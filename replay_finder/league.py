@@ -1,4 +1,4 @@
-from __init__ import dota2_webapi, WEB_API_LIMIT
+from .__init__ import dota2_webapi, WEB_API_LIMIT
 from .model import get_api_usage, League, LeagueStatus, make_replay
 from .model import Replay
 from sqlalchemy import exists
@@ -24,13 +24,12 @@ def update_league_listing(session):
         sleep(1)
     finally:
         api_usage.api_calls += 1
-        session.update(api_usage)
+        session.merge(api_usage)
         session.commit()
 
     for l in leagues['leagues']:
         league_id = l['leagueid']
-        if session.query(exists().where(League.league_id == league_id))\
-           .one()[0]:
+        if session.query(exists().where(League.league_id == league_id)).scalar():
             continue
 
         new_league = League()
@@ -57,7 +56,7 @@ def update_league_replays(session, league_id):
         print("Update aborted due to exceeding API limit!")
         return None
 
-    league = session.query(League).where(League.league_id == league_id).one()[0]
+    league = session.query(League).filter(League.league_id == league_id).one()[0]
     if league.status == LeagueStatus.FINISHED:
         print("League {} considered finished.".format(league_id))
         return None
@@ -79,7 +78,7 @@ def update_league_replays(session, league_id):
             sleep(1)
         finally:
             api_usage.api_calls += 1
-            session.update(api_usage)
+            session.merge(api_usage)
             session.commit()
         total = request['results_remaining']
         replays = sorted(request['matches'], key=lambda k: k['match_id'])
@@ -88,8 +87,7 @@ def update_league_replays(session, league_id):
 
         for r in replays:
             replay_id = r['match_id']
-            if session.query(exists().where(Replay.replay_id == replay_id))\
-               .one()[0]:
+            if session.query(exists().where(Replay.replay_id == replay_id)).scalar():
                 continue
             new_replay = make_replay(r)
             try:
