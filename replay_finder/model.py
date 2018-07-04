@@ -1,5 +1,5 @@
 from datetime import datetime
-from dota2_api import convert_to_64_bit
+from dota2api import convert_to_64_bit
 from sqlalchemy import Column, BigInteger, DateTime, Integer, String
 from sqlalchemy import ForeignKey, exists, create_engine
 from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
@@ -120,7 +120,7 @@ def get_api_usage(session):
     today = datetime.today()
     today = today.replace(hour=0, minute=0, second=0, microsecond=0)
 
-    query = session.query(APIUsage).where(APIUsage.date == today).one_or_none()
+    query = session.query(APIUsage).filter(APIUsage.date == today).one_or_none()
     if query is None:
         try:
             new_usage = APIUsage(date=today, api_calls=0)
@@ -132,7 +132,7 @@ def get_api_usage(session):
         return new_usage
 
     else:
-        return query[0]
+        return query
 
 
 def InitDB(path):
