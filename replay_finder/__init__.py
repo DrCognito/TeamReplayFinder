@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 from pathlib import Path
 from json import load
 
+from .model import InitDB
+
 Base = declarative_base()
 
 load_dotenv(dotenv_path="setup.env")
