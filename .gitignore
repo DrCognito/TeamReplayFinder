@@ -118,3 +118,6 @@ venv.bak/
 
 # Exclude env files
 *.env
+
+# Exclude vscode
+.vscode
