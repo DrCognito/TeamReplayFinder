@@ -5,27 +5,27 @@ from sqlalchemy import exists
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 from dota2api.src.exceptions import APIError, APITimeoutError
+from .exceptions import WebAPIOverLimit
 from time import sleep
+from .api_usage import DecoratorUsageCheck
 
 
 def update_league_listing(session):
-    api_usage = get_api_usage(session)
-
-    if api_usage.api_calls > WEB_API_LIMIT:
-        print("Update aborted due to exceeding API limit!")
-        return None
+    @DecoratorUsageCheck(session)
+    def _update_league():
+        return dota2_webapi.get_league_listing()
 
     try:
-        leagues = dota2_webapi.get_league_listing()
+        leagues = _update_league()
     except (APIError, APITimeoutError) as e:
         print("Failed to update league listing.")
         print(e)
-    else:
-        sleep(1)
+        return
+    except WebAPIOverLimit as e:
+        print(e)
+        return
     finally:
-        api_usage.api_calls += 1
-        session.merge(api_usage)
-        session.commit()
+        sleep(1)
 
     for l in leagues['leagues']:
         league_id = l['leagueid']
@@ -56,7 +56,7 @@ def update_league_replays(session, league_id):
         print("Update aborted due to exceeding API limit!")
         return None
 
-    league = session.query(League).filter(League.league_id == league_id).one()[0]
+    league = session.query(League).filter(League.league_id == league_id).one()
     if league.status == LeagueStatus.FINISHED:
         print("League {} considered finished.".format(league_id))
         return None
@@ -68,20 +68,24 @@ def update_league_replays(session, league_id):
         web_query = {'league_id': league_id,
                      'start_at_match_id': last_replay}
 
+    @DecoratorUsageCheck(session)
+    def _get_replays(web_query):
+        return dota2_webapi.get_match_history(**web_query)
+
     def _query_replays(web_query):
         try:
-            request = dota2_webapi.get_match_history(**web_query)
+            request = _get_replays(web_query)
         except (APIError, APITimeoutError) as e:
             print("Failed to update league listing.")
             print(e)
-        else:
-            sleep(1)
+            return None, None, None
+        except WebAPIOverLimit as e:
+            print(e)
+            return None, None, None
         finally:
-            api_usage.api_calls += 1
-            session.merge(api_usage)
-            session.commit()
-        total = request['results_remaining']
-        replays = sorted(request['matches'], key=lambda k: k['match_id'])
+            sleep(1)
+        total = request['total_results']
+        replays = request['matches']
         processed = len(replays)
         last_replay = replays[-1]['match_id']
 
@@ -98,13 +102,14 @@ def update_league_replays(session, league_id):
                 print(e)
                 session.rollback()
 
-        # return {'remaining':remaining, 'last_match':last_match}
         return total, processed, last_replay
 
     processed = 0
     total = 1
     while total > processed:
         total, p_in, last_replay = _query_replays(web_query)
+        if total is None:
+            break
         processed += p_in
         web_query = {'league_id': league_id,
-                     'start_at_match_id': last_replay + 1}
+                     'start_at_match_id': last_replay - 1}
