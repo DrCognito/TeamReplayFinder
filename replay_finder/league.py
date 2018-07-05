@@ -94,6 +94,7 @@ def update_league_replays(session, league_id):
             if session.query(exists().where(Replay.replay_id == replay_id)).scalar():
                 continue
             new_replay = make_replay(r)
+            new_replay.league_id = league_id
             try:
                 session.add(new_replay)
                 session.commit()
@@ -113,3 +114,18 @@ def update_league_replays(session, league_id):
         processed += p_in
         web_query = {'league_id': league_id,
                      'start_at_match_id': last_replay - 1}
+
+    replay, time = session.query(Replay.replay_id, Replay.start_time)\
+                          .filter(Replay.league_id == league_id)\
+                          .order_by(Replay.replay_id.desc())\
+                          .first()
+
+    league.last_replay = replay
+    league.last_replay_time = time
+    try:
+        session.merge(league)
+        session.commit()
+    except SQLAlchemyError:
+        print(e)
+        session.rollback()
+
