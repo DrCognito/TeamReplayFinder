@@ -64,7 +64,7 @@ class Replay(Base):
 class Player(Base):
     __tablename__ = "players"
 
-    replay_id = Column(BigInteger, ForeignKey(Replay.replay_id))
+    replay_id = Column(BigInteger, ForeignKey(Replay.replay_id), primary_key=True)
     player_id = Column(BigInteger, primary_key=True)
     hero_id = Column(Integer)
     side = Column(Enum(Side))
