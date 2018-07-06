@@ -26,3 +26,5 @@ dota2_client = Dota2Client(steam_client)
 #         api_usage = load(file)
 
 WEB_API_LIMIT = 100000
+# Unkown if it is this low, reported by dota2 docs.
+GC_API_LIMIT = 100
