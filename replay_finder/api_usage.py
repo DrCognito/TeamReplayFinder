@@ -1,18 +1,20 @@
-from .model import APIUsage, get_api_usage
+from .model import WebAPIUsage, get_api_usage
 from .__init__ import WEB_API_LIMIT
-from .exceptions import WebAPIOverLimit
+from .exceptions import APIOverLimit
 
 
 class DecoratorUsageCheck():
 
-    def __init__(self, session):
+    def __init__(self, session, api, limit):
         self.session = session
+        self.api = api
+        self.limit = limit
 
     def __call__(self, function):
         def wrapped_func(*args):
-            usage = get_api_usage(self.session)
-            if usage.api_calls > WEB_API_LIMIT:
-                raise WebAPIOverLimit("Web API limit exceeded.")
+            usage = self.api(self.session)
+            if usage.api_calls > self.limit:
+                raise APIOverLimit("API limit exceeded.")
             try:
                 return function(*args)
             except:

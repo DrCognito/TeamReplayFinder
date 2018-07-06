@@ -5,13 +5,13 @@ from sqlalchemy import exists
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 from dota2api.src.exceptions import APIError, APITimeoutError
-from .exceptions import WebAPIOverLimit
+from .exceptions import APIOverLimit
 from time import sleep
 from .api_usage import DecoratorUsageCheck
 
 
 def update_league_listing(session):
-    @DecoratorUsageCheck(session)
+    @DecoratorUsageCheck(session, get_api_usage, WEB_API_LIMIT)
     def _update_league():
         return dota2_webapi.get_league_listing()
 
@@ -21,7 +21,7 @@ def update_league_listing(session):
         print("Failed to update league listing.")
         print(e)
         return
-    except WebAPIOverLimit as e:
+    except APIOverLimit as e:
         print(e)
         return
     finally:
@@ -68,7 +68,7 @@ def update_league_replays(session, league_id):
         web_query = {'league_id': league_id,
                      'start_at_match_id': last_replay}
 
-    @DecoratorUsageCheck(session)
+    @DecoratorUsageCheck(session, get_api_usage, WEB_API_LIMIT)
     def _get_replays(web_query):
         return dota2_webapi.get_match_history(**web_query)
 
@@ -79,7 +79,7 @@ def update_league_replays(session, league_id):
             print("Failed to update league listing.")
             print(e)
             return None, None, None
-        except WebAPIOverLimit as e:
+        except APIOverLimit as e:
             print(e)
             return None, None, None
         finally:

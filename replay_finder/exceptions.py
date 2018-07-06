@@ -1,4 +1,4 @@
 
 
-class WebAPIOverLimit(Exception):
+class APIOverLimit(Exception):
     pass

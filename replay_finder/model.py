@@ -109,8 +109,8 @@ class League(Base):
     status = Column(Enum(LeagueStatus))
 
 
-class APIUsage(Base):
-    __tablename__ = "api_usage"
+class WebAPIUsage(Base):
+    __tablename__ = "web_api_usage"
 
     date = Column(DateTime, primary_key=True)
     api_calls = Column(Integer)
@@ -120,10 +120,37 @@ def get_api_usage(session):
     today = datetime.today()
     today = today.replace(hour=0, minute=0, second=0, microsecond=0)
 
-    query = session.query(APIUsage).filter(APIUsage.date == today).one_or_none()
+    query = session.query(WebAPIUsage).filter(WebAPIUsage.date == today).one_or_none()
     if query is None:
         try:
-            new_usage = APIUsage(date=today, api_calls=0)
+            new_usage = WebAPIUsage(date=today, api_calls=0)
+            session.add(new_usage)
+            session.commit()
+        except SQLAlchemyError:
+            session.rollback()
+            raise
+        return new_usage
+
+    else:
+        return query
+
+
+class SteamGC_APIUsage(Base):
+    __tablename__ = "steamgc_api_usage"
+
+    date = Column(DateTime, primary_key=True)
+    api_calls = Column(Integer)
+
+
+def get_gc_usage(session):
+    today = datetime.today()
+    today = today.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    query = session.query(SteamGC_APIUsage)\
+                   .filter(SteamGC_APIUsage.date == today).one_or_none()
+    if query is None:
+        try:
+            new_usage = SteamGC_APIUsage(date=today, api_calls=0)
             session.add(new_usage)
             session.commit()
         except SQLAlchemyError:
