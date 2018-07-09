@@ -11,6 +11,8 @@ sqlalchemy = "*"
 python-dotenv = "*"
 "dota2api" = "*"
 "dota2" = "*"
+requests = "*"
+tqdm = "*"
 
 
 [dev-packages]
