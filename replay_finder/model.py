@@ -17,10 +17,11 @@ class Side(enum.Enum):
 
 class ReplayStatus(enum.Enum):
     ACKNOWLEDGED = enum.auto()
-    AQUIRING_URL = enum.auto()
+    # AQUIRING_URL = enum.auto()
     URL_ACQUIRED = enum.auto()
     DOWNLOADING = enum.auto()
     DOWNLOADED = enum.auto()
+    FAILED = enum.auto()
 
 
 class LeagueStatus(enum.Enum):
