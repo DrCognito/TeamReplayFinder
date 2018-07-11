@@ -143,3 +143,15 @@ def process_replay(replay, session):
 
         return final_path
 
+
+def check_existance(replay, extensions, paths):
+    ''' Check for replay existance in the list of paths.
+        extensions is a list corresponding to the file exention
+        for that path.
+    '''
+    for p, ext in zip(paths, extensions):
+        r_file = p + (replay.replay_id + ext)
+        if r_file.is_file():
+            return r_file
+
+    return False
