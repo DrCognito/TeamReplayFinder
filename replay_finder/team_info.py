@@ -22,7 +22,7 @@ class TeamInfo(Base_TI):
 
     @hybrid_property
     def stack_id(self):
-        p_list = [p.payer_id for p in self.players]
+        p_list = [p.player_id for p in self.players]
         p_list.sort()
 
         return ''.join(str(p) for p in p_list)
