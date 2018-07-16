@@ -138,6 +138,7 @@ def update_league_replays(session, league_id):
 
     league.last_replay = replay
     league.last_replay_time = time
+    league.last_update = datetime.now()
     try:
         session.merge(league)
         session.commit()
