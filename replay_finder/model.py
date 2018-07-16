@@ -27,7 +27,7 @@ class ReplayStatus(enum.Enum):
 class LeagueStatus(enum.Enum):
     ONGOING = enum.auto()
     FINISHED = enum.auto()
-    FORVER = enum.auto()
+    FOREVER = enum.auto()
 
 
 class Replay(Base):
@@ -85,7 +85,14 @@ def make_replay(dict_obj):
 
     def _player(p):
         new_player = Player()
-        new_player.player_id = convert_to_64_bit(p['account_id'])
+        try:
+            player_id = convert_to_64_bit(p['account_id'])
+        except KeyError as e:
+            print("Invalid player object in replay {}."
+                  .format(new_replay.replay_id))
+            player_id = p['player_slot']
+        new_player.player_id = player_id
+        new_player.replay_id = new_replay.replay_id
         # Works as a bit mask, 8th bit is true if the team is dire
         if p['player_slot'] & 0b10000000 != 0:
             new_player.side = Side.DIRE
