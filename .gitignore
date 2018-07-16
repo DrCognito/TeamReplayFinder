@@ -115,9 +115,11 @@ venv.bak/
 
 # Exclude databases
 *.db
+*.db-journal
 
 # Exclude env files
 *.env
 
 # Exclude vscode
 .vscode
+update_sources.py
