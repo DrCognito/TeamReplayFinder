@@ -125,7 +125,7 @@ def update_league_replays(session, league_id):
     try:
         session.merge(league)
         session.commit()
-    except SQLAlchemyError:
+    except SQLAlchemyError as e:
         print(e)
         session.rollback()
 
