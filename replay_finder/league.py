@@ -3,11 +3,14 @@ from .model import get_api_usage, League, LeagueStatus, make_replay
 from .model import Replay
 from sqlalchemy import exists
 from sqlalchemy.exc import SQLAlchemyError
-from datetime import datetime
+from datetime import datetime, timedelta
 from dota2api.src.exceptions import APIError, APITimeoutError
 from .exceptions import APIOverLimit
 from time import sleep
 from .api_usage import DecoratorUsageCheck
+
+
+LEAGUE_EXPIRED_AFTER_DAYS = 30
 
 
 def update_league_listing(session):
@@ -42,11 +45,23 @@ def update_league_listing(session):
 
         try:
             session.add(new_league)
-            session.commit()
         except SQLAlchemyError as e:
             print("Failed to add new league {}".format(league_id))
             print(e)
             session.rollback()
+
+
+def get_most_recent(session, league_id):
+    # Protects against leagues with 0 replays
+    if session.query(Replay).filter(Replay.league_id == league_id).count() == 0:
+        return None, None
+
+    replay, time = session.query(Replay.replay_id, Replay.start_time)\
+                          .filter(Replay.league_id == league_id)\
+                          .order_by(Replay.replay_id.desc())\
+                          .first()
+
+    return replay, time
 
 
 def update_league_replays(session, league_id):
@@ -87,7 +102,11 @@ def update_league_replays(session, league_id):
         total = request['total_results']
         replays = request['matches']
         processed = len(replays)
-        last_replay = replays[-1]['match_id']
+        if processed == 0:
+            last_replay = 0
+            return total, processed, last_replay
+        else:
+            last_replay = replays[-1]['match_id']
 
         for r in replays:
             replay_id = r['match_id']
@@ -97,7 +116,7 @@ def update_league_replays(session, league_id):
             new_replay.league_id = league_id
             try:
                 session.add(new_replay)
-                session.commit()
+                #session.commit()
             except SQLAlchemyError as e:
                 print("Failed to add new match {}".format(replay_id))
                 print(e)
@@ -115,10 +134,7 @@ def update_league_replays(session, league_id):
         web_query = {'league_id': league_id,
                      'start_at_match_id': last_replay - 1}
 
-    replay, time = session.query(Replay.replay_id, Replay.start_time)\
-                          .filter(Replay.league_id == league_id)\
-                          .order_by(Replay.replay_id.desc())\
-                          .first()
+    replay, time = get_most_recent(session, league_id)
 
     league.last_replay = replay
     league.last_replay_time = time
@@ -129,3 +145,29 @@ def update_league_replays(session, league_id):
         print(e)
         session.rollback()
 
+    check_league_expiry(session, league_id)
+
+
+def check_league_expiry(session, league_id):
+    league = session.query(League).filter(League.league_id == league_id).one()
+    if league.status == LeagueStatus.FOREVER:
+        return
+
+    cutoff = datetime.now() - timedelta(days=LEAGUE_EXPIRED_AFTER_DAYS)
+
+    if league.last_replay_time is None:
+        league.status = LeagueStatus.ONGOING
+    elif league.last_replay_time > cutoff:
+        league.status = LeagueStatus.ONGOING
+    else:
+        league.status = LeagueStatus.FINISHED
+        print("League {} considered finished.".format(league_id))
+
+    try:
+        session.merge(league)
+        session.commit()
+    except SQLAlchemyError as e:
+        print(e)
+        session.rollback()
+
+    return league.status
