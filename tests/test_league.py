@@ -16,4 +16,4 @@ session = Session()
 test_id = 10049
 
 update_league_listing(session)
-update_league_replays(session, league_id=test_id)
+#update_league_replays(session, league_id=test_id)
