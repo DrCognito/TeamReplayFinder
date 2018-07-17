@@ -1,14 +1,16 @@
+import enum
 from datetime import datetime
+
 from dota2api import convert_to_64_bit
-from sqlalchemy import Column, BigInteger, DateTime, Integer, String
-from sqlalchemy import ForeignKey, exists, create_engine, or_
-from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
+from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
+                        String, create_engine, exists, or_)
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.hybrid import hybrid_method, hybrid_property
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Enum
-from replay_finder import Base
+
 from replay_finder.team_info import TeamInfo
-import enum
 
 
 class Side(enum.Enum):
@@ -31,6 +33,9 @@ class LeagueStatus(enum.Enum):
     FOREVER = enum.auto()
 
 
+Base = declarative_base()
+
+
 class Replay(Base):
     __tablename__ = "replays"
 
@@ -43,24 +48,17 @@ class Replay(Base):
     status = Column(Enum(ReplayStatus))
 
     dire_id = Column(Integer)
+    dire_stack_id = Column(String)
     radiant_id = Column(Integer)
+    radiant_stack_id = Column(String)
 
     players = relationship("Player", cascade="all, delete, delete-orphan")
 
-    @hybrid_method
     def stack_id(self, side):
         p_list = [p.player_id for p in self.players if p.side == side]
         p_list.sort()
 
         return ''.join(str(p) for p in p_list)
-
-    @hybrid_property
-    def dire_stack_id(self):
-        return self.stack_id(Side.DIRE)
-
-    @hybrid_property
-    def radiant_stack_id(self):
-        return self.stack_id(Side.RADIANT)
 
 
 class Player(Base):
@@ -104,6 +102,8 @@ def make_replay(dict_obj):
         return new_player
 
     new_replay.players = [_player(p) for p in dict_obj['players']]
+    new_replay.dire_stack_id = new_replay.stack_id(Side.DIRE)
+    new_replay.radiant_stack_id = new_replay.stack_id(Side.RADIANT)
 
     return new_replay
 
@@ -176,6 +176,21 @@ def InitDB(path):
     Base.metadata.create_all(engine)
 
     return engine
+
+
+def update_stack_ids(session):
+    r_filter = or_(Replay.dire_stack_id == None,
+                   Replay.radiant_stack_id == None)
+    replays = session.query(Replay).filter(r_filter)
+
+    for replay in replays:
+        replay.dire_stack_id = replay.stack_id(Side.DIRE)
+        replay.radiant_stack_id = replay.stack_id(Side.RADIANT)
+
+        try:
+            session.merge(replay)
+        except SQLAlchemyError:
+            session.rollback()
 
 
 def get_replays_for_team(team: TeamInfo, replay_session):

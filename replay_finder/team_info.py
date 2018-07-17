@@ -17,15 +17,9 @@ class TeamInfo(Base_TI):
     team_id = Column(Integer, primary_key=True)
     name = Column(String, unique=True)
     last_change = Column(DateTime)
+    stack_id = Column(String)
 
     players = relationship("TeamPlayer")
-
-    @hybrid_property
-    def stack_id(self):
-        p_list = [p.player_id for p in self.players]
-        p_list.sort()
-
-        return ''.join(str(p) for p in p_list)
 
 
 class TeamPlayer(Base_TI):
@@ -52,6 +46,14 @@ def build_team(team_id, name, date, players, session):
     new_team.last_change = date
     new_team.players = players
 
+    def _stack_id(team):
+        p_list = [p.player_id for p in team.players]
+        p_list.sort()
+
+        return ''.join(str(p) for p in p_list)
+
+    new_team.stack_id = _stack_id(new_team)
+
     try:
         session.merge(new_team)
         session.commit()
@@ -61,6 +63,21 @@ def build_team(team_id, name, date, players, session):
         raise
 
     return new_team
+
+
+def update_stack_ids(session):
+    teams = session.query(TeamInfo).filter(TeamInfo.stack_id == None)
+
+    for team in teams:
+        p_list = [p.player_id for p in team.players]
+        p_list.sort()
+
+        team.stack_id = ''.join(str(p) for p in p_list)
+
+        try:
+            session.merge(team)
+        except SQLAlchemyError:
+            session.rollback()
 
 
 def process_player(name, player_id, team_id, session):
