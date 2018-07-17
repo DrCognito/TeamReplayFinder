@@ -123,3 +123,4 @@ venv.bak/
 # Exclude vscode
 .vscode
 update_sources.py
+alembic.ini
