@@ -4,14 +4,9 @@ from dota2 import Dota2Client
 # Web api
 from dota2api import Initialise
 
-from sqlalchemy.ext.declarative import declarative_base
 from dotenv import load_dotenv
 from pathlib import Path
 from json import load
-
-# from .model import InitDB
-
-Base = declarative_base()
 
 load_dotenv(dotenv_path="setup.env")
 
