@@ -32,7 +32,10 @@ db_names = config.get_main_option('databases')
 #       'engine1':mymodel.metadata1,
 #       'engine2':mymodel.metadata2
 # }
-from replay_finder import Base
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from replay_finder.model import Base
 from replay_finder.team_info import Base_TI
 target_metadata = {
     'engine1': Base.metadata,
