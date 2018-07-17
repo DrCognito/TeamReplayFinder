@@ -13,6 +13,7 @@ python-dotenv = "*"
 "dota2" = "*"
 requests = "*"
 tqdm = "*"
+alembic = "*"
 
 
 [dev-packages]
