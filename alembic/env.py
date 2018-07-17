@@ -32,7 +32,12 @@ db_names = config.get_main_option('databases')
 #       'engine1':mymodel.metadata1,
 #       'engine2':mymodel.metadata2
 # }
-target_metadata = {}
+from replay_finder import Base
+from replay_finder.team_info import Base_TI
+target_metadata = {
+    'engine1': Base.metadata,
+    'engine2': Base_TI.metadata,
+}
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
