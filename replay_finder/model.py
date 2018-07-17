@@ -1,12 +1,13 @@
 from datetime import datetime
 from dota2api import convert_to_64_bit
 from sqlalchemy import Column, BigInteger, DateTime, Integer, String
-from sqlalchemy import ForeignKey, exists, create_engine
+from sqlalchemy import ForeignKey, exists, create_engine, or_
 from sqlalchemy.ext.hybrid import hybrid_property, hybrid_method
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Enum
 from replay_finder import Base
+from replay_finder.team_info import TeamInfo
 import enum
 
 
@@ -175,3 +176,14 @@ def InitDB(path):
     Base.metadata.create_all(engine)
 
     return engine
+
+
+def get_replays_for_team(team: TeamInfo, replay_session):
+    team_id = team.team_id
+    stack_id = team.stack_id
+
+    t_filter = or_(Replay.radiant_id == team_id, Replay.dire_id == team_id,
+                   Replay.radiant_stack_id == stack_id,
+                   Replay.dire_stack_id == stack_id)
+
+    return replay_session.query(Replay).filter(t_filter)
