@@ -3,15 +3,15 @@ from datetime import datetime, timedelta
 from os import environ as environment
 from pathlib import Path
 
+from gevent import Timeout as GeventTimeout
 from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
 from replay_finder.dota2_api import SingleDotaClient
 from replay_finder.model import InitDB as replay_InitDB
-from replay_finder.model import Replay, get_replays_for_team
+from replay_finder.model import Replay, ReplayStatus, get_replays_for_team
 from replay_finder.replay_process import check_existance, process_replay
 from replay_finder.team_info import InitTeamDB, TeamInfo
-from gevent import Timeout as GeventTimeout
 
 REPLAY_TIME_PERIOD_DAYS = 30
 
@@ -32,16 +32,16 @@ arguments.add_argument('--require_players',
                        action='store_true')
 
 replay_paths = [
-    Path(environment['DOWNLOAD_PATH']),
-    Path(environment['EXTRACT_PATH']),
+    Path(environment['JSON_ARCHIVE']),
     Path(environment['JSON_PATH']),
-    Path(environment['JSON_ARCHIVE'])
+    Path(environment['EXTRACT_PATH']),
+    Path(environment['DOWNLOAD_PATH'])
 ]
 replay_extensions = [
-    '.dem.bz2',
-    '.dem',
     '.json',
-    '.json'
+    '.json',
+    '.dem',
+    '.dem.bz2',
 ]
 
 
@@ -94,9 +94,11 @@ if __name__ == '__main__':
     except GeventTimeout:
         print("Timed out waiting for dota2 client to ready.")
         dota_client.close()
-        raise
+        exit()
 
-    for rep in replays[:1]:
+    replays = replays.filter(Replay.status != ReplayStatus.DOWNLOADED,
+                             Replay.status != ReplayStatus.FAILED)
+    for rep in replays:
         try:
             path = process_replay(rep, replay_session, dota_client)
         except:
