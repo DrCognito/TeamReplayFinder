@@ -45,7 +45,6 @@ class SingleDotaClient(object):
     @dota2_client.on("match_details")
     def emit_replay_id(replay_id, eresult, replay):
         url = replay_url_from_match(replay)
-        print(url)
         SingleDotaClient.__instance.dota2_client.emit("replay_url", replay_id, url)
 
     def close(cls):
