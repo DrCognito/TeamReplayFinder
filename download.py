@@ -1,13 +1,17 @@
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from os import environ as environment
+from pathlib import Path
 
 from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
+from replay_finder.dota2_api import SingleDotaClient
 from replay_finder.model import InitDB as replay_InitDB
 from replay_finder.model import Replay, get_replays_for_team
+from replay_finder.replay_process import check_existance, process_replay
 from replay_finder.team_info import InitTeamDB, TeamInfo
+from gevent import Timeout as GeventTimeout
 
 REPLAY_TIME_PERIOD_DAYS = 30
 
@@ -20,7 +24,25 @@ arguments.add_argument('--list',
                                downloading replays.""",
                        action='store_true')
 arguments.add_argument('--custom_time',
-                       help="""Set a custom time for replays""")
+                       help="""Set a custom time for replays""",
+                       type=int)
+arguments.add_argument('--require_players',
+                       help="""Require both the team id and player
+                               stack to match.""",
+                       action='store_true')
+
+replay_paths = [
+    Path(environment['DOWNLOAD_PATH']),
+    Path(environment['EXTRACT_PATH']),
+    Path(environment['JSON_PATH']),
+    Path(environment['JSON_ARCHIVE'])
+]
+replay_extensions = [
+    '.dem.bz2',
+    '.dem',
+    '.json',
+    '.json'
+]
 
 
 if __name__ == '__main__':
@@ -47,5 +69,43 @@ if __name__ == '__main__':
               .format(args.team))
         exit()
 
-    replay_query = get_replays_for_team(team, replay_session)
-    print("Found {} replays".format(replay_query.count()))
+    if args.require_players:
+        replays = get_replays_for_team(team, replay_session, require_both=True)
+    else:
+        replays = get_replays_for_team(team, replay_session,
+                                       require_both=False)
+    replays = replays.filter(Replay.start_time > datetime.now() - updatecut)
+
+    if args.list:
+        output = "Total:\t" + str(replays.count()) + "\n"
+        output += "Replay\t\tStatus\t\tPath\n"
+        for rep in replays:
+            output += str(rep.replay_id) + "\t"
+            output += str(rep.status) + "\t"
+            path = check_existance(rep, replay_extensions, replay_paths)
+            output += str(path) + "\n"
+        print(output)
+        exit()
+
+    # Start up the steam client!
+    dota_client = SingleDotaClient("download")
+    try:
+        dota_client.dota_wait('ready', timeout=20, raises=True)
+    except GeventTimeout:
+        print("Timed out waiting for dota2 client to ready.")
+        dota_client.close()
+        raise
+
+    for rep in replays[:1]:
+        try:
+            path = process_replay(rep, replay_session, dota_client)
+        except:
+            dota_client.close()
+            raise
+            
+        if path:
+            print("Replay downloaded to: {}".format(path))
+        else:
+            print("Failed to process replay {}.".format(rep.replay_id))
+
+    dota_client.close()
