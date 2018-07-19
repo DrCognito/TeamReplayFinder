@@ -9,7 +9,7 @@ from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
 from tqdm import tqdm
 from pathlib import Path
 
-from .__init__ import GC_API_LIMIT, dota2_client
+from .__init__ import GC_API_LIMIT
 from .api_usage import APIOverLimit, DecoratorUsageCheck
 from .model import ReplayStatus, get_gc_usage
 from .dota2_api import SingleDotaClient
@@ -30,7 +30,7 @@ def download_replay(replay, path):
 
     print("Downloading: {}".format(replay.replay_url))
     try:
-        dl_stream = req_get(replay.replay_url)
+        dl_stream = req_get(replay.replay_url, stream=True)
     except ConnectionError:
         print("Connection error!")
         return
@@ -60,22 +60,14 @@ def extract_replay(path_in, path_out, remove_archive=True):
                 out_file.write(data)
         except OSError:
             print('Failed to extract {}.'.format(path_in))
-            return False
-        finally:
             if path_out.is_file():
                 remove_file(path_out)
+            return False
 
     if remove_archive:
         remove_file(path_in)
 
     return path_out
-
-
-@dota2_client.on("match_details")
-def emit_replay_id(replay_id, eresult, replay):
-    url = replay_url_from_match(replay)
-    print(url)
-    dota2_client.emit("replay_url", replay_id, url)
 
 
 def process_replay(replay, session, dota_singleton: SingleDotaClient):
