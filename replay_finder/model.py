@@ -3,7 +3,7 @@ from datetime import datetime
 
 from dota2api import convert_to_64_bit
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
-                        String, create_engine, exists, or_)
+                        String, create_engine, exists, or_, and_)
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_method, hybrid_property
@@ -193,12 +193,18 @@ def update_stack_ids(session):
             session.rollback()
 
 
-def get_replays_for_team(team: TeamInfo, replay_session):
+def get_replays_for_team(team: TeamInfo, replay_session, require_both=False):
     team_id = team.team_id
     stack_id = team.stack_id
 
-    t_filter = or_(Replay.radiant_id == team_id, Replay.dire_id == team_id,
-                   Replay.radiant_stack_id == stack_id,
-                   Replay.dire_stack_id == stack_id)
+    if require_both:
+        t_filter = and_(or_(Replay.radiant_id == team_id, 
+                            Replay.dire_id == team_id),
+                        or_(Replay.radiant_stack_id == stack_id,
+                        Replay.dire_stack_id == stack_id))
+    else:
+        t_filter = or_(Replay.radiant_id == team_id, Replay.dire_id == team_id,
+                       Replay.radiant_stack_id == stack_id,
+                       Replay.dire_stack_id == stack_id)
 
     return replay_session.query(Replay).filter(t_filter)
