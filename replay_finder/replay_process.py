@@ -2,7 +2,7 @@ from bz2 import BZ2File
 from os import remove as remove_file, environ
 from time import sleep
 
-from dota2.util import replay_url_from_match
+# from dota2.util import replay_url_from_match
 from requests import get as req_get
 from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
                                  RequestException)
@@ -12,6 +12,9 @@ from pathlib import Path
 from .__init__ import GC_API_LIMIT, dota2_client
 from .api_usage import APIOverLimit, DecoratorUsageCheck
 from .model import ReplayStatus, get_gc_usage
+from .dota2_api import SingleDotaClient
+
+from gevent import Timeout as GeventTimeout
 
 GC_REPLAY_ATTEMPTS = 5
 REPLAY_DOWNLOAD_ATTEMPTS = 3
@@ -71,18 +74,19 @@ def extract_replay(path_in, path_out, remove_archive=True):
 @dota2_client.on("match_details")
 def emit_replay_id(replay_id, eresult, replay):
     url = replay_url_from_match(replay)
+    print(url)
     dota2_client.emit("replay_url", replay_id, url)
 
 
-def process_replay(replay, session):
+def process_replay(replay, session, dota_singleton: SingleDotaClient):
     @DecoratorUsageCheck(session, get_gc_usage, GC_API_LIMIT)
     def _replay_details(replay_id):
-        dota2_client.match_details(replay_id)
+        dota_singleton.dota2_client.request_match_details(replay_id)
 
-    if replay.status_code == ReplayStatus.DOWNLOADED:
+    if replay.status == ReplayStatus.DOWNLOADED:
         return False
 
-    if replay.status_code == ReplayStatus.ACKNOWLEDGED:
+    if replay.status == ReplayStatus.ACKNOWLEDGED:
         if replay.process_attempts > GC_REPLAY_ATTEMPTS:
             print("Attempts exceeded for {}. Skipping."
                   .format(replay.replay_id))
@@ -100,33 +104,39 @@ def process_replay(replay, session):
         finally:
             sleep(1)
 
-        _, url = dota2_client.wait_msg("replay_url", timeout=5)
+        try:
+            rep_id, url = dota_singleton.dota_wait("replay_url", timeout=5,
+                                                   raises=True)
+        except GeventTimeout:
+            print("Timed out retrieving replay url {}".format(replay.replay_id))
+            url = None
 
         if url is None:
-            return process_replay(replay, session)
+            raise TimeoutError
+            return process_replay(replay, session, dota_singleton)
 
         replay.replay_url = url
-        replay.status_code = ReplayStatus.DOWNLOADING
+        replay.status = ReplayStatus.DOWNLOADING
         replay.process_attempts = 0
         session.merge(replay)
         session.commit()
 
-        return process_replay(replay, session)
+        return process_replay(replay, session, dota_singleton)
 
-    if replay.status_code == ReplayStatus.DOWNLOADING:
+    if replay.status == ReplayStatus.DOWNLOADING:
         if replay.process_attempts > REPLAY_DOWNLOAD_ATTEMPTS:
             print("Download attempts exceeded for {}. Skipping."
                   .format(replay.replay_id))
             return False
 
-        download_path = Path(environ("DOWNLOAD_PATH")) /\
-            (replay.replay_id + '.dem.bz2')
+        download_path = Path(environ["DOWNLOAD_PATH"]) /\
+            (str(replay.replay_id) + '.dem.bz2')
         try:
             download_replay(replay, download_path)
         except RequestException as e:
             print(e)
             sleep(5)
-            return process_replay(replay, session)
+            return process_replay(replay, session, dota_singleton)
         finally:
             replay.process_attempts += 1
             session.merge(replay)
@@ -137,8 +147,8 @@ def process_replay(replay, session):
         session.merge(replay)
         session.commit()
 
-        extract_path = Path(environ("EXTRACT_PATH")) /\
-            (replay.replay_id + '.dem')
+        extract_path = Path(environ["EXTRACT_PATH"]) /\
+            (str(replay.replay_id) + '.dem')
         final_path = extract_replay(download_path, extract_path)
 
         return final_path
@@ -150,7 +160,7 @@ def check_existance(replay, extensions, paths):
         for that path.
     '''
     for p, ext in zip(paths, extensions):
-        r_file = p + (replay.replay_id + ext)
+        r_file = p / (str(replay.replay_id) + ext)
         if r_file.is_file():
             return r_file
 
