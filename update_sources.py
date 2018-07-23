@@ -2,12 +2,16 @@ import gevent.monkey
 gevent.monkey.patch_all()
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
 from os import environ as environment
 
 from sqlalchemy.orm import sessionmaker
 
 from replay_finder.league import update_league_listing, update_league_replays
 from replay_finder.model import InitDB, League, LeagueStatus
+
+
+load_dotenv(dotenv_path="setup.env")
 
 UPDATE_TIME_PERIOD_DAYS = 1
 
