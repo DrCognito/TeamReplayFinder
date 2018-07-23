@@ -2,7 +2,6 @@ from bz2 import BZ2File
 from os import remove as remove_file, environ
 from time import sleep
 
-# from dota2.util import replay_url_from_match
 from requests import get as req_get
 from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
                                  RequestException)
