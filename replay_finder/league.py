@@ -1,14 +1,16 @@
-from .__init__ import dota2_webapi, WEB_API_LIMIT
-from .model import get_api_usage, League, LeagueStatus, make_replay
-from .model import Replay
+from datetime import datetime, timedelta
+from time import sleep
+
+from dota2api import Initialise
+from dota2api.src.exceptions import APIError, APITimeoutError
+from requests import Session as requests_Session
 from sqlalchemy import exists
 from sqlalchemy.exc import SQLAlchemyError
-from datetime import datetime, timedelta
-from dota2api.src.exceptions import APIError, APITimeoutError
-from .exceptions import APIOverLimit
-from time import sleep
-from .api_usage import DecoratorUsageCheck
 
+from .__init__ import WEB_API_LIMIT
+from .api_usage import DecoratorUsageCheck
+from .exceptions import APIOverLimit
+from .model import League, LeagueStatus, Replay, get_api_usage, make_replay
 
 LEAGUE_EXPIRED_AFTER_DAYS = 30
 
@@ -16,6 +18,7 @@ LEAGUE_EXPIRED_AFTER_DAYS = 30
 def update_league_listing(session):
     @DecoratorUsageCheck(session, get_api_usage, WEB_API_LIMIT)
     def _update_league():
+        dota2_webapi = Initialise()
         return dota2_webapi.get_league_listing()
 
     try:
@@ -126,13 +129,15 @@ def update_league_replays(session, league_id):
 
     processed = 0
     total = 1
-    while total > processed:
-        total, p_in, last_replay = _query_replays(web_query)
-        if total is None:
-            break
-        processed += p_in
-        web_query = {'league_id': league_id,
-                     'start_at_match_id': last_replay - 1}
+    with requests_Session() as r_session:
+        dota2_webapi = Initialise(executor=r_session.get)
+        while total > processed:
+            total, p_in, last_replay = _query_replays(web_query)
+            if total is None:
+                break
+            processed += p_in
+            web_query = {'league_id': league_id,
+                        'start_at_match_id': last_replay - 1}
 
     replay, time = get_most_recent(session, league_id)
 
