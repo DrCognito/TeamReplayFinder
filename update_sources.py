@@ -1,3 +1,5 @@
+import gevent.monkey
+gevent.monkey.patch_all()
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from os import environ as environment

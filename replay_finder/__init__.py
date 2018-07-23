@@ -1,3 +1,5 @@
+import gevent.monkey
+gevent.monkey.patch_all()
 # Steam GC api
 from steam import SteamClient
 from dota2 import Dota2Client
