@@ -4,7 +4,7 @@ gevent.monkey.patch_all()
 from steam import SteamClient
 from dota2 import Dota2Client
 # Web api
-from dota2api import Initialise
+# from dota2api import Initialise
 
 from dotenv import load_dotenv
 from pathlib import Path
@@ -12,7 +12,7 @@ from json import load
 
 load_dotenv(dotenv_path="setup.env")
 
-dota2_webapi = Initialise()
+# dota2_webapi = Initialise()
 
 steam_client = SteamClient()
 dota2_client = Dota2Client(steam_client)
