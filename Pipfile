@@ -7,7 +7,7 @@ name = "pypi"
 
 [packages]
 
-SQLAlchemy = "*"
+sqlalchemy = "*"
 python-dotenv = "*"
 "dota2api" = "*"
 "dota2" = "*"
