@@ -13,7 +13,8 @@ from replay_finder.model import InitDB, League, LeagueStatus
 
 load_dotenv(dotenv_path="setup.env")
 
-UPDATE_TIME_PERIOD_DAYS = 1
+UPDATE_TIME_PERIOD_DAYS = 0
+UPDATE_TIME_PERIOD_HOURS = 22
 
 
 arguments = ArgumentParser()
@@ -30,7 +31,8 @@ arguments.add_argument('--update_replays', help="""Attempt to retrieve the basic
 
 if __name__ == '__main__':
     args = arguments.parse_args()
-    updatecut = timedelta(days=UPDATE_TIME_PERIOD_DAYS)
+    updatecut = timedelta(days=UPDATE_TIME_PERIOD_DAYS,
+                          hours=UPDATE_TIME_PERIOD_HOURS)
     
     extra_leagues = []
     if args.league_ids is not None:
