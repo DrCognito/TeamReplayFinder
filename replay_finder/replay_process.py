@@ -49,23 +49,28 @@ def download_replay(replay, path):
 def extract_replay(path_in, path_out, remove_archive=True):
     if path_out.is_file():
         print("{} already exists.".format(path_out))
-        raise FileExistsError
+        remove_file(path_out)
+        #raise FileExistsError
     if not path_in.is_file():
         print("{} replay bz2 file does not exist".format(path_in))
         raise FileNotFoundError
 
+    failed_file = False
     with open(path_out, 'wb') as out_file, BZ2File(path_in, mode="rb") as file:
         try:
             for data in iter(lambda: file.read(100 * 1024), b''):
                 out_file.write(data)
         except OSError:
             print('Failed to extract {}.'.format(path_in))
-            if path_out.is_file():
-                remove_file(path_out)
-            return False
+            failed_file = True
 
     if remove_archive:
         remove_file(path_in)
+
+    if failed_file:
+        if path_out.is_file():
+                remove_file(path_out)
+        return False
 
     return path_out
 
@@ -165,6 +170,16 @@ def replay_process_odota(replay, session, req_session):
     if replay.status == ReplayStatus.DOWNLOADED:
         return False
 
+    extract_path = Path(environ["EXTRACT_PATH"]) /\
+            (str(replay.replay_id) + '.dem')
+
+    if extract_path.is_file():
+        print("Found {} in extract path skipping.".format(replay.replay_id))
+        replay.status = ReplayStatus.DOWNLOADED
+        session.merge(replay)
+        session.commit()
+        return extract_path
+
     if replay.status == ReplayStatus.ACKNOWLEDGED:
         if replay.process_attempts > GC_REPLAY_ATTEMPTS:
             print("Attempts exceeded for {}. Skipping."
@@ -213,8 +228,6 @@ def replay_process_odota(replay, session, req_session):
         session.merge(replay)
         session.commit()
 
-        extract_path = Path(environ["EXTRACT_PATH"]) /\
-            (str(replay.replay_id) + '.dem')
         final_path = extract_replay(download_path, extract_path)
 
         return final_path
