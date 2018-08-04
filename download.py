@@ -17,8 +17,9 @@ import requests
 REPLAY_TIME_PERIOD_DAYS = 30
 
 arguments = ArgumentParser()
-arguments.add_argument('team', help="""Team name or team id from
-                                       the TeamInfo database.""")
+arguments.add_argument('teams', help="""Team name or team id from
+                                       the TeamInfo database.""",
+                       nargs='+')
 arguments.add_argument('--list',
                        help="""Only list replays.
                                Skips updating or
@@ -65,52 +66,54 @@ if __name__ == '__main__':
     team_Session = sessionmaker(bind=team_engine)
     team_session = team_Session()
 
-    t_filter = or_(TeamInfo.team_id == args.team,
-                   TeamInfo.name == args.team)
-    team = team_session.query(TeamInfo).filter(t_filter).one_or_none()
+    for t_in in args.teams:
+        print("Processing {}.".format(t_in))
+        t_filter = or_(TeamInfo.team_id == t_in,
+                       TeamInfo.name == t_in)
+        team = team_session.query(TeamInfo).filter(t_filter).one_or_none()
 
-    if team is None:
-        print("Could not find team corresponding to {}"
-              .format(args.team))
-        exit()
+        if team is None:
+            print("Could not find team corresponding to {}"
+                  .format(t_in))
+            exit()
 
-    if args.require_players:
-        replays = get_replays_for_team(team, replay_session, require_both=True)
-    else:
-        replays = get_replays_for_team(team, replay_session,
-                                       require_both=False)
-    replays = replays.filter(Replay.start_time > datetime.now() - updatecut)\
-                     .order_by(Replay.replay_id.desc())
+        if args.require_players:
+            replays = get_replays_for_team(team, replay_session, require_both=True)
+        else:
+            replays = get_replays_for_team(team, replay_session,
+                                           require_both=False)
+        replays = replays.filter(Replay.start_time > datetime.now() - updatecut)\
+                         .order_by(Replay.replay_id.desc())
 
-    if args.list:
-        output = "Total:\t" + str(replays.count()) + "\n"
-        output += "Replay\t\tStatus\t\tPath\n"
-        for rep in replays:
-            output += str(rep.replay_id) + "\t"
-            output += str(rep.status) + "\t"
-            path = check_existance(rep, replay_extensions, replay_paths)
-            output += str(path) + "\n"
-        print(output)
-        exit()
+        if args.list:
+            output = "Total:\t" + str(replays.count()) + "\n"
+            output += "Replay\t\tStatus\t\tPath\n"
+            for rep in replays:
+                output += str(rep.replay_id) + "\t"
+                output += str(rep.status) + "\t"
+                path = check_existance(rep, replay_extensions, replay_paths)
+                output += str(path) + "\n"
+            print(output)
+            exit()
 
-    # Start up the steam client!
-    # dota_client = SingleDotaClient("download")
-    # try:
-    #     dota_client.dota_wait('ready', timeout=20, raises=True)
-    # except GeventTimeout:
-    #     print("Timed out waiting for dota2 client to ready.")
-    #     dota_client.close()
-    #     exit()
+        # Start up the steam client!
+        # dota_client = SingleDotaClient("download")
+        # try:
+        #     dota_client.dota_wait('ready', timeout=20, raises=True)
+        # except GeventTimeout:
+        #     print("Timed out waiting for dota2 client to ready.")
+        #     dota_client.close()
+        #     exit()
 
-    replays = replays.filter(Replay.status != ReplayStatus.DOWNLOADED,
-                             Replay.status != ReplayStatus.FAILED)
-    if args.limit is not None:
-        replays = replays.limit(args.limit)
+        replays = replays.filter(Replay.status != ReplayStatus.DOWNLOADED,
+                                 Replay.status != ReplayStatus.FAILED)
+        if args.limit is not None:
+            replays = replays.limit(args.limit)
 
-    with requests.Session() as req_session:
-        for rep in replays:
-            path = replay_process_odota(rep, replay_session, req_session)
-            if path:
-                print("Replay downloaded to: {}".format(path))
-            else:
-                print("Failed to process replay {}.".format(rep.replay_id))
+        with requests.Session() as req_session:
+            for rep in replays:
+                path = replay_process_odota(rep, replay_session, req_session)
+                if path:
+                    print("Replay downloaded to: {}".format(path))
+                else:
+                    print("Failed to process replay {}.".format(rep.replay_id))
