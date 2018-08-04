@@ -83,7 +83,6 @@
                 "sha256:495c5c2d43bf6cebe0178eb3e88f9c4aa48d8934aa6e3cddb865c058da76756b",
                 "sha256:e90f17980e6ab0f3c2f3730e56d1fe9bcba1891eeea58966e89d352492cc74f4"
             ],
-            "markers": "sys_platform == 'win32' and platform_python_implementation == 'CPython'",
             "version": "==1.11.5"
         },
         "chardet": {
