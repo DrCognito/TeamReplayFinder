@@ -10,8 +10,9 @@ from sqlalchemy.orm import sessionmaker
 from replay_finder.dota2_api import SingleDotaClient
 from replay_finder.model import InitDB as replay_InitDB
 from replay_finder.model import Replay, ReplayStatus, get_replays_for_team
-from replay_finder.replay_process import check_existance, process_replay
+from replay_finder.replay_process import check_existance, replay_process_odota
 from replay_finder.team_info import InitTeamDB, TeamInfo
+import requests
 
 REPLAY_TIME_PERIOD_DAYS = 30
 
@@ -30,6 +31,10 @@ arguments.add_argument('--require_players',
                        help="""Require both the team id and player
                                stack to match.""",
                        action='store_true')
+arguments.add_argument('--limit',
+                       help='''Limit number of replays to download.''',
+                       type=int
+                       )
 
 replay_paths = [
     Path(environment['JSON_ARCHIVE']),
@@ -74,7 +79,8 @@ if __name__ == '__main__':
     else:
         replays = get_replays_for_team(team, replay_session,
                                        require_both=False)
-    replays = replays.filter(Replay.start_time > datetime.now() - updatecut)
+    replays = replays.filter(Replay.start_time > datetime.now() - updatecut)\
+                     .order_by(Replay.replay_id.desc())
 
     if args.list:
         output = "Total:\t" + str(replays.count()) + "\n"
@@ -88,26 +94,23 @@ if __name__ == '__main__':
         exit()
 
     # Start up the steam client!
-    dota_client = SingleDotaClient("download")
-    try:
-        dota_client.dota_wait('ready', timeout=20, raises=True)
-    except GeventTimeout:
-        print("Timed out waiting for dota2 client to ready.")
-        dota_client.close()
-        exit()
+    # dota_client = SingleDotaClient("download")
+    # try:
+    #     dota_client.dota_wait('ready', timeout=20, raises=True)
+    # except GeventTimeout:
+    #     print("Timed out waiting for dota2 client to ready.")
+    #     dota_client.close()
+    #     exit()
 
     replays = replays.filter(Replay.status != ReplayStatus.DOWNLOADED,
                              Replay.status != ReplayStatus.FAILED)
-    for rep in replays:
-        try:
-            path = process_replay(rep, replay_session, dota_client)
-        except:
-            dota_client.close()
-            raise
-            
-        if path:
-            print("Replay downloaded to: {}".format(path))
-        else:
-            print("Failed to process replay {}.".format(rep.replay_id))
+    if args.limit is not None:
+        replays = replays.limit(args.limit)
 
-    dota_client.close()
+    with requests.Session() as req_session:
+        for rep in replays:
+            path = replay_process_odota(rep, replay_session, req_session)
+            if path:
+                print("Replay downloaded to: {}".format(path))
+            else:
+                print("Failed to process replay {}.".format(rep.replay_id))

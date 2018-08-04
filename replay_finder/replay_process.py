@@ -3,6 +3,7 @@ from os import remove as remove_file, environ
 from time import sleep
 
 from requests import get as req_get
+from requests import codes as req_codes
 from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
                                  RequestException)
 from tqdm import tqdm
@@ -96,7 +97,7 @@ def process_replay(replay, session, dota_singleton: SingleDotaClient):
             sleep(1)
 
         try:
-            rep_id, url = dota_singleton.dota_wait("replay_url", timeout=5,
+            rep_id, url = dota_singleton.dota_wait("replay_url", timeout=90,
                                                    raises=True)
         except GeventTimeout:
             print("Timed out retrieving replay url {}".format(replay.replay_id))
@@ -128,6 +129,80 @@ def process_replay(replay, session, dota_singleton: SingleDotaClient):
             print(e)
             sleep(5)
             return process_replay(replay, session, dota_singleton)
+        finally:
+            replay.process_attempts += 1
+            session.merge(replay)
+            session.commit()
+            sleep(1)
+
+        replay.status = ReplayStatus.DOWNLOADED
+        session.merge(replay)
+        session.commit()
+
+        extract_path = Path(environ["EXTRACT_PATH"]) /\
+            (str(replay.replay_id) + '.dem')
+        final_path = extract_replay(download_path, extract_path)
+
+        return final_path
+
+
+def replay_process_odota(replay, session, req_session):
+    def _query_odota(replay_id):
+        base_url = 'https://api.opendota.com/api/matches/{}'.format(replay_id)
+        responce = req_session.get(base_url)
+
+        if responce.status_code != req_codes.ok:
+            print("Failed to retrieve {} from odota with code {}"
+                  .format(base_url, responce.status_code))
+        try:
+            json = responce.json()
+            return json['replay_url']
+        except ValueError:
+            print("Invalid json retrieved from {}"
+                  .format(base_url))
+            return None
+
+    if replay.status == ReplayStatus.DOWNLOADED:
+        return False
+
+    if replay.status == ReplayStatus.ACKNOWLEDGED:
+        if replay.process_attempts > GC_REPLAY_ATTEMPTS:
+            print("Attempts exceeded for {}. Skipping."
+                  .format(replay.replay_id))
+            return False
+
+        url = _query_odota(replay.replay_id)
+        replay.process_attempts += 1
+        session.merge(replay)
+        session.commit()
+        sleep(3)
+
+        if url is None:
+            raise TimeoutError
+            return replay_process_odota(replay, session, req_session)
+
+        replay.replay_url = url
+        replay.status = ReplayStatus.DOWNLOADING
+        replay.process_attempts = 0
+        session.merge(replay)
+        session.commit()
+
+        return replay_process_odota(replay, session, req_session)
+
+    if replay.status == ReplayStatus.DOWNLOADING:
+        if replay.process_attempts > REPLAY_DOWNLOAD_ATTEMPTS:
+            print("Download attempts exceeded for {}. Skipping."
+                  .format(replay.replay_id))
+            return False
+
+        download_path = Path(environ["DOWNLOAD_PATH"]) /\
+            (str(replay.replay_id) + '.dem.bz2')
+        try:
+            download_replay(replay, download_path)
+        except RequestException as e:
+            print(e)
+            sleep(5)
+            return replay_process_odota(replay, session, req_session)
         finally:
             replay.process_attempts += 1
             session.merge(replay)
