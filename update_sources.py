@@ -25,7 +25,7 @@ arguments.add_argument('--league_ids', help="""League IDs of the main leagues to
                                             """)
 arguments.add_argument('--skip_league_update', help="""Skip updating the master league listing
                                                     """, action='store_true')
-arguments.add_argument('--update_replays', help="""Attempt to retrieve the basic information
+arguments.add_argument('--skip_replays', help="""Attempt to retrieve the basic information
                        for replays.""",
                        action='store_true')
 
@@ -47,7 +47,7 @@ if __name__ == '__main__':
         update_league_listing(session)
         session.commit()
 
-    if args.update_replays:
+    if not args.skip_replays:
         league_ids = session.query(League.league_id)\
                     .filter(League.status != LeagueStatus.FINISHED)\
                     .filter(League.last_update < datetime.now() - updatecut)\
