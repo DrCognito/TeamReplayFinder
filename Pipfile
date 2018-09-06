@@ -15,6 +15,7 @@ requests = "*"
 tqdm = "*"
 alembic = "*"
 tabulate = "*"
+pandas = "*"
 
 
 [dev-packages]
