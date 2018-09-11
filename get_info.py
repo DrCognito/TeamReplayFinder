@@ -75,20 +75,27 @@ def get_player_info(player_id: int, team_session):
     return data
 
 
-def get_team_replays(team_id: int, session, team_session):
+def get_team_replays(team_id: int, session, team_session, max_count=50):
     team: TeamInfo = team_session.query(TeamInfo)\
                                  .filter(TeamInfo.team_id == team_id).one()
     team_stack = team.stack_id
 
-    dire_statement = team_session.query(Replay)\
+    dire_statement = team_session.query(Replay.replay_id.label('Dire'))\
                                  .filter((Replay.dire_id == team_id) |
-                                         (Replay.dire_stack_id == team_stack))
+                                         (Replay.dire_stack_id == team_stack))\
+                                 .order_by(Replay.replay_id.desc())\
+                                 .limit(max_count)
     data_dire = read_sql(dire_statement.statement, session.bind)
 
-    radiant_statement = team_session.query(Replay)\
+    radiant_statement = team_session.query(Replay.replay_id.label('Radiant'))\
                                     .filter((Replay.radiant_id == team_id) |
-                                            (Replay.radiant_stack_id == team_stack))
+                                            (Replay.radiant_stack_id ==
+                                             team_stack))\
+                                    .order_by(Replay.replay_id.desc())\
+                                    .limit(max_count)
     data_radiant = read_sql(radiant_statement.statement, session.bind)
+
+    return data_dire, data_radiant
 
 
 if __name__ == '__main__':
@@ -121,6 +128,19 @@ if __name__ == '__main__':
             print(team_df.to_csv())
         else:
             print(tabulate(team_df, headers='keys'))
+
+        if args.list_replays:
+            teams_replays = map(lambda x: get_team_replays(x, session,
+                                team_session, max_count=args.max_replays),
+                                args.team_ids)
+
+            for r in teams_replays:
+                summary = concat(r, axis=1)
+                if args.csv_output:
+                    print(summary.to_csv())
+                else:
+                    print(tabulate(summary, headers='keys', floatfmt='.0f'))
+
 
     if args.player_id is not None:
         player_info: DataFrame = get_player_info(args.player_id, session)
