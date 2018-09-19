@@ -22,12 +22,15 @@ arguments.add_argument('--league_ids', help="""League IDs of the main leagues to
                                             updated.
                                             Update will be forced even if it is
                                             less than the usual cut off time.
-                                            """)
+                                            """,
+                       nargs="*")
 arguments.add_argument('--skip_league_update', help="""Skip updating the master league listing
                                                     """, action='store_true')
 arguments.add_argument('--skip_replays', help="""Attempt to retrieve the basic information
                        for replays.""",
                        action='store_true')
+arguments.add_argument('--extra_leagues', help="""Add extra leagues not found by listing.""",
+                       nargs="*")
 
 if __name__ == '__main__':
     args = arguments.parse_args()
@@ -44,10 +47,12 @@ if __name__ == '__main__':
     session = Session()
 
     if not args.skip_league_update:
-        update_league_listing(session)
+        print("Updating leagues.")
+        update_league_listing(session, extra=args.extra_leagues)
         session.commit()
 
     if not args.skip_replays:
+        print("Updating replays.")
         league_ids = session.query(League.league_id)\
                     .filter(League.status != LeagueStatus.FINISHED)\
                     .filter(League.last_update < datetime.now() - updatecut)\
