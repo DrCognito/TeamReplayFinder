@@ -19,7 +19,9 @@ class TeamInfo(Base_TI):
     last_change = Column(DateTime)
     stack_id = Column(String)
 
-    players = relationship("TeamPlayer")
+    players = relationship("TeamPlayer",
+                           cascade="save-update, merge, "
+                                   "delete, delete-orphan")
 
 
 class TeamPlayer(Base_TI):
