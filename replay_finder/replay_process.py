@@ -162,7 +162,7 @@ def replay_process_odota(replay, session, req_session):
         try:
             json = responce.json()
             return json['replay_url']
-        except ValueError:
+        except (ValueError, KeyError):
             print("Invalid json retrieved from {}"
                   .format(base_url))
             return None
