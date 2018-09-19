@@ -41,12 +41,12 @@ PlayerIDs['PSG LGD']['xNova'] = 76561198054561825
 ValidityTime['PSG LGD'] = datetime.datetime(2018, 1, 1, 0, 0, 0, 0)
 
 PlayerIDs['Team Secret'] = collections.OrderedDict()
-PlayerIDs['Team Secret']['Ace'] = 76561198057856286
+PlayerIDs['Team Secret']['Nisha'] = 76561198082035378
 PlayerIDs['Team Secret']['MidOne'] = 76561198076851106
-PlayerIDs['Team Secret']['Fata'] = 76561198047065028
+PlayerIDs['Team Secret']['Zai'] = 76561198033828054
 PlayerIDs['Team Secret']['YapzOr'] = 76561198049382766
 PlayerIDs['Team Secret']['Puppey'] = 76561198047544485
-ValidityTime['Team Secret'] = datetime.datetime(2017, 9, 5, 0, 0, 0, 0)
+ValidityTime['Team Secret'] = datetime.datetime(2018, 9, 11, 0, 0, 0, 0)
 
 PlayerIDs['Mineski'] = collections.OrderedDict()
 PlayerIDs['Mineski']['Mushi'] = 76561198050137285
@@ -160,6 +160,63 @@ PlayerIDs['Pain Gaming']['Kingrd'] = 76561198045119556
 PlayerIDs['Pain Gaming']['Duster'] = 76561198076790780
 ValidityTime['Pain Gaming'] = datetime.datetime(2018, 4, 14, 0, 0, 0, 0)
 
+#KL major additions
+PlayerIDs['Alliance'] = collections.OrderedDict()
+PlayerIDs['Alliance']['qojqva'] = 76561198047004422
+PlayerIDs['Alliance']['miCKe'] = 76561198113227791
+PlayerIDs['Alliance']['Boxi'] = 76561198037756242
+PlayerIDs['Alliance']['iNSaNiA'] = 76561198014846690
+PlayerIDs['Alliance']['Taiga'] = 76561198362058302
+ValidityTime['Alliance'] = datetime.datetime(2018, 6, 3, 0, 0, 0, 0)
+
+PlayerIDs['Ninjas in Pyjamas'] = collections.OrderedDict()
+PlayerIDs['Ninjas in Pyjamas']['Ace'] = 76561198057856286
+PlayerIDs['Ninjas in Pyjamas']['Fata'] = 76561198047065028
+PlayerIDs['Ninjas in Pyjamas']['33'] = 76561198046964005
+PlayerIDs['Ninjas in Pyjamas']['Saksa'] = 76561198064001473
+PlayerIDs['Ninjas in Pyjamas']['ppd'] = 76561198046993283
+ValidityTime['Ninjas in Pyjamas'] = datetime.datetime(2018, 9, 15, 0, 0, 0, 0)
+
+PlayerIDs['Team Lithium'] = collections.OrderedDict()
+PlayerIDs['Team Lithium']['Madara'] = 76561198055695796
+PlayerIDs['Team Lithium']['MagE'] = 76561198138632092
+PlayerIDs['Team Lithium']['KheZu'] = 76561198129291346
+PlayerIDs['Team Lithium']['Maybe Next Time '] = 76561198047219142
+PlayerIDs['Team Lithium']['Peksu'] = 76561198111335318
+ValidityTime['Team Lithium'] = datetime.datetime(2018, 9, 12, 0, 0, 0, 0)
+
+PlayerIDs['madjor atendari'] = collections.OrderedDict()
+PlayerIDs['madjor atendari']['Power'] = 76561198047111480
+PlayerIDs['madjor atendari']['lil pleb'] = 76561198064176721
+PlayerIDs['madjor atendari']['Vihren'] = 76561198047153381
+PlayerIDs['madjor atendari']['eN'] = 76561198070460321
+PlayerIDs['madjor atendari']['CTOMAHEH1'] = 76561198274849896
+ValidityTime['madjor atendari'] = datetime.datetime(2018, 9, 12, 0, 0, 0, 0)
+
+PlayerIDs['MangoBay'] = collections.OrderedDict()
+PlayerIDs['MangoBay']['Fey'] = 76561198138298284
+PlayerIDs['MangoBay']['garter'] = 76561198047059467
+PlayerIDs['MangoBay']['bOne7'] = 76561198048985630
+PlayerIDs['MangoBay']['Qupe'] = 76561198078343881
+PlayerIDs['MangoBay']['Flash'] = 76561198052294119
+ValidityTime['MangoBay'] = datetime.datetime(2018, 9, 5, 0, 0, 0, 0)
+
+PlayerIDs['The Final Tribe'] = collections.OrderedDict()
+PlayerIDs['The Final Tribe']['Frost'] = 76561198129624977
+PlayerIDs['The Final Tribe']['Chessie'] = 76561198132689985
+PlayerIDs['The Final Tribe']['jonassomfan'] = 76561198000475053
+PlayerIDs['The Final Tribe']['Handsken'] = 76561197978446698
+PlayerIDs['The Final Tribe']['Era'] = 76561198060583478
+ValidityTime['The Final Tribe'] = datetime.datetime(2018, 4, 14, 0, 0, 0, 0)
+
+# PlayerIDs[''] = collections.OrderedDict()
+# PlayerIDs[''][''] = 
+# PlayerIDs[''][''] = 
+# PlayerIDs[''][''] = 
+# PlayerIDs[''][''] = 
+# PlayerIDs[''][''] = 
+# ValidityTime[''] = datetime.datetime(2018, 4, 14, 0, 0, 0, 0)
+
 _TeamIDs = {}
 
 _TeamIDs['Virtus Pro'] = 1883502
@@ -180,6 +237,13 @@ _TeamIDs['VGJ Storm'] = 5228654
 _TeamIDs['Evil Geniuses'] = 39
 _TeamIDs['Optic Gaming'] = 5026801
 _TeamIDs['Pain Gaming'] = 67
+
+_TeamIDs['Alliance'] = 111474
+_TeamIDs['Ninjas in Pyjamas'] = 6214973
+_TeamIDs['Team Lithium'] = 6212166
+_TeamIDs['madjor atendari'] = 6211505
+_TeamIDs['MangoBay'] = 6187923
+_TeamIDs['The Final Tribe'] = 5059375
 
 #path = 'sqlite://'
 path = None
