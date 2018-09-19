@@ -15,7 +15,7 @@ from .model import League, LeagueStatus, Replay, get_api_usage, make_replay
 LEAGUE_EXPIRED_AFTER_DAYS = 30
 
 
-def update_league_listing(session):
+def update_league_listing(session, extra=None):
     @DecoratorUsageCheck(session, get_api_usage, WEB_API_LIMIT)
     def _update_league():
         dota2_webapi = Initialise()
@@ -33,8 +33,15 @@ def update_league_listing(session):
     finally:
         sleep(1)
 
-    for l in leagues['leagues']:
-        league_id = l['leagueid']
+    league_ids = [l['leagueid'] for l in leagues['leagues']]
+    if extra is not None:
+        league_ids += extra
+
+    for league_id in league_ids:
+        #league_id = l['leagueid']
+        #print(league_id)
+        if league_id == 10296:
+            print("found kl")
         if session.query(exists().where(League.league_id == league_id)).scalar():
             continue
 
