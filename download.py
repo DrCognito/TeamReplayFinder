@@ -112,7 +112,11 @@ if __name__ == '__main__':
 
         with requests.Session() as req_session:
             for rep in replays:
-                path = replay_process_odota(rep, replay_session, req_session)
+                try:
+                    path = replay_process_odota(rep, replay_session, req_session)
+                except TimeoutError:
+                    print("TimeoutError for {}".format(rep.replay_id))
+                    continue
                 if path:
                     print("Replay downloaded to: {}".format(path))
                 else:
