@@ -38,10 +38,6 @@ def update_league_listing(session, extra=None):
         league_ids += extra
 
     for league_id in league_ids:
-        #league_id = l['leagueid']
-        #print(league_id)
-        if league_id == 10296:
-            print("found kl")
         if session.query(exists().where(League.league_id == league_id)).scalar():
             continue
 
