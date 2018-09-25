@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 from pandas import DataFrame, read_sql, concat
 from sqlalchemy.orm import sessionmaker
 from tabulate import tabulate
+from pathlib import Path
 
+from download import replay_paths, replay_extensions
 from replay_finder.model import InitDB, League, Replay
 from replay_finder.team_info import InitTeamDB, TeamInfo, TeamPlayer
 
@@ -27,6 +29,11 @@ arguments.add_argument('--team_ids',
 arguments.add_argument('--teams',
                        help="""Display known information about team
                                by name""",
+                       nargs="*")
+arguments.add_argument('--replays',
+                       help="Lookup information on replays and check"
+                            "available locations for the id.",
+                       type=int,
                        nargs="*")
 arguments.add_argument('--player_id',
                        help="""Display known information about player
@@ -98,6 +105,27 @@ def get_team_replays(team_id: int, session, team_session, max_count=50):
     return data_dire, data_radiant
 
 
+def get_replay_db_info(replay_id: int, session):
+    sql_statement = session.query(Replay.replay_id, Replay.start_time,
+                                  Replay.league_id, Replay.status,
+                                  Replay.dire_id, Replay.radiant_id)\
+                           .filter(Replay.replay_id == replay_id)
+    data = read_sql(sql_statement.statement, session.bind)
+
+    return data
+
+
+def get_replay_location_info(replay_id: int):
+    data = DataFrame()
+    for f_path, ext in zip(replay_paths, replay_extensions):
+        r_file: Path = f_path / (str(replay_id) + ext)
+        column = "{}\\*{}".format(str(f_path), ext)
+        data[column] = [r_file.is_file(), ]
+    data.index = [replay_id, ]
+
+    return data
+
+
 if __name__ == '__main__':
     args = arguments.parse_args()
 
@@ -141,9 +169,26 @@ if __name__ == '__main__':
                 else:
                     print(tabulate(summary, headers='keys', floatfmt='.0f'))
 
+    if args.replays is not None:
+        replay_itter = map(lambda x: get_replay_db_info(x, session),
+                           args.replays)
+        replay_info = concat(replay_itter)
+
+        replay_itter = map(lambda x: get_replay_location_info(x),
+                           args.replays)
+        replay_locations = concat(replay_itter)
+
+        if args.csv_output:
+            print(replay_info.to_csv())
+            print(replay_locations.to_csv())
+        else:
+            print(tabulate(replay_info, headers='keys'))
+            print(tabulate(replay_locations, headers='keys'))
+            #print(replay_locations)
 
     if args.player_id is not None:
-        player_info: DataFrame = get_player_info(args.player_id, session)
+        player_info: DataFrame = get_player_info(args.player_id, team_session)
+        player_info.index = player_info["player_id"]
 
         if args.csv_output:
             print(player_info.to_csv())
