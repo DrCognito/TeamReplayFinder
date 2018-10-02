@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from os import environ as environment
 
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import SQLAlchemyError
 
 from replay_finder.league import update_league_listing, update_league_replays
 from replay_finder.model import InitDB, League, LeagueStatus
@@ -31,6 +32,10 @@ arguments.add_argument('--skip_replays', help="""Attempt to retrieve the basic i
                        action='store_true')
 arguments.add_argument('--extra_leagues', help="""Add extra leagues not found by listing.""",
                        nargs="*")
+arguments.add_argument('--unfinish_leagues',
+                       help="Sets the status of listed leagues to ongoing"
+                            " allowing for extra replays to be queried.",
+                       nargs="*")
 
 if __name__ == '__main__':
     args = arguments.parse_args()
@@ -45,6 +50,24 @@ if __name__ == '__main__':
     engine = InitDB(environment['REPLAY_LEAGUE_DB_PATH'])
     Session = sessionmaker(bind=engine)
     session = Session()
+
+    if args.unfinish_leagues is not None:
+        for league in args.unfinish_leagues:
+            print("Trying to set {} to ongoing.".format(league))
+            db_league = session.query(League)\
+                               .filter(League.league_id == league)\
+                               .one_or_none()
+            if db_league is None:
+                print("{} not found! To add an unexisting "
+                      "league use --extra_leagues".format(league))
+                continue
+            db_league.status = LeagueStatus.ONGOING
+            try:
+                session.merge(db_league)
+                session.commit()
+            except SQLAlchemyError as e:
+                print(e)
+                session.rollback()
 
     if not args.skip_league_update:
         print("Updating leagues.")
