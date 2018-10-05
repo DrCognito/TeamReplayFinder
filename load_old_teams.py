@@ -217,6 +217,22 @@ ValidityTime['The Final Tribe'] = datetime.datetime(2018, 4, 14, 0, 0, 0, 0)
 # PlayerIDs[''][''] = 
 # ValidityTime[''] = datetime.datetime(2018, 4, 14, 0, 0, 0, 0)
 
+PlayerIDs['Hippomaniacs'] = collections.OrderedDict()
+PlayerIDs['Hippomaniacs']['Curry'] = 76561198012671730
+PlayerIDs['Hippomaniacs']['Supream'] = 76561198018778775
+PlayerIDs['Hippomaniacs']['SabeRLighT'] = 76561198086478594
+PlayerIDs['Hippomaniacs']['Muf'] = 76561198028273089
+PlayerIDs['Hippomaniacs']['sehny'] = 76561198079445782
+ValidityTime['Hippomaniacs'] = datetime.datetime(2018, 9, 4, 0, 0, 0, 0)
+
+PlayerIDs['ferzee'] = collections.OrderedDict()
+PlayerIDs['ferzee']['Daxak'] = 76561198073006451
+PlayerIDs['ferzee']['Afoninje'] = 76561198042118224
+PlayerIDs['ferzee']['AfterLife'] = 76561198047050811
+PlayerIDs['ferzee']['KingR'] = 76561198143259310
+PlayerIDs['ferzee']['VANSKOR'] = 76561197971815910
+ValidityTime['ferzee'] = datetime.datetime(2018, 9, 14, 0, 0, 0, 0)
+
 _TeamIDs = {}
 
 _TeamIDs['Virtus Pro'] = 1883502
@@ -244,6 +260,9 @@ _TeamIDs['Team Lithium'] = 6212166
 _TeamIDs['madjor atendari'] = 6211505
 _TeamIDs['MangoBay'] = 6187923
 _TeamIDs['The Final Tribe'] = 5059375
+
+_TeamIDs['ferzee'] = 6209143
+_TeamIDs['Hippomaniacs'] = 3214090
 
 #path = 'sqlite://'
 path = None
