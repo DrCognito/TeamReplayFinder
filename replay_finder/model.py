@@ -79,8 +79,16 @@ def make_replay(dict_obj):
     new_replay.status = ReplayStatus.ACKNOWLEDGED
     new_replay.process_attempts = 0
 
-    new_replay.dire_id = dict_obj['dire_team_id']
-    new_replay.radiant_id = dict_obj['radiant_team_id']
+    try:
+        new_replay.dire_id = dict_obj['dire_team_id']
+    except KeyError:
+        print("Missing dire team in {}".format(dict_obj['match_id']))
+        new_replay.dire_id = 0
+    try:
+        new_replay.radiant_id = dict_obj['radiant_team_id']
+    except KeyError:
+        print("Missing radiant team in {}".format(dict_obj['match_id']))
+        new_replay.radiant_id = 0
 
     def _player(p):
         new_player = Player()
