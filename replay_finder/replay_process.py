@@ -2,16 +2,19 @@ from bz2 import BZ2File
 from os import remove as remove_file, environ
 from time import sleep
 
-from requests import get as req_get
+from dota2api import Initialise
+from dota2api.src.exceptions import APIError, APITimeoutError
+from requests import get as req_get, Session as requests_Session
 from requests import codes as req_codes
 from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
                                  RequestException)
+from sqlalchemy.exc import SQLAlchemyError
 from tqdm import tqdm
 from pathlib import Path
 
-from .__init__ import GC_API_LIMIT
+from .__init__ import GC_API_LIMIT, WEB_API_LIMIT
 from .api_usage import APIOverLimit, DecoratorUsageCheck
-from .model import ReplayStatus, get_gc_usage
+from .model import ReplayStatus, get_gc_usage, get_api_usage, make_replay
 from .dota2_api import SingleDotaClient
 
 from gevent import Timeout as GeventTimeout
@@ -244,3 +247,23 @@ def check_existance(replay, extensions, paths):
             return r_file
 
     return False
+
+
+def add_single_replay(session, match_id: int):
+    dota2_webapi = Initialise()
+
+    @DecoratorUsageCheck(session, get_api_usage, WEB_API_LIMIT)
+    def _get_replay_details(web_query):
+        return dota2_webapi.get_match_details(**web_query)
+
+    match_query = _get_replay_details({'match_id': match_id})
+    sleep(1)
+
+    new_replay = make_replay(match_query)
+    try:
+        session.add(new_replay)
+        session.commit()
+    except SQLAlchemyError as e:
+        print("Failed to add new match {}".format(match_id))
+        print(e)
+        session.rollback()
