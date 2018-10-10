@@ -8,8 +8,10 @@ from os import environ as environment
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 
+from odota.odota_replay import InitDB as odota_db_init, Replay as Odota_Replay
 from replay_finder.league import update_league_listing, update_league_replays
-from replay_finder.model import InitDB, League, LeagueStatus
+from replay_finder.model import InitDB, League, LeagueStatus, Replay
+from replay_finder.replay_process import add_single_replay
 
 
 load_dotenv(dotenv_path="setup.env")
@@ -36,6 +38,9 @@ arguments.add_argument('--unfinish_leagues',
                        help="Sets the status of listed leagues to ongoing"
                             " allowing for extra replays to be queried.",
                        nargs="*")
+arguments.add_argument('--skip_odota_db',
+                       help="Fill any missing replay ids from Odota information.",
+                       action='store_true')
 
 if __name__ == '__main__':
     args = arguments.parse_args()
@@ -89,3 +94,28 @@ if __name__ == '__main__':
             print("Updating league {}".format(l))
             update_league_replays(session, l)
             session.commit()
+
+    if not args.skip_odota_db:
+        print("Filling missing replays from Open DOTA")
+        odota_engine = odota_db_init(environment['ODOTA_DB_PATH'])
+        Odota_Maker = sessionmaker(bind=odota_engine)
+        odota_session = Odota_Maker()
+
+        sub_query = odota_session.query(Odota_Replay.match_id).all()
+        query = session.query(Replay.replay_id)
+        retrieved_ids = [x[0] for x in sub_query]
+
+        count_missing = 0
+        count_matched = 0
+        for m_id in retrieved_ids:
+            test_q = query.filter(Replay.replay_id == m_id).one_or_none()
+
+            if test_q is None:
+                print("Adding {}.".format(m_id))
+                count_missing += 1
+                add_single_replay(session, m_id)
+            else:
+                count_matched += 1
+        session.commit()
+
+        print("Added {} missing replays with {} matched.".format(count_missing, count_matched))
