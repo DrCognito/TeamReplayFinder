@@ -29,10 +29,7 @@ def get_team_info(team_id: int, req_session):
     base_url_players = base_url + '/players'
 
     def _query_odota(url):
-        print(url)
         responce = req_session.get(url)
-        #responce = req_get(url)
-        print("boo")
         sleep(2)
 
         if responce.status_code != req_codes.ok:
