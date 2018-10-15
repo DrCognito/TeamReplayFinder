@@ -1,5 +1,7 @@
 import gevent.monkey
 gevent.monkey.patch_all()
+from base64 import urlsafe_b64encode
+from datetime import datetime
 from argparse import ArgumentParser
 from time import sleep
 from os import environ as environment
@@ -20,6 +22,12 @@ arguments = ArgumentParser()
 arguments.add_argument('team_ids',
                        help="Team ids to retrieve from ODOTA",
                        nargs='*')
+arguments.add_argument('--print',
+                       help="Print the team output instead of saving to file.",
+                       action='store_true')
+arguments.add_argument('--file',
+                       help="Filename for team output.",
+                       type=str)
 
 
 def get_team_info(team_id: int, req_session):
@@ -54,16 +62,25 @@ def get_team_info(team_id: int, req_session):
     out_string = "PlayerIDs['{}'] = "\
                      "collections.OrderedDict()\n".format(team_name)
 
+    player_strings = []
     for p in players:
         try:
             if p['is_current_team_member']:
                 pid = convert_to_64_bit(p['account_id'])
-                name = p['name']
-                out_string += "PlayerIDs['{}']"\
-                                 "['{}'] = {}\n".format(team_name, name, pid)
+                name = "".join(x for x in p['name'] if x.isalnum())
+                p_string = "PlayerIDs['{}']"\
+                           "['{}'] = {}\n".format(team_name, name, pid)
+                player_strings.append(p_string)
         except KeyError:
             print("Failed to process team {}".format(team_id))
             return None
+
+    while len(player_strings) < 5:
+        player_strings.append("PlayerIDs['{}']"
+                              "[''] = \n".format(team_name))
+
+    for p in player_strings:
+        out_string += p
 
     out_string += "ValidityTime['{}'] = "\
                   "datetime.datetime(2018, 9, 14, 0, 0, 0, 0)\n".format(team_name)
@@ -74,8 +91,24 @@ def get_team_info(team_id: int, req_session):
 if __name__ == '__main__':
     args = arguments.parse_args()
 
+    output = str()
+    now = datetime.now()
+    output = "#Queried at {}\n".format(now.isoformat())
     with requests_Session() as req_session:
         for t in args.team_ids:
-            print(t)
-            print(get_team_info(t, req_session))
+            print("Querying {}".format(t))
+            output += get_team_info(t, req_session)
+            output += "\n"
+            #print(get_team_info(t, req_session))
+
+    if len(args.team_ids) > 0:
+        if args.print:
+            print(output)
+        else:
+            if args.file is not None:
+                file_name = args.file
+            else:
+                file_name = "team_template.py"
+            with open(file_name, "w") as file_out:
+                file_out.write(output)
 
