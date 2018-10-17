@@ -264,6 +264,72 @@ _TeamIDs['The Final Tribe'] = 5059375
 _TeamIDs['ferzee'] = 6209143
 _TeamIDs['Hippomaniacs'] = 3214090
 
+#Queried at 2018-10-15T23:28:25.749090
+PlayerIDs['compLexity Gaming'] = collections.OrderedDict()
+PlayerIDs['compLexity Gaming']['Skem'] = 76561198060859959
+PlayerIDs['compLexity Gaming']['Limmp'] = 76561197972496930
+PlayerIDs['compLexity Gaming']['Sneyking'] = 76561197970632344
+PlayerIDs['compLexity Gaming']['Zfreek'] = 76561198011094390
+PlayerIDs['compLexity Gaming']['EternaLEnVy'] = 76561198003541947
+ValidityTime['compLexity Gaming'] = datetime.datetime(2018, 9, 11, 0, 0, 0, 0)
+_TeamIDs['compLexity Gaming'] = 3
+
+PlayerIDs['ROOONS'] = collections.OrderedDict()
+PlayerIDs['ROOONS']['BananaSlamJamma'] = 76561198065444496
+PlayerIDs['ROOONS']['iAnnihilate'] = 76561198052972365
+PlayerIDs['ROOONS']['monkeys-forever'] = 76561198047076771
+PlayerIDs['ROOONS']['Boris'] = 76561198054630653
+PlayerIDs['ROOONS']['Jubei'] = 76561198064541693
+ValidityTime['ROOONS'] = datetime.datetime(2018, 9, 27, 0, 0, 0, 0)
+_TeamIDs['ROOONS'] = 6266671
+
+PlayerIDs['Infamous'] = collections.OrderedDict()
+PlayerIDs['Infamous']['Timado'] = 76561198057924346
+PlayerIDs['Infamous']['Papita'] = 76561197988336300
+PlayerIDs['Infamous']['Wisper'] = 76561198253187000
+PlayerIDs['Infamous']['Matthew'] = 76561198115598187
+PlayerIDs['Infamous']['MoOz'] = 76561198309576604
+ValidityTime['Infamous'] = datetime.datetime(2018, 9, 7, 0, 0, 0, 0)
+_TeamIDs['Infamous'] = 5065748
+
+PlayerIDs['The Final Tribe'] = collections.OrderedDict()
+PlayerIDs['The Final Tribe']['Frost'] = 76561198129624977
+PlayerIDs['The Final Tribe']['Chessie'] = 76561198132689985
+PlayerIDs['The Final Tribe']['Jonassomfan'] = 76561198000475053
+PlayerIDs['The Final Tribe']['Handsken'] = 76561197978446698
+PlayerIDs['The Final Tribe']['Era'] = 76561198060583478
+ValidityTime['The Final Tribe'] = datetime.datetime(2018, 9, 6, 0, 0, 0, 0)
+_TeamIDs['The Final Tribe'] = 5059375
+
+PlayerIDs['Natus Vincere'] = collections.OrderedDict()
+PlayerIDs['Natus Vincere']['Crystallize'] = 76561198074884958
+PlayerIDs['Natus Vincere']['Ark'] = 76561198056454854
+PlayerIDs['Natus Vincere']['Blizzy'] = 76561198194965622
+PlayerIDs['Natus Vincere']['Chu'] = 76561198077749622
+PlayerIDs['Natus Vincere']['SoNNeikO'] = 76561198077687195
+ValidityTime['Natus Vincere'] = datetime.datetime(2018, 9, 7, 0, 0, 0, 0)
+_TeamIDs['Natus Vincere'] = 36
+
+PlayerIDs['Royal Never Give Up'] = collections.OrderedDict()
+PlayerIDs['Royal Never Give Up']['Monet'] = 76561198108481367
+PlayerIDs['Royal Never Give Up']['xy'] = 76561198161860152
+PlayerIDs['Royal Never Give Up']['Srf'] = 76561198116928426
+PlayerIDs['Royal Never Give Up']['ahfu'] = 76561198079842570
+PlayerIDs['Royal Never Give Up']['343'] = 76561198071300317
+ValidityTime['Royal Never Give Up'] = datetime.datetime(2018, 9, 15, 0, 0, 0, 0)
+_TeamIDs['Royal Never Give Up'] = 6209804
+
+PlayerIDs['Tigers'] = collections.OrderedDict()
+PlayerIDs['Tigers']['AhJit'] = 76561198086683001
+PlayerIDs['Tigers']['inYourdreaM'] = 76561198141981865
+PlayerIDs['Tigers']['MoonMeander'] = 76561197998894475
+PlayerIDs['Tigers']['Xepher'] = 76561198081669956
+PlayerIDs['Tigers']['1437'] = 76561198047462618
+ValidityTime['Tigers'] = datetime.datetime(2018, 9, 8, 0, 0, 0, 0)
+_TeamIDs['Tigers'] = 6187627
+
+
+
 #path = 'sqlite://'
 path = None
 engine = InitTeamDB(path)
