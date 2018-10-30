@@ -283,14 +283,14 @@ PlayerIDs['ROOONS']['Jubei'] = 76561198064541693
 ValidityTime['ROOONS'] = datetime.datetime(2018, 9, 27, 0, 0, 0, 0)
 _TeamIDs['ROOONS'] = 6266671
 
-PlayerIDs['Infamous'] = collections.OrderedDict()
-PlayerIDs['Infamous']['Timado'] = 76561198057924346
-PlayerIDs['Infamous']['Papita'] = 76561197988336300
-PlayerIDs['Infamous']['Wisper'] = 76561198253187000
-PlayerIDs['Infamous']['Matthew'] = 76561198115598187
-PlayerIDs['Infamous']['MoOz'] = 76561198309576604
-ValidityTime['Infamous'] = datetime.datetime(2018, 9, 7, 0, 0, 0, 0)
-_TeamIDs['Infamous'] = 5065748
+PlayerIDs['Infamous Gaming'] = collections.OrderedDict()
+PlayerIDs['Infamous Gaming']['Timado'] = 76561198057924346
+PlayerIDs['Infamous Gaming']['Papita'] = 76561197988336300
+PlayerIDs['Infamous Gaming']['Wisper'] = 76561198253187000
+PlayerIDs['Infamous Gaming']['Matthew'] = 76561198115598187
+PlayerIDs['Infamous Gaming']['MoOz'] = 76561198309576604
+ValidityTime['Infamous Gaming'] = datetime.datetime(2018, 9, 7, 0, 0, 0, 0)
+_TeamIDs['Infamous Gaming'] = 2672298
 
 PlayerIDs['The Final Tribe'] = collections.OrderedDict()
 PlayerIDs['The Final Tribe']['Frost'] = 76561198129624977
