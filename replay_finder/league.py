@@ -3,6 +3,7 @@ from time import sleep
 
 from dota2api import Initialise
 from dota2api.src.exceptions import APIError, APITimeoutError
+from json.decoder import JSONDecodeError
 from requests import Session as requests_Session
 from sqlalchemy import exists
 from sqlalchemy.exc import SQLAlchemyError
@@ -29,6 +30,11 @@ def update_league_listing(session, extra=None):
         return
     except APIOverLimit as e:
         print(e)
+        return
+    except JSONDecodeError as e:
+        print(e)
+        print("JSONDecodeError\n"
+              "Failed to process response from dota2api get_league_listing()")
         return
     finally:
         sleep(1)
