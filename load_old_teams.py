@@ -287,7 +287,7 @@ PlayerIDs['Infamous Gaming'] = collections.OrderedDict()
 PlayerIDs['Infamous Gaming']['Timado'] = 76561198057924346
 PlayerIDs['Infamous Gaming']['Papita'] = 76561197988336300
 PlayerIDs['Infamous Gaming']['Wisper'] = 76561198253187000
-PlayerIDs['Infamous Gaming']['Matthew'] = 76561198115598187
+PlayerIDs['Infamous Gaming']['Matthew'] = 76561198118255226
 PlayerIDs['Infamous Gaming']['MoOz'] = 76561198309576604
 ValidityTime['Infamous Gaming'] = datetime.datetime(2018, 9, 7, 0, 0, 0, 0)
 _TeamIDs['Infamous Gaming'] = 2672298
@@ -303,7 +303,7 @@ _TeamIDs['The Final Tribe'] = 5059375
 
 PlayerIDs['Natus Vincere'] = collections.OrderedDict()
 PlayerIDs['Natus Vincere']['Crystallize'] = 76561198074884958
-PlayerIDs['Natus Vincere']['Ark'] = 76561198056454854
+PlayerIDs['Natus Vincere']['MagicaL'] = 76561198132246824
 PlayerIDs['Natus Vincere']['Blizzy'] = 76561198194965622
 PlayerIDs['Natus Vincere']['Chu'] = 76561198077749622
 PlayerIDs['Natus Vincere']['SoNNeikO'] = 76561198077687195
