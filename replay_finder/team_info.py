@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from dota2api import convert_to_64_bit
 from os import environ as environment
 
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
@@ -85,7 +86,7 @@ def update_stack_ids(session):
 def process_player(name, player_id, team_id, session):
 
     player = TeamPlayer()
-    player.player_id = player_id
+    player.player_id = convert_to_64_bit(player_id)
     player.name = name
     player.team_id = team_id
 
