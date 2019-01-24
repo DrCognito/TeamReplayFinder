@@ -49,6 +49,11 @@ arguments.add_argument('--max_replays',
                        help="Maximum number of replays to list.",
                        type=int,
                        default=30)
+arguments.add_argument('--generate_id',
+                       help="Generate a stack_id from a" 
+                       "list of 5 player ids",
+                       nargs="*",
+                       type=int)
 
 
 def get_league_info(league_id: int, session):
@@ -126,6 +131,13 @@ def get_replay_location_info(replay_id: int):
     return data
 
 
+def generate_stack_id(id_list: list):
+    assert(len(id_list) == 5)
+    assert(len(set(id_list)) == len(id_list))
+    id_list.sort()
+
+    return ''.join(str(p) for p in id_list)
+
 if __name__ == '__main__':
     args = arguments.parse_args()
 
@@ -194,3 +206,7 @@ if __name__ == '__main__':
             print(player_info.to_csv())
         else:
             print(tabulate(player_info, headers='keys'))
+
+    if args.generate_id is not None:
+        print("Generating stack id for {}".format(str(args.generate_id)))
+        print(generate_stack_id(args.generate_id))
