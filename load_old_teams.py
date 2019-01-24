@@ -179,7 +179,7 @@ ValidityTime['Ninjas in Pyjamas'] = datetime.datetime(2018, 9, 15, 0, 0, 0, 0)
 
 PlayerIDs['Vega Squadron'] = collections.OrderedDict()
 PlayerIDs['Vega Squadron']['Madara'] = 76561198055695796
-PlayerIDs['Vega Squadron']['MagE'] = 76561198138632092
+PlayerIDs['Vega Squadron']['DM'] = 76561198016617237
 PlayerIDs['Vega Squadron']['KheZu'] = 76561198129291346
 PlayerIDs['Vega Squadron']['Maybe Next Time '] = 76561198047219142
 PlayerIDs['Vega Squadron']['Peksu'] = 76561198111335318
