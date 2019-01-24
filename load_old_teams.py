@@ -177,13 +177,13 @@ PlayerIDs['Ninjas in Pyjamas']['Saksa'] = 76561198064001473
 PlayerIDs['Ninjas in Pyjamas']['ppd'] = 76561198046993283
 ValidityTime['Ninjas in Pyjamas'] = datetime.datetime(2018, 9, 15, 0, 0, 0, 0)
 
-PlayerIDs['Team Lithium'] = collections.OrderedDict()
-PlayerIDs['Team Lithium']['Madara'] = 76561198055695796
-PlayerIDs['Team Lithium']['MagE'] = 76561198138632092
-PlayerIDs['Team Lithium']['KheZu'] = 76561198129291346
-PlayerIDs['Team Lithium']['Maybe Next Time '] = 76561198047219142
-PlayerIDs['Team Lithium']['Peksu'] = 76561198111335318
-ValidityTime['Team Lithium'] = datetime.datetime(2018, 9, 12, 0, 0, 0, 0)
+PlayerIDs['Vega Squadron'] = collections.OrderedDict()
+PlayerIDs['Vega Squadron']['Madara'] = 76561198055695796
+PlayerIDs['Vega Squadron']['MagE'] = 76561198138632092
+PlayerIDs['Vega Squadron']['KheZu'] = 76561198129291346
+PlayerIDs['Vega Squadron']['Maybe Next Time '] = 76561198047219142
+PlayerIDs['Vega Squadron']['Peksu'] = 76561198111335318
+ValidityTime['Vega Squadron'] = datetime.datetime(2018, 10, 28, 0, 0, 0, 0)
 
 PlayerIDs['madjor atendari'] = collections.OrderedDict()
 PlayerIDs['madjor atendari']['Power'] = 76561198047111480
@@ -256,7 +256,7 @@ _TeamIDs['Pain Gaming'] = 67
 
 _TeamIDs['Alliance'] = 111474
 _TeamIDs['Ninjas in Pyjamas'] = 6214973
-_TeamIDs['Team Lithium'] = 6212166
+_TeamIDs['Vega Squadron'] = 2006913
 _TeamIDs['madjor atendari'] = 6211505
 _TeamIDs['MangoBay'] = 6187923
 _TeamIDs['The Final Tribe'] = 5059375
