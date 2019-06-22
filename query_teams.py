@@ -109,6 +109,6 @@ if __name__ == '__main__':
                 file_name = args.file
             else:
                 file_name = "team_template.py"
-            with open(file_name, "w") as file_out:
+            with open(file_name, "w", encoding="utf-8") as file_out:
                 file_out.write(output)
 
