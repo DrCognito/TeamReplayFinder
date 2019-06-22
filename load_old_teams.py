@@ -162,8 +162,8 @@ ValidityTime['Pain Gaming'] = datetime.datetime(2018, 4, 14, 0, 0, 0, 0)
 
 #KL major additions
 PlayerIDs['Alliance'] = collections.OrderedDict()
-PlayerIDs['Alliance']['qojqva'] = 76561198047004422
 PlayerIDs['Alliance']['miCKe'] = 76561198113227791
+PlayerIDs['Alliance']['qojqva'] = 76561198047004422
 PlayerIDs['Alliance']['Boxi'] = 76561198037756242
 PlayerIDs['Alliance']['iNSaNiA'] = 76561198014846690
 PlayerIDs['Alliance']['Taiga'] = 76561198362058302
@@ -328,7 +328,173 @@ PlayerIDs['Tigers']['1437'] = 76561198047462618
 ValidityTime['Tigers'] = datetime.datetime(2018, 9, 8, 0, 0, 0, 0)
 _TeamIDs['Tigers'] = 6187627
 
+#Queried at 2019-06-20T15:53:07.836852
+PlayerIDs['Ninjas in Pyjamas'] = collections.OrderedDict()
+PlayerIDs['Ninjas in Pyjamas']['Ace'] = 76561198057856286
+PlayerIDs['Ninjas in Pyjamas']['Fata'] = 76561198047065028
+PlayerIDs['Ninjas in Pyjamas']['33'] = 76561198046964005
+PlayerIDs['Ninjas in Pyjamas']['Saksa'] = 76561198064001473
+PlayerIDs['Ninjas in Pyjamas']['ppd'] = 76561198046993283
+ValidityTime['Ninjas in Pyjamas'] = datetime.datetime(2018, 9, 17, 0, 0, 0, 0)
+_TeamIDs['Ninjas in Pyjamas'] = 6214973
 
+PlayerIDs['Team Sirius'] = collections.OrderedDict()
+PlayerIDs['Team Sirius']['Sylar'] = 76561198068647788
+PlayerIDs['Team Sirius']['ASD'] = 76561198428865663
+PlayerIDs['Team Sirius']['InJuly'] = 76561198071557321
+PlayerIDs['Team Sirius']['天命'] = 76561198119113501
+PlayerIDs['Team Sirius']['F1refly'] = 76561198095649787
+ValidityTime['Team Sirius'] = datetime.datetime(2019, 6, 5, 0, 0, 0, 0)
+_TeamIDs['Team Sirius'] = 7059982
+
+PlayerIDs['EHOME'] = collections.OrderedDict()
+PlayerIDs['EHOME']['NeverEnd'] = 76561198099546105
+PlayerIDs['EHOME']['430'] = 76561198048850805
+PlayerIDs['EHOME']['Faithbian'] = 76561198078399948
+PlayerIDs['EHOME']['XinQ'] = 76561198117741251
+PlayerIDs['EHOME']['y'] = 76561198071380415
+ValidityTime['EHOME'] = datetime.datetime(2019, 3, 29, 0, 0, 0, 0)
+_TeamIDs['EHOME'] = 4
+
+PlayerIDs['Team Secret'] = collections.OrderedDict()
+PlayerIDs['Team Secret']['Nisha'] = 76561198082035378
+PlayerIDs['Team Secret']['MidOne'] = 76561198076851106
+PlayerIDs['Team Secret']['zai'] = 76561198033828054
+PlayerIDs['Team Secret']['YapzOr'] = 76561198049382766
+PlayerIDs['Team Secret']['Puppey'] = 76561198047544485
+ValidityTime['Team Secret'] = datetime.datetime(2018, 9, 11, 0, 0, 0, 0)
+_TeamIDs['Team Secret'] = 1838315
+
+PlayerIDs['Evil Geniuses'] = collections.OrderedDict()
+PlayerIDs['Evil Geniuses']['rtz'] = 76561198047011640
+PlayerIDs['Evil Geniuses']['SumaiL'] = 76561198071885769
+PlayerIDs['Evil Geniuses']['s4'] = 76561198001497299
+PlayerIDs['Evil Geniuses']['Cr1t'] = 76561197986172872
+PlayerIDs['Evil Geniuses']['Fly'] = 76561198054420884
+ValidityTime['Evil Geniuses'] = datetime.datetime(2018, 5, 28, 0, 0, 0, 0)
+_TeamIDs['Evil Geniuses'] = 39
+
+PlayerIDs['PSG.LGD'] = collections.OrderedDict()
+
+
+PlayerIDs['PSG.LGD']['Ameame'] = 76561198085846975
+PlayerIDs['PSG.LGD']['Maybe'] = 76561198067128891
+PlayerIDs['PSG.LGD']['Chalice'] = 76561198055004575
+PlayerIDs['PSG.LGD']['fy'] = 76561198061960890
+PlayerIDs['PSG.LGD']['xNova'] = 76561198054561825
+ValidityTime['PSG.LGD'] = datetime.datetime(2018, 1, 1, 0, 0, 0, 0)
+_TeamIDs['PSG.LGD'] = 15
+
+PlayerIDs['KEEN GAMING'] = collections.OrderedDict()
+PlayerIDs['KEEN GAMING']['oldchicken'] = 76561198096143960
+PlayerIDs['KEEN GAMING']['一'] = 76561198215485600
+PlayerIDs['KEEN GAMING']['oldeLeVeN'] = 76561198094541811
+PlayerIDs['KEEN GAMING']['kaka'] = 76561198100141760
+PlayerIDs['KEEN GAMING']['Dark'] = 76561198357728633
+ValidityTime['KEEN GAMING'] = datetime.datetime(2018, 9, 19, 0, 0, 0, 0)
+_TeamIDs['KEEN GAMING'] = 2626685
+
+PlayerIDs['Gambit Esports'] = collections.OrderedDict()
+PlayerIDs['Gambit Esports']['Daxak'] = 76561198137677513
+PlayerIDs['Gambit Esports']['Afoninje'] = 76561198042118224
+PlayerIDs['Gambit Esports']['AfterLife'] = 76561198047050811
+PlayerIDs['Gambit Esports']['Immersion'] = 76561198255963198
+PlayerIDs['Gambit Esports']['Fng'] = 76561198054315317
+ValidityTime['Gambit Esports'] = datetime.datetime(2018, 12, 25, 0, 0, 0, 0)
+_TeamIDs['Gambit Esports'] = 6209143
+
+PlayerIDs['The Final Tribe'] = collections.OrderedDict()
+PlayerIDs['The Final Tribe']['Frost'] = 76561198129624977
+PlayerIDs['The Final Tribe']['Chessie'] = 76561198132689985
+PlayerIDs['The Final Tribe']['Xibbe'] = 76561198010845732
+PlayerIDs['The Final Tribe']['Handsken'] = 76561197978446698
+PlayerIDs['The Final Tribe']['Era'] = 76561198060583478
+ValidityTime['The Final Tribe'] = datetime.datetime(2019, 2, 8, 0, 0, 0, 0)
+_TeamIDs['The Final Tribe'] = 5059375
+
+#Queried at 2019-06-21T12:41:32.486730
+PlayerIDs['Forward Gaming'] = collections.OrderedDict()
+PlayerIDs['Forward Gaming']['YawaR'] = 76561198068717835
+PlayerIDs['Forward Gaming']['CCnC'] = 76561198181931958
+PlayerIDs['Forward Gaming']['Sneyking'] = 76561197970632344
+PlayerIDs['Forward Gaming']['MSS'] = 76561198046992615
+PlayerIDs['Forward Gaming']['pieliedie'] = 76561197967187728
+ValidityTime['Forward Gaming'] = datetime.datetime(2019, 4, 30, 0, 0, 0, 0)
+_TeamIDs['Forward Gaming'] = 6214538
+
+PlayerIDs['Vici Gaming'] = collections.OrderedDict()
+PlayerIDs['Vici Gaming']['Paparazi'] = 76561198097458967
+PlayerIDs['Vici Gaming']['Ori'] = 76561198068069222
+PlayerIDs['Vici Gaming']['Yang'] = 76561198100203650
+PlayerIDs['Vici Gaming']['Fade'] = 76561198142597041
+PlayerIDs['Vici Gaming']['Dy'] = 76561198103959167
+ValidityTime['Vici Gaming'] = datetime.datetime(2018, 9, 9, 0, 0, 0, 0)
+_TeamIDs['Vici Gaming'] = 726228
+
+#Queried at 2019-06-21T14:45:25.692325
+PlayerIDs['Team Liquid'] = collections.OrderedDict()
+PlayerIDs['Team Liquid']['Miracle'] = 76561198065514372
+PlayerIDs['Team Liquid']['w33'] = 76561198046966189
+PlayerIDs['Team Liquid']['MinDContRoL'] = 76561197994770931
+PlayerIDs['Team Liquid']['Gh'] = 76561198061622614
+PlayerIDs['Team Liquid']['KuroKy'] = 76561198042528392
+ValidityTime['Team Liquid'] = datetime.datetime(2019, 6, 20, 0, 0, 0, 0)
+_TeamIDs['Team Liquid'] = 2163
+
+PlayerIDs['OG'] = collections.OrderedDict()
+PlayerIDs['OG']['ana'] = 76561198271626550
+PlayerIDs['OG']['Topson'] = 76561198054320440
+PlayerIDs['OG']['Ceb'] = 76561198048536965
+PlayerIDs['OG']['JerAx'] = 76561197987037722
+PlayerIDs['OG']['N0tail'] = 76561197979938082
+ValidityTime['OG'] = datetime.datetime(2019, 3, 13, 0, 0, 0, 0)
+_TeamIDs['OG'] = 2586976
+
+PlayerIDs['Royal Never Give Up'] = collections.OrderedDict()
+PlayerIDs['Royal Never Give Up']['Monet'] = 76561198108481367
+PlayerIDs['Royal Never Give Up']['Setsu'] = 76561198100088082
+PlayerIDs['Royal Never Give Up']['Flyby'] = 76561198146892894
+PlayerIDs['Royal Never Give Up']['LaNm'] = 76561198049689484
+PlayerIDs['Royal Never Give Up']['ah fu'] = 76561198079842570
+ValidityTime['Royal Never Give Up'] = datetime.datetime(2019, 4, 14, 0, 0, 0, 0)
+_TeamIDs['Royal Never Give Up'] = 6209804
+
+PlayerIDs['TNC Predator'] = collections.OrderedDict()
+PlayerIDs['TNC Predator']['Gabbi'] = 76561198112811187
+PlayerIDs['TNC Predator']['ARMEL'] = 76561198124797733
+PlayerIDs['TNC Predator']['Kuku'] = 76561198145216072
+PlayerIDs['TNC Predator']['Tims'] = 76561198115760109
+PlayerIDs['TNC Predator']['eyyou'] = 76561198133741952
+ValidityTime['TNC Predator'] = datetime.datetime(2019, 2, 5, 0, 0, 0, 0)
+_TeamIDs['TNC Predator'] = 2108395
+
+PlayerIDs['Fnatic'] = collections.OrderedDict()
+PlayerIDs['Fnatic']['MP'] = 76561198061715811
+PlayerIDs['Fnatic']['Abed'] = 76561198114980808
+PlayerIDs['Fnatic']['iceiceice'] = 76561198045038168
+PlayerIDs['Fnatic']['DJ'] = 76561198062365554
+PlayerIDs['Fnatic']['JAbz'] = 76561198060737259
+ValidityTime['Fnatic'] = datetime.datetime(2018, 9, 12, 0, 0, 0, 0)
+_TeamIDs['Fnatic'] = 350190
+
+PlayerIDs['paiN Gaming'] = collections.OrderedDict()
+PlayerIDs['paiN Gaming']['Mandy'] = 76561198091972446
+PlayerIDs['paiN Gaming']['4dr'] = 76561198046203108
+PlayerIDs['paiN Gaming']['Lelis'] = 76561198047328903
+PlayerIDs['paiN Gaming']['Thiolicor'] = 76561198065311019
+PlayerIDs['paiN Gaming']['444'] = 76561198194503374
+ValidityTime['paiN Gaming'] = datetime.datetime(2019, 3, 30, 0, 0, 0, 0)
+_TeamIDs['paiN Gaming'] = 67
+
+#Queried at 2019-06-21T19:01:55.318148
+PlayerIDs['Infamous Gaming'] = collections.OrderedDict()
+PlayerIDs['Infamous Gaming']['oliver'] = 76561198060324070
+PlayerIDs['Infamous Gaming']['Black'] = 76561197981555031
+PlayerIDs['Infamous Gaming']['HeStEJoERoTTeN'] = 76561198003885423
+PlayerIDs['Infamous Gaming']['Biver'] = 76561198069778085
+PlayerIDs['Infamous Gaming']['p4pita'] = 76561197988336300
+ValidityTime['Infamous Gaming'] = datetime.datetime(2019, 5, 15, 0, 0, 0, 0)
+_TeamIDs['Infamous Gaming'] = 2672298
 
 #path = 'sqlite://'
 path = None
