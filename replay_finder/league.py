@@ -22,24 +22,26 @@ def update_league_listing(session, extra=None):
         dota2_webapi = Initialise()
         return dota2_webapi.get_league_listing()
 
-    try:
-        leagues = _update_league()
-    except (APIError, APITimeoutError) as e:
-        print("Failed to update league listing.")
-        print(e)
-        return
-    except APIOverLimit as e:
-        print(e)
-        return
-    except JSONDecodeError as e:
-        print(e)
-        print("JSONDecodeError\n"
-              "Failed to process response from dota2api get_league_listing()")
-        return
-    finally:
-        sleep(1)
+    # League listing retrieval seems broken for now.
+    # try:
+    #     leagues = _update_league()
+    # except (APIError, APITimeoutError) as e:
+    #     print("Failed to update league listing.")
+    #     print(e)
+    #     return
+    # except APIOverLimit as e:
+    #     print(e)
+    #     return
+    # except JSONDecodeError as e:
+    #     print(e)
+    #     print("JSONDecodeError\n"
+    #           "Failed to process response from dota2api get_league_listing()")
+    #     return
+    # finally:
+    #     sleep(1)
 
-    league_ids = [l['leagueid'] for l in leagues['leagues']]
+    # league_ids = [l['leagueid'] for l in leagues['leagues']]
+    league_ids = []
     if extra is not None:
         league_ids += extra
 
