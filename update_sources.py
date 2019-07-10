@@ -41,6 +41,8 @@ arguments.add_argument('--unfinish_leagues',
 arguments.add_argument('--skip_odota_db',
                        help="Fill any missing replay ids from Odota information.",
                        action='store_true')
+arguments.add_argument('--extra_ids', help="Add ids for considersation.",
+                       nargs="*")
 
 if __name__ == '__main__':
     args = arguments.parse_args()
@@ -89,7 +91,6 @@ if __name__ == '__main__':
         # sqlalchemy always returns a tuple for each row
         league_ids = [l[0] for l in league_ids.all()]
         league_ids = extra_leagues + league_ids
-
         for l in league_ids:
             print("Updating league {}".format(l))
             update_league_replays(session, l)
@@ -119,3 +120,21 @@ if __name__ == '__main__':
         session.commit()
 
         print("Added {} missing replays with {} matched.".format(count_missing, count_matched))
+
+    if args.extra_ids:
+        print("Filling missing replays from command line.")
+        count_missing = 0
+        count_matched = 0
+        query = session.query(Replay.replay_id)
+        for m_id in args.extra_ids:
+            test_q = query.filter(Replay.replay_id == m_id).one_or_none()
+
+            if test_q is None:
+                print("Adding {}.".format(m_id))
+                count_missing += 1
+                add_single_replay(session, m_id)
+            else:
+                count_matched += 1
+        session.commit()
+
+        print("Added {} missing replays with {} matched from cmd line.".format(count_missing, count_matched))
