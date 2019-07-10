@@ -83,7 +83,7 @@ def get_team_info(team_id: int, req_session):
         out_string += p
 
     out_string += "ValidityTime['{}'] = "\
-                  "datetime.datetime(2018, 9, 14, 0, 0, 0, 0)\n".format(team_name)
+                  "datetime.datetime(2019, 9, 14, 0, 0, 0, 0)\n".format(team_name)
     out_string += "_TeamIDs['{}'] = {}\n".format(team_name, team_id)
 
     return out_string
