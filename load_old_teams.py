@@ -496,6 +496,66 @@ PlayerIDs['Infamous Gaming']['p4pita'] = 76561197988336300
 ValidityTime['Infamous Gaming'] = datetime.datetime(2019, 5, 15, 0, 0, 0, 0)
 _TeamIDs['Infamous Gaming'] = 2672298
 
+#Queried at 2019-07-10T20:49:26.065254
+PlayerIDs['Hippomaniacs'] = collections.OrderedDict()
+PlayerIDs['Hippomaniacs']['CURRY'] = 76561198012671730
+PlayerIDs['Hippomaniacs']['Supream'] = 76561198018778775
+PlayerIDs['Hippomaniacs']['SabeRLighT'] = 76561198086478594
+PlayerIDs['Hippomaniacs']['Muf'] = 76561198028273089
+PlayerIDs['Hippomaniacs']['sehny'] = 76561198079445782
+ValidityTime['Hippomaniacs'] = datetime.datetime(2018, 10, 2, 0, 0, 0, 0)
+_TeamIDs['Hippomaniacs'] = 3214090
+#Queried at 2019-07-10T22:39:56.681754
+PlayerIDs['Team Singularity'] = collections.OrderedDict()
+PlayerIDs['Team Singularity']['Xcalibur'] = 76561198205638857
+PlayerIDs['Team Singularity']['Pingvincek'] = 76561198044132985
+PlayerIDs['Team Singularity']['Shachlo'] = 76561198084053252
+PlayerIDs['Team Singularity']['Luft'] = 76561198032135226
+PlayerIDs['Team Singularity']['Miposhka'] = 76561198073597242
+
+ValidityTime['Team Singularity'] = datetime.datetime(2019, 2, 24, 0, 0, 0, 0)
+_TeamIDs['Team Singularity'] = 6711290
+
+#Queried at 2019-07-10T22:39:56.681754
+PlayerIDs['Bald'] = collections.OrderedDict()
+PlayerIDs['Bald']['gorgc'] = 56939869
+PlayerIDs['Bald']['Stormstormer'] = 96803083
+PlayerIDs['Bald']['SexyBamboe'] = 20321748
+PlayerIDs['Bald']['EGM'] = 3916428
+PlayerIDs['Bald']['Eixn'] = 116876282
+
+ValidityTime['Bald'] = datetime.datetime(2019, 6, 1, 0, 0, 0, 0)
+_TeamIDs['Bald'] = 7237270
+
+#Queried at 2019-07-10T23:41:47.128372
+PlayerIDs['Chaos Esports'] = collections.OrderedDict()
+PlayerIDs['Chaos Esports']['vtFαded'] = 142139318
+PlayerIDs['Chaos Esports']['MATUMBAMAN'] = 72312627
+PlayerIDs['Chaos Esports']['KheZu'] = 169025618
+PlayerIDs['Chaos Esports']['MiLAN'] = 98172857
+PlayerIDs['Chaos Esports']['MISERY'] = 87382579
+ValidityTime['Chaos Esports'] = datetime.datetime(2019, 6, 24, 0, 0, 0, 0)
+_TeamIDs['Chaos Esports'] = 6666989
+
+#Queried at 2019-07-10T23:41:47.128372
+PlayerIDs['Anti-MagE-'] = collections.OrderedDict()
+PlayerIDs['Anti-MagE-']['Naive'] = 96183976
+PlayerIDs['Anti-MagE-']['MagE'] = 178366364
+PlayerIDs['Anti-MagE-']['GeneRaL'] = 89550641
+PlayerIDs['Anti-MagE-']['syndereN'] = 4281729
+PlayerIDs['Anti-MagE-']['dnz'] = 98167706
+ValidityTime['Anti-MagE-'] = datetime.datetime(2019, 6, 24, 0, 0, 0, 0)
+_TeamIDs['Anti-MagE-'] = -1
+
+PlayerIDs['six eight two'] = collections.OrderedDict()
+PlayerIDs['six eight two']['zipzap'] = 858046932
+PlayerIDs['six eight two']['W1sh'] = 120613892
+PlayerIDs['six eight two']['Tobi'] = 140288368
+PlayerIDs['six eight two']['meowspirit'] = 104334048
+PlayerIDs['six eight two']['antoha'] = 178692606
+ValidityTime['six eight two'] = datetime.datetime(2019, 6, 24, 0, 0, 0, 0)
+_TeamIDs['six eight two'] = -2
+
 #path = 'sqlite://'
 path = None
 engine = InitTeamDB(path)
