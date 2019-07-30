@@ -9,13 +9,14 @@ name = "pypi"
 
 sqlalchemy = "*"
 python-dotenv = "*"
-"dota2api" = "*"
 "dota2" = "*"
 requests = "*"
 tqdm = "*"
 alembic = "*"
 tabulate = "*"
 pandas = "*"
+"beautifulsoup4" = "*"
+"d2api" = "*"
 
 
 [dev-packages]
