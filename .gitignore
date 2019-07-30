@@ -126,3 +126,4 @@ update_sources.py
 alembic.ini
 *_sentry.bin
 team_template.py
+*.png
