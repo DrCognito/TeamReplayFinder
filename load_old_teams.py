@@ -556,6 +556,50 @@ PlayerIDs['six eight two']['antoha'] = 178692606
 ValidityTime['six eight two'] = datetime.datetime(2019, 6, 24, 0, 0, 0, 0)
 _TeamIDs['six eight two'] = -2
 
+PlayerIDs['J.Storm'] = collections.OrderedDict()
+PlayerIDs['J.Storm']['Resolut1on'] = 76561198046990903
+PlayerIDs['J.Storm']['Nine'] = 76561198055052004
+PlayerIDs['J.Storm']['Moo'] = 76561198044695409
+PlayerIDs['J.Storm']['Fear'] = 76561198047443319
+PlayerIDs['J.Storm']['1437'] = 76561198047462618
+ValidityTime['J.Storm'] = datetime.datetime(2019, 6, 20, 0, 0, 0, 0)
+_TeamIDs['J.Storm'] = 6288801
+
+PlayerIDs['Team Serenity'] = collections.OrderedDict()
+PlayerIDs['Team Serenity']['Ahjit'] = 126417273
+PlayerIDs['Team Serenity']['Zyd'] = 76561198085201850
+PlayerIDs['Team Serenity']['Pyw'] = 76561198098808851
+PlayerIDs['Team Serenity']['roddgeee'] = 76561198068983210
+PlayerIDs['Team Serenity']['XCJ'] = 76561198077997505
+ValidityTime['Team Serenity'] = datetime.datetime(2019, 4, 10, 0, 0, 0, 0)
+_TeamIDs['Team Serenity'] = 5066616
+
+PlayerIDs['beastcoast'] = collections.OrderedDict()
+PlayerIDs['beastcoast']['Mandy'] = 76561198091972446
+PlayerIDs['beastcoast']['Ryoya'] = 76561198075407158
+PlayerIDs['beastcoast']['Brax'] = 76561197992084581
+PlayerIDs['beastcoast']['MoOz'] = 76561198309576604
+PlayerIDs['beastcoast']['ixmike88'] = 76561198046980857
+ValidityTime['beastcoast'] = datetime.datetime(2019, 6, 30, 0, 0, 0, 0)
+_TeamIDs['beastcoast'] = 7079109
+
+PlayerIDs['paiN Gaming'] = collections.OrderedDict()
+PlayerIDs['paiN Gaming']['hFn'] = 76561198054270445
+PlayerIDs['paiN Gaming']['Therence'] = 65674469
+PlayerIDs['paiN Gaming']['Lelis'] = 76561198047328903
+PlayerIDs['paiN Gaming']['Thiolicor'] = 76561198065311019
+PlayerIDs['paiN Gaming']['444'] = 76561198194503374
+ValidityTime['paiN Gaming'] = datetime.datetime(2019, 6, 30, 0, 0, 0, 0)
+_TeamIDs['paiN Gaming'] = 67
+
+PlayerIDs['Complexity'] = collections.OrderedDict()
+PlayerIDs['Complexity']['Meracle'] = 76561198051635104
+PlayerIDs['Complexity']['Limmp'] = 76561197972496930
+PlayerIDs['Complexity']['tavo'] = 76561198078222576
+PlayerIDs['Complexity']['Zfreek'] = 76561198011094390
+PlayerIDs['Complexity']['Adam'] = 76561198071300317
+ValidityTime['Complexity'] = datetime.datetime(2019, 5, 14, 0, 0, 0, 0)
+_TeamIDs['Complexity'] = 3
 #path = 'sqlite://'
 path = None
 engine = InitTeamDB(path)
