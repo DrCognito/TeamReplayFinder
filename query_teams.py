@@ -6,7 +6,7 @@ from argparse import ArgumentParser
 from time import sleep
 from os import environ as environment
 
-from dota2api import convert_to_64_bit
+from util import convert_to_64_bit
 from dotenv import load_dotenv
 from requests import Session as requests_Session
 from requests import codes as req_codes
