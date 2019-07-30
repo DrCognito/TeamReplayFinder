@@ -2,8 +2,7 @@ from bz2 import BZ2File
 from os import remove as remove_file, environ
 from time import sleep
 
-from dota2api import Initialise
-from dota2api.src.exceptions import APIError, APITimeoutError
+import d2api
 from requests import get as req_get, Session as requests_Session
 from requests import codes as req_codes
 from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
@@ -250,7 +249,7 @@ def check_existance(replay, extensions, paths):
 
 
 def add_single_replay(session, match_id: int):
-    dota2_webapi = Initialise()
+    dota2_webapi = d2api.APIWrapper()
 
     @DecoratorUsageCheck(session, get_api_usage, WEB_API_LIMIT)
     def _get_replay_details(web_query):

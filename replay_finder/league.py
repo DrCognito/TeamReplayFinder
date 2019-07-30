@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 from time import sleep
 
-from dota2api import Initialise
-from dota2api.src.exceptions import APIError, APITimeoutError
+import d2api
+from d2api.src.errors import APITimeoutError, APIAuthenticationError
+# from dota2api.src.exceptions import APIError, APITimeoutError
 from json.decoder import JSONDecodeError
 from requests import Session as requests_Session
 from sqlalchemy import exists
@@ -19,13 +20,13 @@ LEAGUE_EXPIRED_AFTER_DAYS = 30
 def update_league_listing(session, extra=None):
     @DecoratorUsageCheck(session, get_api_usage, WEB_API_LIMIT)
     def _update_league():
-        dota2_webapi = Initialise()
+        dota2_webapi = d2api.APIWrapper()
         return dota2_webapi.get_league_listing()
 
     # League listing retrieval seems broken for now.
     # try:
     #     leagues = _update_league()
-    # except (APIError, APITimeoutError) as e:
+    # except (APIAuthenticationError, APITimeoutError) as e:
     #     print("Failed to update league listing.")
     #     print(e)
     #     return
@@ -104,7 +105,7 @@ def update_league_replays(session, league_id):
     def _query_replays(web_query):
         try:
             request = _get_replays(web_query)
-        except (APIError, APITimeoutError) as e:
+        except (APIAuthenticationError, APITimeoutError) as e:
             print("Failed to update league listing.")
             print(e)
             return None, None, None
@@ -141,7 +142,8 @@ def update_league_replays(session, league_id):
     processed = 0
     total = 1
     with requests_Session() as r_session:
-        dota2_webapi = Initialise(executor=r_session.get)
+        # dota2_webapi = Initialise(executor=r_session.get)
+        dota2_webapi = d2api.APIWrapper()
         while total > processed:
             total, p_in, last_replay = _query_replays(web_query)
             if total is None:

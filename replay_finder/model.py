@@ -1,7 +1,8 @@
 import enum
 from datetime import datetime
 
-from dota2api import convert_to_64_bit
+#from dota2api import convert_to_64_bit
+from util import convert_to_64_bit
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
                         String, create_engine, exists, or_, and_)
 from sqlalchemy.exc import SQLAlchemyError
@@ -93,19 +94,23 @@ def make_replay(dict_obj):
     def _player(p):
         new_player = Player()
         try:
-            player_id = convert_to_64_bit(p['account_id'])
+            player_id = p['steam_account']['id64']
         except KeyError as e:
             print("Invalid player object in replay {}."
                   .format(new_replay.replay_id))
-            player_id = p['player_slot']
+            player_id = p['hero']['hero_id']
+            raise
+            # player_id = p['player_slot']
         new_player.player_id = player_id
         new_player.replay_id = new_replay.replay_id
         # Works as a bit mask, 8th bit is true if the team is dire
-        if p['player_slot'] & 0b10000000 != 0:
+        if p['side'] == 'dire':
             new_player.side = Side.DIRE
-        else:
+        elif p['side'] == 'radiant':
             new_player.side = Side.RADIANT
-        new_player.hero_id = p['hero_id']
+        else:
+            raise KeyError('Invalid team! {}'.format(p['side']))
+        new_player.hero_id = p['hero']['hero_id']
 
         return new_player
 

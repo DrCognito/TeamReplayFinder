@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from dota2api import convert_to_64_bit
+from util import convert_to_64_bit
 from os import environ as environment
 
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
