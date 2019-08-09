@@ -6,13 +6,16 @@ import bs4
 import requests as r
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
+from random import randrange
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
 base_url = "https://www.dotabuff.com/esports/teams/"
 
 
+cache_id = {}
 def get_team_url(team_id: int) -> str:
     """Returns a dotabuff team url for team_id.
+    Follow the redirect so we behave like a client.
 
     Arguments:
         team_id {int} -- Team ID number.
@@ -20,7 +23,27 @@ def get_team_url(team_id: int) -> str:
     Returns:
         str -- Url for team_id.
     """
-    return "{}{}".format(base_url, team_id)
+    if team_id in cache_id:
+        return cache_id[team_id]
+    test_url = "{}{}".format(base_url, team_id)
+    headers = {
+        'User-Agent': user_agent
+    }
+    try:
+        response = r.get(test_url, headers=headers)
+        time.sleep(randrange(1, 5))
+        response.raise_for_status()
+    except r.HTTPError:
+        print("Failed to retrieve {} with {}".format(url, params))
+        raise
+
+    if response.history:
+        print("Team {} redirected to {}".format(team_id, response.url))
+        cache_id[team_id] = response.url
+        return response.url
+    else:
+        cache_id[team_id] = test_url
+        return test_url
 
 
 def get_match_url(team_id: int, page: int = 1,
@@ -62,11 +85,11 @@ def get_page(url: str, params: dict) -> str:
         str -- Html string for the soup.
     """
     headers = {
-        'User-Agent':user_agent
+        'User-Agent': user_agent
     }
     try:
         response = r.get(url, params=params, headers=headers)
-        time.sleep(2)
+        time.sleep(randrange(1, 5))
         response.raise_for_status()
     except r.HTTPError:
         print("Failed to retrieve {} with {}".format(url, params))
