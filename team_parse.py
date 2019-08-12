@@ -6,7 +6,7 @@ import bs4
 import requests as r
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
-from random import randrange
+from random import randrange, sample
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
 base_url = "https://www.dotabuff.com/esports/teams/"
@@ -122,19 +122,7 @@ def matches_from_page(soup: bs4.BeautifulSoup) -> List[int]:
     return out
 
 
-arguments = arg.ArgumentParser()
-arguments.add_argument('--team_id', help='Team ID',
-                       type=int, required=True)
-
-if __name__ == "__main__":
-    args = arguments.parse_args()
-    engine = InitDB(environment['REPLAY_LEAGUE_DB_PATH'])
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
-    team_id = args.team_id
-    limit = 20
-
+def process_team(team_id: int, limit: int = 20) -> List[int]:
     def _process_side(s: str, page: int = 1) -> List[int]:
         url, params = get_match_url(team_id, page=page, faction=s)
         html = get_page(url, params)
@@ -144,18 +132,43 @@ if __name__ == "__main__":
     dire = _process_side('dire')
     radiant = _process_side('radiant')
 
+    return dire + radiant
+
+
+arguments = arg.ArgumentParser()
+arguments.add_argument('team_id',
+                       help="Team ids to retrieve from ODOTA",
+                       nargs='*')
+
+if __name__ == "__main__":
+    args = arguments.parse_args()
+    engine = InitDB(environment['REPLAY_LEAGUE_DB_PATH'])
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    limit = 20
+
     new_ids = []
     query = session.query(Replay.replay_id)
-    new = 0
-    matched = 0
-    for m_id in dire + radiant:
-        test_q = query.filter(Replay.replay_id == m_id).one_or_none()
+    print("Processing {} teams.".format(len(args.team_id)))
+    for t_id in sample(args.team_id, k=len(args.team_id)):
+        ids = process_team(t_id, limit)
+        new = 0
+        matched = 0
+        new_team = []
+        for m_id in ids:
+            test_q = query.filter(Replay.replay_id == m_id).one_or_none()
 
-        if test_q is None:
-            new += 1
-            new_ids.append(str(m_id))
-        else:
-            matched += 1
+            if test_q is None:
+                new += 1
+                new_team.append(str(m_id))
+            else:
+                matched += 1
+        print('Team: {}'.format(t_id))
+        if new_team:
+            print(' '.join(new_team))
+        print('New: {} Matched: {}\n'.format(new, matched))
+        new_ids += new_team
 
+    print('All new ids:')
     print(' '.join(new_ids))
-    print('New: {} Matched: {}'.format(new, matched))
