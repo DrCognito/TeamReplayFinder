@@ -14,7 +14,7 @@ from replay_finder.replay_process import check_existance, replay_process_odota
 from replay_finder.team_info import InitTeamDB, TeamInfo
 import requests
 
-REPLAY_TIME_PERIOD_DAYS = 30
+REPLAY_TIME_PERIOD_DAYS = 60
 
 arguments = ArgumentParser()
 arguments.add_argument('teams', help="""Team name or team id from
