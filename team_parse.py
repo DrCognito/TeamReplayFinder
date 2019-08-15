@@ -34,7 +34,7 @@ def get_team_url(team_id: int) -> str:
         time.sleep(randrange(1, 5))
         response.raise_for_status()
     except r.HTTPError:
-        print("Failed to retrieve {} with {}".format(url, params))
+        print("Failed to retrieve {}.".format(test_url))
         raise
 
     if response.history:
@@ -124,7 +124,12 @@ def matches_from_page(soup: bs4.BeautifulSoup) -> List[int]:
 
 def process_team(team_id: int, limit: int = 20) -> List[int]:
     def _process_side(s: str, page: int = 1) -> List[int]:
-        url, params = get_match_url(team_id, page=page, faction=s)
+        try:
+            url, params = get_match_url(team_id, page=page, faction=s)
+        except r.HTTPError:
+            print("HTTP error during attempt to process id {}.".format(team_id))
+            return []
+
         html = get_page(url, params)
         soup = bs4.BeautifulSoup(html, features="html.parser")
         return matches_from_page(soup)
@@ -171,4 +176,5 @@ if __name__ == "__main__":
         new_ids += new_team
 
     print('All new ids:')
+    new_ids = set(new_ids)
     print(' '.join(new_ids))
