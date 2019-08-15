@@ -226,11 +226,11 @@ def replay_process_odota(replay, session, req_session):
             session.commit()
             sleep(1)
 
-        replay.status = ReplayStatus.DOWNLOADED
+        final_path = extract_replay(download_path, extract_path)
+        if final_path:
+            replay.status = ReplayStatus.DOWNLOADED
         session.merge(replay)
         session.commit()
-
-        final_path = extract_replay(download_path, extract_path)
 
         return final_path
 
