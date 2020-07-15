@@ -14,6 +14,8 @@ api = d2api.APIWrapper()
 
 heroes = api.get_heroes()
 
+dota2_heroimage_url = "http://cdn.dota2.com/apps/dota2/images/heroes/"
+
 hero_map = {}
 redownload = False
 download = "url_full_portrait"
@@ -26,8 +28,14 @@ for h in heroes['heroes']:
         print("{} exists and redownload is False".format(path))
         hero_map[full_name] = full_name + download_abrev
         continue
-
-    url = h[download]
+    try:
+        url = h[download]
+    except KeyError:
+        print(f"Missing key {download} for:\n{h}")
+        # Have to remove the npc_dota_hero prefix
+        hero_name = h['name'].replace('npc_dota_hero_', '')
+        url = f"{dota2_heroimage_url}{hero_name}{download_abrev}"
+        print(url)
     try:
         r = requests.get(url)
         time.sleep(1)
