@@ -183,9 +183,9 @@ _TeamIDs['Natus Vincere'] = 36
 PlayerIDs['Royal Never Give Up'] = collections.OrderedDict()
 PlayerIDs['Royal Never Give Up']['Monet'] = 76561198108481367
 PlayerIDs['Royal Never Give Up']['Setsu'] = 76561198100088082
+PlayerIDs['Royal Never Give Up']['Flyby'] = 186627166
 PlayerIDs['Royal Never Give Up']['LaNm'] = 76561198049689484
 PlayerIDs['Royal Never Give Up']['ahfu'] = 76561198079842570
-PlayerIDs['Royal Never Give Up']['Flyby'] = 186627166
 ValidityTime['Royal Never Give Up'] = datetime.datetime(2019, 4, 14, 0, 0, 0, 0)
 _TeamIDs['Royal Never Give Up'] = 6209804
 
