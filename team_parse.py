@@ -142,7 +142,7 @@ def process_team(team_id: int, limit: int = 20) -> List[int]:
 
 arguments = arg.ArgumentParser()
 arguments.add_argument('team_id',
-                       help="Team ids to retrieve from ODOTA",
+                       help="Team ids to retrieve from DotaBuff",
                        nargs='*')
 
 if __name__ == "__main__":
