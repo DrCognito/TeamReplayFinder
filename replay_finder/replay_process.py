@@ -14,7 +14,6 @@ from pathlib import Path
 from .__init__ import GC_API_LIMIT, WEB_API_LIMIT
 from .api_usage import APIOverLimit, DecoratorUsageCheck
 from .model import ReplayStatus, get_gc_usage, get_api_usage, make_replay
-from .dota2_api import SingleDotaClient
 
 from gevent import Timeout as GeventTimeout
 
@@ -75,82 +74,6 @@ def extract_replay(path_in, path_out, remove_archive=True):
         return False
 
     return path_out
-
-
-def process_replay(replay, session, dota_singleton: SingleDotaClient):
-    @DecoratorUsageCheck(session, get_gc_usage, GC_API_LIMIT)
-    def _replay_details(replay_id):
-        dota_singleton.dota2_client.request_match_details(replay_id)
-
-    if replay.status == ReplayStatus.DOWNLOADED:
-        return False
-
-    if replay.status == ReplayStatus.ACKNOWLEDGED:
-        if replay.process_attempts > GC_REPLAY_ATTEMPTS:
-            print("Attempts exceeded for {}. Skipping."
-                  .format(replay.replay_id))
-            return False
-
-        try:
-            _replay_details(replay.replay_id)
-        except APIOverLimit as e:
-            print(e)
-            return False
-        else:
-            replay.process_attempts += 1
-            session.merge(replay)
-            session.commit()
-        finally:
-            sleep(1)
-
-        try:
-            rep_id, url = dota_singleton.dota_wait("replay_url", timeout=90,
-                                                   raises=True)
-        except GeventTimeout:
-            print("Timed out retrieving replay url {}".format(replay.replay_id))
-            url = None
-
-        if url is None:
-            raise TimeoutError
-            return process_replay(replay, session, dota_singleton)
-
-        replay.replay_url = url
-        replay.status = ReplayStatus.DOWNLOADING
-        replay.process_attempts = 0
-        session.merge(replay)
-        session.commit()
-
-        return process_replay(replay, session, dota_singleton)
-
-    if replay.status == ReplayStatus.DOWNLOADING:
-        if replay.process_attempts > REPLAY_DOWNLOAD_ATTEMPTS:
-            print("Download attempts exceeded for {}. Skipping."
-                  .format(replay.replay_id))
-            return False
-
-        download_path = Path(environ["DOWNLOAD_PATH"]) /\
-            (str(replay.replay_id) + '.dem.bz2')
-        try:
-            download_replay(replay, download_path)
-        except RequestException as e:
-            print(e)
-            sleep(5)
-            return process_replay(replay, session, dota_singleton)
-        finally:
-            replay.process_attempts += 1
-            session.merge(replay)
-            session.commit()
-            sleep(1)
-
-        replay.status = ReplayStatus.DOWNLOADED
-        session.merge(replay)
-        session.commit()
-
-        extract_path = Path(environ["EXTRACT_PATH"]) /\
-            (str(replay.replay_id) + '.dem')
-        final_path = extract_replay(download_path, extract_path)
-
-        return final_path
 
 
 def replay_process_odota(replay, session, req_session):
