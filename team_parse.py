@@ -7,6 +7,7 @@ import requests as r
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
 from random import randrange, sample
+from replay_finder.replay_process import add_single_replay
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
 base_url = "https://www.dotabuff.com/esports/teams/"
@@ -165,8 +166,10 @@ if __name__ == "__main__":
             test_q = query.filter(Replay.replay_id == m_id).one_or_none()
 
             if test_q is None:
+                print(f"Adding {m_id}.")
                 new += 1
                 new_team.append(str(m_id))
+                add_single_replay(session, m_id)
             else:
                 matched += 1
         print('Team: {}'.format(t_id))
@@ -174,6 +177,7 @@ if __name__ == "__main__":
             print(' '.join(new_team))
         print('New: {} Matched: {}\n'.format(new, matched))
         new_ids += new_team
+        session.commit()
 
     print('All new ids:')
     new_ids = set(new_ids)
