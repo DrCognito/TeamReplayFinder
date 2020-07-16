@@ -3,11 +3,9 @@ from datetime import datetime, timedelta
 from os import environ as environment
 from pathlib import Path
 
-from gevent import Timeout as GeventTimeout
 from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
-from replay_finder.dota2_api import SingleDotaClient
 from replay_finder.model import InitDB as replay_InitDB
 from replay_finder.model import Replay, ReplayStatus, get_replays_for_team
 from replay_finder.replay_process import check_existance, replay_process_odota
@@ -66,8 +64,8 @@ if __name__ == '__main__':
     team_Session = sessionmaker(bind=team_engine)
     team_session = team_Session()
 
+    failure_list = []
     for t_in in args.teams:
-        print("Processing {}.".format(t_in))
         t_filter = or_(TeamInfo.team_id == t_in,
                        TeamInfo.name == t_in)
         team = team_session.query(TeamInfo).filter(t_filter).one_or_none()
@@ -76,7 +74,8 @@ if __name__ == '__main__':
             print("Could not find team corresponding to {}"
                   .format(t_in))
             exit()
-
+        print(f"Processing {team.name}, {team.team_id}.")
+        failure_list.append(f"Team {team.name}, {team.team_id}.\n")
         if args.require_players:
             replays = get_replays_for_team(team, replay_session, require_both=True)
         else:
@@ -96,15 +95,6 @@ if __name__ == '__main__':
             print(output)
             exit()
 
-        # Start up the steam client!
-        # dota_client = SingleDotaClient("download")
-        # try:
-        #     dota_client.dota_wait('ready', timeout=20, raises=True)
-        # except GeventTimeout:
-        #     print("Timed out waiting for dota2 client to ready.")
-        #     dota_client.close()
-        #     exit()
-
         replays = replays.filter(Replay.status != ReplayStatus.DOWNLOADED,
                                  Replay.status != ReplayStatus.FAILED)
         if args.limit is not None:
@@ -121,3 +111,5 @@ if __name__ == '__main__':
                     print("Replay downloaded to: {}".format(path))
                 else:
                     print("Failed to process replay {}.".format(rep.replay_id))
+                    failure_list.append(f"{rep.replay_id}\n")
+    print(''.join(failure_list))
