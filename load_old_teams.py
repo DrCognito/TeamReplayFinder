@@ -49,7 +49,7 @@ PlayerIDs['Ninjas in Pyjamas']['charlie'] = 76561198082315226
 PlayerIDs['Ninjas in Pyjamas']['Supream'] = 76561198018778775
 PlayerIDs['Ninjas in Pyjamas']['SabeRLighT'] = 76561198086478594
 PlayerIDs['Ninjas in Pyjamas']['Era'] = 76561198060583478
-PlayerIDs['Ninjas in Pyjamas']['SoNNeikO'] = 76561198077687195
+PlayerIDs['Ninjas in Pyjamas']['Cr1t'] = getSteam64From32(25907144)
 ValidityTime['Ninjas in Pyjamas'] = datetime.datetime(2020, 4, 22, 0, 0, 0, 0)
 _TeamIDs['Ninjas in Pyjamas'] = 6214973
 
@@ -89,7 +89,15 @@ PlayerIDs['FlyToMoon']['ALWAYSWANNAFLY'] = 76561198051330508
 ValidityTime['FlyToMoon'] = datetime.datetime(2020, 2, 21, 0, 0, 0, 0)
 _TeamIDs['FlyToMoon'] = 6953913
 
-
+#Queried at 2020-07-24T01:49:57.379770
+PlayerIDs['VP.Prodigy'] = collections.OrderedDict()
+PlayerIDs['VP.Prodigy']['epileptick1d'] = getSteam64From32(124801257)
+PlayerIDs['VP.Prodigy']['DM'] = 76561198016617237
+PlayerIDs['VP.Prodigy']['fn'] = 76561197965416536
+PlayerIDs['VP.Prodigy']['Save'] = 76561198278146366
+PlayerIDs['VP.Prodigy']['eine'] = 76561198089337610
+ValidityTime['VP.Prodigy'] = datetime.datetime(2020, 4, 1, 0, 0, 0, 0)
+_TeamIDs['VP.Prodigy'] = 7819701
 
 path = None
 engine = InitTeamDB(path)
