@@ -71,24 +71,6 @@ PlayerIDs['ViKin.gg']['Seleri'] = 76561198051995905
 ValidityTime['ViKin.gg'] = datetime.datetime(2020, 1, 1, 0, 0, 0, 0)
 _TeamIDs['ViKin.gg'] = 6685591
 
-PlayerIDs['Nigma'] = collections.OrderedDict()
-PlayerIDs['Nigma']['Miracle'] = 76561198065514372
-PlayerIDs['Nigma']['w33'] = 76561198046966189
-PlayerIDs['Nigma']['MinDContRoL'] = 76561197994770931
-PlayerIDs['Nigma']['Gh'] = 76561198061622614
-PlayerIDs['Nigma']['KuroKy'] = 76561198042528392
-ValidityTime['Nigma'] = datetime.datetime(2019, 11, 25, 0, 0, 0, 0)
-_TeamIDs['Nigma'] = 7554697
-
-PlayerIDs['FlyToMoon'] = collections.OrderedDict()
-PlayerIDs['FlyToMoon']['VTune'] = 76561198112721251
-PlayerIDs['FlyToMoon']['Iceberg'] = 76561198210380235
-PlayerIDs['FlyToMoon']['GeneRaL'] = 76561198049816369
-PlayerIDs['FlyToMoon']['ALOHADANCE'] = 76561198083316966
-PlayerIDs['FlyToMoon']['ALWAYSWANNAFLY'] = 76561198051330508
-ValidityTime['FlyToMoon'] = datetime.datetime(2020, 2, 21, 0, 0, 0, 0)
-_TeamIDs['FlyToMoon'] = 6953913
-
 #Queried at 2020-07-24T01:49:57.379770
 PlayerIDs['VP.Prodigy'] = collections.OrderedDict()
 PlayerIDs['VP.Prodigy']['epileptick1d'] = getSteam64From32(124801257)
@@ -145,6 +127,137 @@ PlayerIDs['Ninjas in Pyjamas']['Era'] = 76561198060583478
 PlayerIDs['Ninjas in Pyjamas']['Misha'] = getSteam64From32(90125566)
 ValidityTime['Ninjas in Pyjamas'] = datetime.datetime(2020, 4, 22, 0, 0, 0, 0)
 _TeamIDs['Ninjas in Pyjamas'] = 6214973
+
+PlayerIDs['Evil Geniuses'] = collections.OrderedDict()
+PlayerIDs['Evil Geniuses']['Arteezy'] = getSteam64From32(86745912)
+PlayerIDs['Evil Geniuses']['Abed'] = getSteam64From32(480412663)
+PlayerIDs['Evil Geniuses']['RAMZES666'] = 76561198093117099
+PlayerIDs['Evil Geniuses']['Cr1t'] = 76561197986172872
+PlayerIDs['Evil Geniuses']['Fly'] = 76561198054420884
+ValidityTime['Evil Geniuses'] = datetime.datetime(2019, 9, 16, 0, 0, 0, 0)
+_TeamIDs['Evil Geniuses'] = 39
+
+PlayerIDs['Nigma'] = collections.OrderedDict()
+PlayerIDs['Nigma']['Miracle'] = 76561198065514372
+PlayerIDs['Nigma']['w33'] = 76561198046966189
+PlayerIDs['Nigma']['MinDContRoL'] = 76561197994770931
+PlayerIDs['Nigma']['Gh'] = 76561198061622614
+PlayerIDs['Nigma']['KuroKy'] = getSteam64From32(87197791)
+ValidityTime['Nigma'] = datetime.datetime(2019, 11, 25, 0, 0, 0, 0)
+_TeamIDs['Nigma'] = 7554697
+
+PlayerIDs['FlyToMoon'] = collections.OrderedDict()
+PlayerIDs['FlyToMoon']['VTune'] = 76561198112721251
+PlayerIDs['FlyToMoon']['Iceberg'] = 76561198210380235
+PlayerIDs['FlyToMoon']['GeneRaL'] = 76561198049816369
+PlayerIDs['FlyToMoon']['RodjER'] = getSteam64From32(159020918)
+PlayerIDs['FlyToMoon']['ALWAYSWANNAFLY'] = 76561198051330508
+ValidityTime['FlyToMoon'] = datetime.datetime(2020, 2, 21, 0, 0, 0, 0)
+_TeamIDs['FlyToMoon'] = 6953913
+
+#Queried at 2020-08-24T16:29:08.763672
+PlayerIDs['Cyber Legacy'] = collections.OrderedDict()
+PlayerIDs['Cyber Legacy']['Cooman'] = 76561198135729387
+PlayerIDs['Cyber Legacy']['MagicaL'] = 76561198132246824
+PlayerIDs['Cyber Legacy']['Blizzy'] = 76561198194965622
+PlayerIDs['Cyber Legacy']['Bignum'] = 76561198050689479
+PlayerIDs['Cyber Legacy']['CemaTheSlayer'] = 76561198051726500
+ValidityTime['Cyber Legacy'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Cyber Legacy'] = 7669103
+
+PlayerIDs['Omegalil'] = collections.OrderedDict()
+PlayerIDs['Omegalil']['Kelen'] = 76561198056454854
+PlayerIDs['Omegalil']['Sunlight'] = 76561198001903020
+PlayerIDs['Omegalil']['Malik'] = getSteam64From32(203351055)
+PlayerIDs['Omegalil']['grim reaper'] = getSteam64From32(91405276)
+PlayerIDs['Omegalil']['HappyDyurara'] = 76561198305126946
+ValidityTime['Omegalil'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Omegalil'] = 8077147
+
+PlayerIDs['EXTREMUM'] = collections.OrderedDict()
+PlayerIDs['EXTREMUM']['nefrit'] = 76561198076514883
+PlayerIDs['EXTREMUM']['mellojul'] = 76561198001070814
+PlayerIDs['EXTREMUM']['AfterLife'] = 76561198047050811
+PlayerIDs['EXTREMUM']['velheor'] = 76561198042571493
+PlayerIDs['EXTREMUM']['G'] = 76561198047852720
+ValidityTime['EXTREMUM'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['EXTREMUM'] = 7542148
+
+PlayerIDs['Cyberium Seed'] = collections.OrderedDict()
+PlayerIDs['Cyberium Seed']['lilpleb'] = 76561198064176721
+PlayerIDs['Cyberium Seed']['Mastermind'] = 76561198052743718
+PlayerIDs['Cyberium Seed']['Samsam'] = 76561198847923582
+PlayerIDs['Cyberium Seed']['b1kA'] = getSteam64From32(348703642)
+PlayerIDs['Cyberium Seed']['Puber'] = 76561198259479562
+ValidityTime['Cyberium Seed'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Cyberium Seed'] = 8021531
+
+PlayerIDs['Team Unique'] = collections.OrderedDict()
+PlayerIDs['Team Unique']['Palantimos'] = 76561198077147248
+PlayerIDs['Team Unique']['19teen'] = 76561198360974756
+PlayerIDs['Team Unique']['633'] = 76561198056462556
+PlayerIDs['Team Unique']['illusion'] = getSteam64From32(126702445)
+PlayerIDs['Team Unique']['VANSKOR'] = 76561197971815910
+ValidityTime['Team Unique'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Team Unique'] = 7820540
+
+PlayerIDs['HellRaisers'] = collections.OrderedDict()
+PlayerIDs['HellRaisers']['Nix'] = 76561197972131055
+PlayerIDs['HellRaisers']['ksani'] = 76561198059421563
+PlayerIDs['HellRaisers']['funn1k'] = 76561198046988871
+PlayerIDs['HellRaisers']['KingR'] = getSteam64From32(182993582)
+PlayerIDs['HellRaisers']['Miposhka'] = 76561198073597242
+ValidityTime['HellRaisers'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['HellRaisers'] = 7422789
+
+#Queried at 2020-08-31T15:26:47.031569
+PlayerIDs['KHAN'] = collections.OrderedDict()
+PlayerIDs['KHAN']['naive'] = 76561198056449704
+PlayerIDs['KHAN']['mlg winner'] = getSteam64From32(114933489)
+PlayerIDs['KHAN']['chshrct'] = 76561198047136584
+PlayerIDs['KHAN']['bigboyuu'] = getSteam64From32(196878136)
+PlayerIDs['KHAN']['Gilgir'] = 76561198146261995
+ValidityTime['KHAN'] = datetime.datetime(2020, 6, 21, 0, 0, 0, 0)
+_TeamIDs['KHAN'] = 7453744
+
+#Queried at 2020-09-08T16:13:17.420831
+PlayerIDs['B8'] = collections.OrderedDict()
+PlayerIDs['B8']['Crystallis'] = 76561198087883707
+PlayerIDs['B8']['Dendi'] = 76561198030654385
+PlayerIDs['B8']['Lasthero'] = 76561198050590468
+PlayerIDs['B8']['5up'] = getSteam64From32(313198707)
+PlayerIDs['B8']['Fishman'] = 76561198087831260
+ValidityTime['B8'] = datetime.datetime(2020, 6, 7, 0, 0, 0, 0)
+_TeamIDs['B8'] = 7684041
+
+PlayerIDs['Team Unique'] = collections.OrderedDict()
+PlayerIDs['Team Unique']['Palantimos'] = 76561198077147248
+PlayerIDs['Team Unique']['19teen'] = 76561198360974756
+PlayerIDs['Team Unique']['633'] = 76561198056462556
+PlayerIDs['Team Unique']['illusion'] = getSteam64From32(126702445)
+PlayerIDs['Team Unique']['VANSKOR'] = 76561197971815910
+ValidityTime['Team Unique'] = datetime.datetime(2020, 6, 14, 0, 0, 0, 0)
+_TeamIDs['Team Unique'] = 7820540
+
+PlayerIDs['Team Empire'] = collections.OrderedDict()
+PlayerIDs['Team Empire']['SmilingKnight'] = 76561198115428035
+PlayerIDs['Team Empire']['lightless'] = 76561198155267188
+PlayerIDs['Team Empire']['Mastery'] = 76561198098121704
+PlayerIDs['Team Empire']['jAMES'] = 76561198175001711
+PlayerIDs['Team Empire']['EcNart'] = 76561198026886689
+ValidityTime['Team Empire'] = datetime.datetime(2020, 6, 14, 0, 0, 0, 0)
+_TeamIDs['Team Empire'] = 46
+
+
+#Queried at 2020-09-08T16:13:17.420831
+PlayerIDs['Mudgolems'] = collections.OrderedDict()
+PlayerIDs['Mudgolems']['skiter'] = getSteam64From32(100058342)
+PlayerIDs['Mudgolems']['BoraNija'] = getSteam64From32(298683250)
+PlayerIDs['Mudgolems']['33'] = getSteam64From32(86698277)
+PlayerIDs['Mudgolems']['MiLAN'] = getSteam64From32(98172857)
+PlayerIDs['Mudgolems']['Fata'] = getSteam64From32(86799300)
+ValidityTime['Mudgolems'] = datetime.datetime(2020, 12, 8, 0, 0, 0, 0)
+_TeamIDs['Mudgolems'] = 8121295
 
 path = None
 engine = InitTeamDB(path)
