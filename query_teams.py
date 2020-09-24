@@ -1,5 +1,3 @@
-import gevent.monkey
-gevent.monkey.patch_all()
 from base64 import urlsafe_b64encode
 from datetime import datetime
 from argparse import ArgumentParser
