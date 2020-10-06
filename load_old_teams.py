@@ -196,8 +196,8 @@ PlayerIDs['HellRaisers'] = collections.OrderedDict()
 PlayerIDs['HellRaisers']['Nix'] = 76561197972131055
 PlayerIDs['HellRaisers']['ksani'] = 76561198059421563
 PlayerIDs['HellRaisers']['funn1k'] = 76561198046988871
-PlayerIDs['HellRaisers']['KingR'] = getSteam64From32(182993582)
-PlayerIDs['HellRaisers']['Miposhka'] = 76561198073597242
+PlayerIDs['HellRaisers']['Lil'] = getSteam64From32(106809101)
+PlayerIDs['HellRaisers']['Kickeed'] = getSteam64From32(79809603)
 ValidityTime['HellRaisers'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
 _TeamIDs['HellRaisers'] = 7422789
 
