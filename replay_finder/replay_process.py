@@ -15,7 +15,6 @@ from .__init__ import GC_API_LIMIT, WEB_API_LIMIT
 from .api_usage import APIOverLimit, DecoratorUsageCheck
 from .model import ReplayStatus, get_gc_usage, get_api_usage, make_replay
 
-from gevent import Timeout as GeventTimeout
 
 GC_REPLAY_ATTEMPTS = 5
 REPLAY_DOWNLOAD_ATTEMPTS = 3

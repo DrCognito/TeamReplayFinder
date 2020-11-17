@@ -11,8 +11,9 @@ tqdm = "*"
 alembic = "*"
 tabulate = "*"
 pandas = "*"
-"beautifulsoup4" = "*"
-"d2api" = "*"
+beautifulsoup4 = "*"
+d2api = "*"
 
 [dev-packages]
-"flake8" = "*"
+flake8 = "*"
+pylint = "*"

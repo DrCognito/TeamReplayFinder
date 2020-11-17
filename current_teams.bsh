@@ -1,0 +1,3 @@
+echo "Processing teams $@"
+pipenv run python team_parse.py "$@"
+pipenv run python download.py "$@"
