@@ -142,7 +142,7 @@ PlayerIDs['Nigma']['Miracle'] = 76561198065514372
 PlayerIDs['Nigma']['w33'] = 76561198046966189
 PlayerIDs['Nigma']['MinDContRoL'] = 76561197994770931
 PlayerIDs['Nigma']['Gh'] = 76561198061622614
-PlayerIDs['Nigma']['KuroKy'] = getSteam64From32(87197791)
+PlayerIDs['Nigma']['rMN'] = getSteam64From32(87197791)
 ValidityTime['Nigma'] = datetime.datetime(2019, 11, 25, 0, 0, 0, 0)
 _TeamIDs['Nigma'] = 7554697
 
@@ -197,17 +197,17 @@ PlayerIDs['HellRaisers']['Nix'] = 76561197972131055
 PlayerIDs['HellRaisers']['ksani'] = 76561198059421563
 PlayerIDs['HellRaisers']['funn1k'] = 76561198046988871
 PlayerIDs['HellRaisers']['Lil'] = getSteam64From32(106809101)
-PlayerIDs['HellRaisers']['Kickeed'] = getSteam64From32(79809603)
+PlayerIDs['HellRaisers']['KingR'] = getSteam64From32(182993582)
 ValidityTime['HellRaisers'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
 _TeamIDs['HellRaisers'] = 7422789
 
 #Queried at 2020-08-31T15:26:47.031569
 PlayerIDs['KHAN'] = collections.OrderedDict()
+PlayerIDs['KHAN']['young G'] = getSteam64From32(127530803)
 PlayerIDs['KHAN']['naive'] = 76561198056449704
-PlayerIDs['KHAN']['hAze'] = getSteam64From32(192981126)
 PlayerIDs['KHAN']['chshrct'] = 76561198047136584
-PlayerIDs['KHAN']['bigboyuu'] = getSteam64From32(196878136)
 PlayerIDs['KHAN']['Gilgir'] = 76561198146261995
+PlayerIDs['KHAN']['j4'] = getSteam64From32(75750590)
 ValidityTime['KHAN'] = datetime.datetime(2020, 6, 21, 0, 0, 0, 0)
 _TeamIDs['KHAN'] = 7453744
 
@@ -232,9 +232,9 @@ _TeamIDs['Team Unique'] = 7820540
 
 PlayerIDs['Team Empire'] = collections.OrderedDict()
 PlayerIDs['Team Empire']['SmilingKnight'] = 76561198115428035
-PlayerIDs['Team Empire']['lightless'] = 76561198155267188
-PlayerIDs['Team Empire']['Mastery'] = 76561198098121704
-PlayerIDs['Team Empire']['jAMES'] = 76561198175001711
+PlayerIDs['Team Empire']['gwynbleidd'] = getSteam64From32(200362560)
+PlayerIDs['Team Empire']['Petushara'] = getSteam64From32(363871826)
+PlayerIDs['Team Empire']['sayuw'] = getSteam64From32(145065875)
 PlayerIDs['Team Empire']['EcNart'] = 76561198026886689
 ValidityTime['Team Empire'] = datetime.datetime(2020, 6, 14, 0, 0, 0, 0)
 _TeamIDs['Team Empire'] = 46
@@ -296,6 +296,55 @@ PlayerIDs['Tempo']['dnz'] = 76561198058433434
 PlayerIDs['Tempo']['LeBron'] = 76561197995770025
 ValidityTime['Tempo'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
 _TeamIDs['Tempo'] = 7556672
+
+#Queried at 2020-11-02T13:38:12.792222
+PlayerIDs['Brame'] = collections.OrderedDict()
+PlayerIDs['Brame']['Focus'] = getSteam64From32(196490133)
+PlayerIDs['Brame']['W1sh'] = 76561198080879620
+PlayerIDs['Brame']['Skylark'] = 76561197987444626
+PlayerIDs['Brame']['Stomanen1'] = getSteam64From32(314584168)
+PlayerIDs['Brame']['SsaSpartan'] = 76561198053214822
+ValidityTime['Brame'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Brame'] = 8112124
+
+#Queried at 2020-11-02T13:38:12.792222
+PlayerIDs['Live To Win'] = collections.OrderedDict()
+PlayerIDs['Live To Win']['iLTW'] = getSteam64From32(113995822)
+PlayerIDs['Live To Win']['fn'] = getSteam64From32(5150808)
+PlayerIDs['Live To Win']['Afterlife'] = getSteam64From32(86785083)
+PlayerIDs['Live To Win']['Immersion'] = getSteam64From32(295697470)
+PlayerIDs['Live To Win']['SoNNeikO'] = getSteam64From32(117421467)
+ValidityTime['Live To Win'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Live To Win'] = 8161113
+
+#Queried at 2020-11-07T03:47:50.431763
+PlayerIDs['Gambit Esports'] = collections.OrderedDict()
+PlayerIDs['Gambit Esports']['yy'] = getSteam64From32(116934015)
+PlayerIDs['Gambit Esports']['Lorenof'] = getSteam64From32(210053851)
+PlayerIDs['Gambit Esports']['meLes'] = getSteam64From32(148180390)
+PlayerIDs['Gambit Esports']['XSvamp1Re'] = getSteam64From32(326327879)
+PlayerIDs['Gambit Esports']['eine'] = 76561198089337610
+ValidityTime['Gambit Esports'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Gambit Esports'] = 6209143
+
+#Queried at 2020-11-12T17:37:55.790242
+PlayerIDs['Cyberium'] = collections.OrderedDict()
+PlayerIDs['Cyberium']['lil pleb'] = getSteam64From32(103910993)
+PlayerIDs['Cyberium']['Mastermind'] = getSteam64From32(92477990)
+PlayerIDs['Cyberium']['Airu'] = getSteam64From32(41843638)
+PlayerIDs['Cyberium']['goddam'] = getSteam64From32(63703276)
+PlayerIDs['Cyberium']['Gatciy'] = getSteam64From32(104185879)
+ValidityTime['Cyberium'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Cyberium'] = 7486089
+
+PlayerIDs['Nemiga Gaming'] = collections.OrderedDict()
+PlayerIDs['Nemiga Gaming']['tatakae'] = 76561198278080177
+PlayerIDs['Nemiga Gaming']['Ainkrad'] = getSteam64From32(196482746)
+PlayerIDs['Nemiga Gaming']['TheChosenOne'] = 76561198256492424
+PlayerIDs['Nemiga Gaming']['Petru44o'] = getSteam64From32(86317757)
+PlayerIDs['Nemiga Gaming']['Lodine'] = 76561198073885576
+ValidityTime['Nemiga Gaming'] = datetime.datetime(2019, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Nemiga Gaming'] = 5014799
 
 path = None
 engine = InitTeamDB(path)
