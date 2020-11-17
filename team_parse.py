@@ -8,6 +8,7 @@ from sqlalchemy.orm import sessionmaker
 import argparse as arg
 from random import randrange, sample
 from replay_finder.replay_process import add_single_replay
+from pathlib import Path
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
 base_url = "https://www.dotabuff.com/esports/teams/"
