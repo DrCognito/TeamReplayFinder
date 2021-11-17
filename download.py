@@ -24,7 +24,7 @@ arguments.add_argument('--list',
                                downloading replays.""",
                        action='store_true')
 arguments.add_argument('--custom_time',
-                       help="""Set a custom time for replays""",
+                       help="""Set a custom day age for replays""",
                        type=int)
 arguments.add_argument('--require_players',
                        help="""Require both the team id and player
