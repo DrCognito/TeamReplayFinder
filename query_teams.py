@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 from time import sleep
 from os import environ as environment
 
-from util import convert_to_64_bit
+from util import convert_to_64_bit, convert_to_32_bit
 from dotenv import load_dotenv
 from requests import Session as requests_Session
 from requests import codes as req_codes
@@ -64,10 +64,12 @@ def get_team_info(team_id: int, req_session):
     for p in players:
         try:
             if p['is_current_team_member']:
-                pid = convert_to_64_bit(p['account_id'])
+                pid64 = convert_to_64_bit(p['account_id'])
+                pid32 = convert_to_32_bit(p['account_id'])
                 name = "".join(x for x in p['name'] if x.isalnum())
-                p_string = "PlayerIDs['{}']"\
-                           "['{}'] = {}\n".format(team_name, name, pid)
+                # p_string = "PlayerIDs['{}']"\
+                #            "['{}'] = {}\n".format(team_name, name, pid)
+                p_string = f"PlayerIDs['{team_name}']['{name}'] = {pid32} # {pid64}\n"
                 player_strings.append(p_string)
         except KeyError:
             print("Failed to process team {}".format(team_id))
@@ -81,7 +83,7 @@ def get_team_info(team_id: int, req_session):
         out_string += p
 
     out_string += "ValidityTime['{}'] = "\
-                  "datetime.datetime(2019, 9, 14, 0, 0, 0, 0)\n".format(team_name)
+                  "datetime.datetime(2021, 9, 14, 0, 0, 0, 0)\n".format(team_name)
     out_string += "_TeamIDs['{}'] = {}\n".format(team_name, team_id)
 
     return out_string
