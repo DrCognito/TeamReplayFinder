@@ -56,6 +56,14 @@ PlayerIDs['Virtus.pro']['Kingslayer'] = 187758589 # 76561198148024317
 ValidityTime['Virtus.pro'] = datetime.datetime(2020, 11, 5, 0, 0, 0, 0)
 _TeamIDs['Virtus.pro'] = 1883502
 
+PlayerIDs['OG'] = collections.OrderedDict()
+PlayerIDs['OG']['Yuragi'] = 167976729 # 76561198128242457
+PlayerIDs['OG']['bzm'] = 93618577 # 76561198053884305
+PlayerIDs['OG']['ATF'] = 183719386 # 76561198143985114
+PlayerIDs['OG']['Taiga'] = 401792574 # 76561198362058302
+PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
+ValidityTime['OG'] = datetime.datetime(2021, 11, 21, 0, 0, 0, 0)
+_TeamIDs['OG'] = 2586976
 
 path = None
 engine = InitTeamDB(path)
