@@ -10,7 +10,7 @@ from random import randrange, sample
 from replay_finder.replay_process import add_single_replay
 from pathlib import Path
 
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0"
 base_url = "https://www.dotabuff.com/esports/teams/"
 
 
@@ -33,10 +33,11 @@ def get_team_url(team_id: int) -> str:
     }
     try:
         response = r.get(test_url, headers=headers)
-        time.sleep(randrange(1, 5))
+        time.sleep(randrange(5, 10))
         response.raise_for_status()
     except r.HTTPError:
-        print("Failed to retrieve {}.".format(test_url))
+        print("Failed to retrieve {} with {} code {}".format(url, params, r.status_code))
+        print(f"Headers:\n{response.headers}")
         raise
 
     if response.history:
@@ -91,10 +92,12 @@ def get_page(url: str, params: dict) -> str:
     }
     try:
         response = r.get(url, params=params, headers=headers)
-        time.sleep(randrange(1, 5))
-        response.raise_for_status()
+        time.sleep(randrange(5, 10))
+        # response.raise_for_status()
     except r.HTTPError:
-        print("Failed to retrieve {} with {}".format(url, params))
+        print("Failed to retrieve {} with {} code {}".format(url, params, r.status_code))
+        print(f"Headers:\n{response.headers}")
+        response.raise_for_status()
         raise
 
     return response.text
