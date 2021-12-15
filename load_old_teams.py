@@ -65,6 +65,90 @@ PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
 ValidityTime['OG'] = datetime.datetime(2021, 11, 21, 0, 0, 0, 0)
 _TeamIDs['OG'] = 2586976
 
+#Queried at 2021-12-09T18:42:47.871476
+PlayerIDs['Nigma Galaxy'] = collections.OrderedDict()
+PlayerIDs['Nigma Galaxy']['iLTW'] = 113995822 # 76561198074261550
+PlayerIDs['Nigma Galaxy']['Miracle'] = 105248644 # 76561198065514372
+PlayerIDs['Nigma Galaxy']['MinDContRoL'] = 34505203 # 76561197994770931
+PlayerIDs['Nigma Galaxy']['Gh'] = 101356886 # 76561198061622614
+PlayerIDs['Nigma Galaxy']['KuroKy'] = 82262664 # 76561198042528392
+ValidityTime['Nigma Galaxy'] = datetime.datetime(2021, 4, 10, 0, 0, 0, 0)
+_TeamIDs['Nigma Galaxy'] = 7554697
+
+PlayerIDs['Alliance'] = collections.OrderedDict()
+PlayerIDs['Alliance']['Nikobaby'] = 412753955 # 76561198373019683
+PlayerIDs['Alliance']['Supream'] = 58513047 # 76561198018778775
+PlayerIDs['Alliance']['LESLÃO'] = 87063175 # 76561198047328903
+PlayerIDs['Alliance']['Aramis'] = 92601861 # 76561198052867589
+PlayerIDs['Alliance']['Handsken'] = 18180970 # 76561197978446698
+ValidityTime['Alliance'] = datetime.datetime(2021, 11, 18, 0, 0, 0, 0)
+_TeamIDs['Alliance'] = 111474
+
+PlayerIDs['Team Liquid'] = collections.OrderedDict()
+PlayerIDs['Team Liquid']['MATUMBAMAN'] = 72312627 # 76561198032578355
+PlayerIDs['Team Liquid']['m1CKe'] = 152962063 # 76561198113227791
+PlayerIDs['Team Liquid']['zai'] = 73562326 # 76561198033828054
+PlayerIDs['Team Liquid']['Boxi'] = 77490514 # 76561198037756242
+PlayerIDs['Team Liquid']['iNsania'] = 54580962 # 76561198014846690
+ValidityTime['Team Liquid'] = datetime.datetime(2021, 11, 17, 0, 0, 0, 0)
+_TeamIDs['Team Liquid'] = 2163
+
+PlayerIDs['Team Secret'] = collections.OrderedDict()
+PlayerIDs['Team Secret']['Nisha'] = 121769650 # 76561198082035378
+PlayerIDs['Team Secret']['SumaiL'] = 111620041 # 76561198071885769
+PlayerIDs['Team Secret']['iceiceice'] = 84772440 # 76561198045038168
+PlayerIDs['Team Secret']['YapzOr'] = 89117038 # 76561198049382766
+PlayerIDs['Team Secret']['Puppey'] = 87278757 # 76561198047544485
+ValidityTime['Team Secret'] = datetime.datetime(2021, 11, 18, 0, 0, 0, 0)
+_TeamIDs['Team Secret'] = 1838315
+
+PlayerIDs['Tundra Esports'] = collections.OrderedDict()
+PlayerIDs['Tundra Esports']['skiter'] = 100058342 # 76561198060324070
+PlayerIDs['Tundra Esports']['Nine'] = 94786276 # 76561198055052004
+PlayerIDs['Tundra Esports']['33'] = 86698277 # 76561198046964005
+PlayerIDs['Tundra Esports']['Sneyking'] = 10366616 # 76561197970632344
+PlayerIDs['Tundra Esports']['Fata'] = 86799300 # 76561198047065028
+ValidityTime['Tundra Esports'] = datetime.datetime(2021, 4, 6, 0, 0, 0, 0)
+_TeamIDs['Tundra Esports'] = 8291895
+
+PlayerIDs['Team Tickles'] = collections.OrderedDict()
+PlayerIDs['Team Tickles']['dyrachyo'] = 116934015 # 76561198077199743
+PlayerIDs['Team Tickles']['BOOM'] = 190826739 # 76561198151092467
+PlayerIDs['Team Tickles']['Ace'] = 97590558 # 76561198057856286
+PlayerIDs['Team Tickles']['tOfu'] = 16497807 # 76561197976763535
+PlayerIDs['Team Tickles']['Seleri'] = 91730177 # 76561198051995905
+ValidityTime['Team Tickles'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Team Tickles'] = 8599101
+
+PlayerIDs['Coolguys'] = collections.OrderedDict()
+PlayerIDs['Coolguys']['ThuG'] = 107855479 # 76561198068121207
+PlayerIDs['Coolguys']['Noob'] = 140297552 # 76561198100563280
+PlayerIDs['Coolguys']['Funn1k'] = 86723143 # 76561198046988871
+PlayerIDs['Coolguys']['OmaR'] = 152168157 # 76561198112433885
+PlayerIDs['Coolguys']['dnz'] = 98167706 # 76561198058433434
+ValidityTime['Coolguys'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Coolguys'] = 8598999
+
+#Queried at 2021-12-14T17:33:08.393564
+PlayerIDs['Team Spirit'] = collections.OrderedDict()
+PlayerIDs['Team Spirit']['Yatoro'] = 321580662 # 76561198281846390
+PlayerIDs['Team Spirit']['TORONTOTOKYO'] = 431770905 # 76561198392036633
+PlayerIDs['Team Spirit']['CoLLapse'] = 302214028 # 76561198262479756
+PlayerIDs['Team Spirit']['Mira'] = 256156323 # 76561198216422051
+PlayerIDs['Team Spirit']['Miposhka'] = 113331514 # 76561198073597242
+ValidityTime['Team Spirit'] = datetime.datetime(2021, 3, 1, 0, 0, 0, 0)
+_TeamIDs['Team Spirit'] = 7119388
+
+PlayerIDs['Natus Vincere'] = collections.OrderedDict()
+PlayerIDs['Natus Vincere']['VTune'] = 152455523 # 76561198112721251
+PlayerIDs['Natus Vincere']['Noone'] = 106573901 # 76561198066839629
+PlayerIDs['Natus Vincere']['GeneRaL'] = 89550641 # 76561198049816369
+PlayerIDs['Natus Vincere']['ALOHADANCE'] = 123051238 # 76561198083316966
+PlayerIDs['Natus Vincere']['Solo'] = 134556694 # 76561198094822422
+ValidityTime['Natus Vincere'] = datetime.datetime(2021, 9, 22, 0, 0, 0, 0)
+_TeamIDs['Natus Vincere'] = 36
+
+
 path = None
 engine = InitTeamDB(path)
 Session = sessionmaker(bind=engine)
