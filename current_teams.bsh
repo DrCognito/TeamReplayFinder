@@ -3,5 +3,5 @@
 echo "Processing teams $@ in TeamReplayFinder"
 git fetch
 pipenv run python load_old_teams.py
-pipenv run python team_parse.py $@
+pipenv run python team_parse_datdota.py $@
 pipenv run python download.py $@
