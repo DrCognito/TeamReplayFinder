@@ -6,5 +6,5 @@ $OGA_DOTAPIT_S5_EU = "7119388", "36", "8291895", "7554697", "2163", "1838315", "
 $teams = $og + $DPC_WEU_T1_D1 + $OGA_DOTAPIT_S5_EU | Get-Unique
 Write-Output "Processing " $teams
 
-python .\team_parse.py $teams
+python .\team_parse_datdota.py $teams
 python .\download.py $teams 
