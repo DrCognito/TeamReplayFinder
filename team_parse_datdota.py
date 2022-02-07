@@ -6,7 +6,10 @@ import requests as r
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
 from random import randrange, sample
+from replay_finder.__init__ import DATDOTA_API_LIMIT
 from replay_finder.replay_process import add_single_replay
+from replay_finder.api_usage import APIOverLimit, DecoratorUsageCheck
+from replay_finder.model import get_datdota_usage
 
 
 base_url = "https://www.dotabuff.com/esports/teams/"
@@ -29,7 +32,7 @@ def get_json(url: str) -> str:
     # }
     try:
         response = r.get(url)
-        time.sleep(2)
+        time.sleep(3)
     except r.HTTPError:
         print("Failed to retrieve {} with {} code {}".format(url, r.status_code))
         print(f"Headers:\n{response.headers}")
@@ -67,6 +70,8 @@ if __name__ == "__main__":
     new_ids = []
     query = session.query(Replay.replay_id)
     print("Processing {} teams.".format(len(args.team_id)))
+    datdota_dec = DecoratorUsageCheck(session, get_datdota_usage, DATDOTA_API_LIMIT)
+    process_team = datdota_dec(process_team)
     for t_id in sample(args.team_id, k=len(args.team_id)):
         ids = process_team(t_id)
         new = 0
