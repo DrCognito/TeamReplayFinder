@@ -184,6 +184,32 @@ def get_gc_usage(session):
         return query
 
 
+class DatDotaAPIUsage(Base):
+    __tablename__ = "datdota_api_usage"
+
+    date = Column(DateTime, primary_key=True)
+    api_calls = Column(Integer)
+
+
+def get_datdota_usage(session):
+    today = datetime.today()
+    today = today.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    query = session.query(DatDotaAPIUsage).filter(DatDotaAPIUsage.date == today).one_or_none()
+    if query is None:
+        try:
+            new_usage = DatDotaAPIUsage(date=today, api_calls=0)
+            session.add(new_usage)
+            session.commit()
+        except SQLAlchemyError:
+            session.rollback()
+            raise
+        return new_usage
+
+    else:
+        return query
+
+
 def InitDB(path):
     engine = create_engine(path, echo=False)
     Base.metadata.create_all(engine)
