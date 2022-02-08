@@ -58,7 +58,7 @@ def build_team(team_id, name, date, players, session):
     new_team.stack_id = _stack_id(new_team)
 
     try:
-        session.merge(new_team)
+        session.add(new_team)
         session.commit()
     except SQLAlchemyError as e:
         print(e)
@@ -84,15 +84,13 @@ def update_stack_ids(session):
 
 
 def process_player(name, player_id, team_id, session):
-
     player = TeamPlayer()
     player.player_id = convert_to_64_bit(player_id)
     player.name = name
     player.team_id = team_id
 
     try:
-        session.merge(player)
-        # session.commit()
+        session.add(player)
     except SQLAlchemyError:
         session.rollback()
         raise
@@ -108,6 +106,16 @@ def import_from_old(team_ids, all_players, validity_times, session):
 
         valid_from = validity_times.get(name, DEFAULT_TIME)
 
+        current_data = session.query(TeamInfo).filter(TeamInfo.team_id == team_ids[name]).one_or_none()
+        if not None:
+            try:
+                for p in current_data.players:
+                    session.delete(p)
+                session.delete(current_data)
+                session.commit()
+            except SQLAlchemyError as e:
+                print(e)
+                session.rollback()
         player_list = []
         team = all_players[name]
         for player in team:
