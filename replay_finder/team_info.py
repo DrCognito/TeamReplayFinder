@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from types import NoneType
 from util import convert_to_64_bit
 from os import environ as environment
 
@@ -107,7 +108,7 @@ def import_from_old(team_ids, all_players, validity_times, session):
         valid_from = validity_times.get(name, DEFAULT_TIME)
 
         current_data = session.query(TeamInfo).filter(TeamInfo.team_id == team_ids[name]).one_or_none()
-        if not None:
+        if current_data is not None:
             try:
                 for p in current_data.players:
                     session.delete(p)
