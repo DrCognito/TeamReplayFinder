@@ -111,14 +111,14 @@ PlayerIDs['Tundra Esports']['Fata'] = 86799300 # 76561198047065028
 ValidityTime['Tundra Esports'] = datetime.datetime(2021, 4, 6, 0, 0, 0, 0)
 _TeamIDs['Tundra Esports'] = 8291895
 
-PlayerIDs['Team Tickles'] = collections.OrderedDict()
-PlayerIDs['Team Tickles']['dyrachyo'] = 116934015 # 76561198077199743
-PlayerIDs['Team Tickles']['BOOM'] = 190826739 # 76561198151092467
-PlayerIDs['Team Tickles']['Ace'] = 97590558 # 76561198057856286
-PlayerIDs['Team Tickles']['tOfu'] = 16497807 # 76561197976763535
-PlayerIDs['Team Tickles']['Seleri'] = 91730177 # 76561198051995905
-ValidityTime['Team Tickles'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
-_TeamIDs['Team Tickles'] = 8599101
+PlayerIDs['Gladiators'] = collections.OrderedDict()
+PlayerIDs['Gladiators']['dyrachyo'] = 116934015 # 76561198077199743
+PlayerIDs['Gladiators']['BOOM'] = 190826739 # 76561198151092467
+PlayerIDs['Gladiators']['Ace'] = 97590558 # 76561198057856286
+PlayerIDs['Gladiators']['tOfu'] = 16497807 # 76561197976763535
+PlayerIDs['Gladiators']['Seleri'] = 91730177 # 76561198051995905
+ValidityTime['Gladiators'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Gladiators'] = 8599101
 
 PlayerIDs['Coolguys'] = collections.OrderedDict()
 PlayerIDs['Coolguys']['ThuG'] = 107855479 # 76561198068121207
@@ -148,6 +148,24 @@ PlayerIDs['Natus Vincere']['Solo'] = 134556694 # 76561198094822422
 ValidityTime['Natus Vincere'] = datetime.datetime(2021, 9, 22, 0, 0, 0, 0)
 _TeamIDs['Natus Vincere'] = 36
 
+#Queried at 2022-02-16T17:26:10.161275
+PlayerIDs['Entity'] = collections.OrderedDict()
+PlayerIDs['Entity']['Crystallis'] = 127617979 # 76561198087883707
+PlayerIDs['Entity']['Stormstormer'] = 96803083 # 76561198057068811
+PlayerIDs['Entity']['Tobi'] = 140288368 # 76561198100554096
+PlayerIDs['Entity']['Kataomi'] = 196878136 # 76561198157143864
+PlayerIDs['Entity']['Fishman'] = 127565532 # 76561198087831260
+ValidityTime['Entity'] = datetime.datetime(2021, 11, 23, 0, 0, 0, 0)
+_TeamIDs['Entity'] = 8605863
+
+PlayerIDs['Brame'] = collections.OrderedDict()
+PlayerIDs['Brame']['Focus'] = 196490133 # 76561198156755861
+PlayerIDs['Brame']['ThuG'] = 107855479 # 76561198068121207
+PlayerIDs['Brame']['Eleven'] = 27178898 # 76561197987444626
+PlayerIDs['Brame']['dEsire'] = 115464954 # 76561198075730682
+PlayerIDs['Brame']['SsaSpartan'] = 92949094 # 76561198053214822
+ValidityTime['Brame'] = datetime.datetime(2022, 1, 1, 0, 0, 0, 0)
+_TeamIDs['Brame'] = 8112124
 
 path = None
 engine = InitTeamDB(path)
