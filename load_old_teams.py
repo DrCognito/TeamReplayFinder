@@ -48,12 +48,12 @@ _TeamIDs['PSG.LGD'] = 15
 
 #Queried at 2021-11-17T00:24:11.780161
 PlayerIDs['Virtus.pro'] = collections.OrderedDict()
-PlayerIDs['Virtus.pro']['Nightfall'] = 124801257 # 76561198085066985
+PlayerIDs['Virtus.pro']['Pure'] = 331855530
 PlayerIDs['Virtus.pro']['gpk'] = 480412663 # 76561198440678391
 PlayerIDs['Virtus.pro']['DM'] = 56351509 # 76561198016617237
-PlayerIDs['Virtus.pro']['Save'] = 317880638
-PlayerIDs['Virtus.pro']['Kingslayer'] = 187758589 # 76561198148024317
-ValidityTime['Virtus.pro'] = datetime.datetime(2020, 11, 5, 0, 0, 0, 0)
+PlayerIDs['Virtus.pro']['yamich'] = 9403474
+PlayerIDs['Virtus.pro']['Xakoda'] = 217472313
+ValidityTime['Virtus.pro'] = datetime.datetime(2022, 1, 5, 0, 0, 0, 0)
 _TeamIDs['Virtus.pro'] = 1883502
 
 PlayerIDs['OG'] = collections.OrderedDict()
@@ -166,6 +166,43 @@ PlayerIDs['Brame']['dEsire'] = 115464954 # 76561198075730682
 PlayerIDs['Brame']['SsaSpartan'] = 92949094 # 76561198053214822
 ValidityTime['Brame'] = datetime.datetime(2022, 1, 1, 0, 0, 0, 0)
 _TeamIDs['Brame'] = 8112124
+
+#Queried at 2022-02-23T22:52:32.610467
+PlayerIDs['Fnatic'] = collections.OrderedDict()
+PlayerIDs['Fnatic']['Raven'] = 132309493 # 76561198092575221
+PlayerIDs['Fnatic']['Armel'] = 164532005 # 76561198124797733
+PlayerIDs['Fnatic']['Jabz'] = 100471531 # 76561198060737259
+PlayerIDs['Fnatic']['DJ'] = 102099826 # 76561198062365554
+PlayerIDs['Fnatic']['Jaunuel'] = 148526973 # 76561198108792701
+ValidityTime['Fnatic'] = datetime.datetime(2021, 11, 20, 0, 0, 0, 0)
+_TeamIDs['Fnatic'] = 350190
+
+PlayerIDs['Nigma Galaxy SEA'] = collections.OrderedDict()
+PlayerIDs['Nigma Galaxy SEA']['inYourdreaM'] = 181716137 # 76561198141981865
+PlayerIDs['Nigma Galaxy SEA']['AlaCrity'] = 118233883 # 76561198078499611
+PlayerIDs['Nigma Galaxy SEA']['Meracle'] = 91369376 # 76561198051635104
+PlayerIDs['Nigma Galaxy SEA']['poloson'] = 76904792 # 76561198037170520
+PlayerIDs['Nigma Galaxy SEA']['Jhocam'] = 152859296 # 76561198113125024
+ValidityTime['Nigma Galaxy SEA'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Nigma Galaxy SEA'] = 8572181
+
+PlayerIDs['TSM FTX'] = collections.OrderedDict()
+PlayerIDs['TSM FTX']['Timado'] = 97658618 # 76561198057924346
+PlayerIDs['TSM FTX']['Bryle'] = 238239590 # 76561198198505318
+PlayerIDs['TSM FTX']['SabeRLighT'] = 126212866 # 76561198086478594
+PlayerIDs['TSM FTX']['MoonMeander'] = 38628747 # 76561197998894475
+PlayerIDs['TSM FTX']['DuBu'] = 145550466 # 76561198105816194
+ValidityTime['TSM FTX'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['TSM FTX'] = 8260983
+
+PlayerIDs['BOOM Esports'] = collections.OrderedDict()
+PlayerIDs['BOOM Esports']['JACKBOYS'] = 392565237 # 76561198352830965
+PlayerIDs['BOOM Esports']['Yopaj'] = 324277900 # 76561198284543628
+PlayerIDs['BOOM Esports']['Fbz'] = 156328257 # 76561198116593985
+PlayerIDs['BOOM Esports']['TIMS'] = 155494381 # 76561198115760109
+PlayerIDs['BOOM Esports']['skem'] = 100594231 # 76561198060859959
+ValidityTime['BOOM Esports'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['BOOM Esports'] = 7732977
 
 path = None
 engine = InitTeamDB(path)
