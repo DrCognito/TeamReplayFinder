@@ -61,7 +61,8 @@ PlayerIDs['OG']['Yuragi'] = 167976729 # 76561198128242457
 PlayerIDs['OG']['bzm'] = 93618577 # 76561198053884305
 PlayerIDs['OG']['ATF'] = 183719386 # 76561198143985114
 PlayerIDs['OG']['Taiga'] = 401792574 # 76561198362058302
-PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
+PlayerIDs['OG']['Chu'] = 117483894
+# PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
 ValidityTime['OG'] = datetime.datetime(2021, 11, 21, 0, 0, 0, 0)
 _TeamIDs['OG'] = 2586976
 
@@ -106,8 +107,8 @@ PlayerIDs['Tundra Esports'] = collections.OrderedDict()
 PlayerIDs['Tundra Esports']['skiter'] = 100058342 # 76561198060324070
 PlayerIDs['Tundra Esports']['Nine'] = 94786276 # 76561198055052004
 PlayerIDs['Tundra Esports']['33'] = 86698277 # 76561198046964005
+PlayerIDs['Tundra Esports']['Saksa'] = 103735745 # 76561198047065028
 PlayerIDs['Tundra Esports']['Sneyking'] = 10366616 # 76561197970632344
-PlayerIDs['Tundra Esports']['Fata'] = 86799300 # 76561198047065028
 ValidityTime['Tundra Esports'] = datetime.datetime(2021, 4, 6, 0, 0, 0, 0)
 _TeamIDs['Tundra Esports'] = 8291895
 
@@ -134,7 +135,8 @@ PlayerIDs['Team Spirit'] = collections.OrderedDict()
 PlayerIDs['Team Spirit']['Yatoro'] = 321580662 # 76561198281846390
 PlayerIDs['Team Spirit']['TORONTOTOKYO'] = 431770905 # 76561198392036633
 PlayerIDs['Team Spirit']['CoLLapse'] = 302214028 # 76561198262479756
-PlayerIDs['Team Spirit']['Mira'] = 256156323 # 76561198216422051
+# PlayerIDs['Team Spirit']['Mira'] = 256156323 # 76561198216422051
+PlayerIDs['Team Spirit']['RodjER'] = 159020918
 PlayerIDs['Team Spirit']['Miposhka'] = 113331514 # 76561198073597242
 ValidityTime['Team Spirit'] = datetime.datetime(2021, 3, 1, 0, 0, 0, 0)
 _TeamIDs['Team Spirit'] = 7119388
@@ -179,10 +181,10 @@ _TeamIDs['Fnatic'] = 350190
 
 PlayerIDs['Nigma Galaxy SEA'] = collections.OrderedDict()
 PlayerIDs['Nigma Galaxy SEA']['inYourdreaM'] = 181716137 # 76561198141981865
-PlayerIDs['Nigma Galaxy SEA']['AlaCrity'] = 118233883 # 76561198078499611
-PlayerIDs['Nigma Galaxy SEA']['Meracle'] = 91369376 # 76561198051635104
-PlayerIDs['Nigma Galaxy SEA']['poloson'] = 76904792 # 76561198037170520
+PlayerIDs['Nigma Galaxy SEA']['w33'] = 86700461
+PlayerIDs['Nigma Galaxy SEA']['mizu'] = 91369376 # 76561198051635104
 PlayerIDs['Nigma Galaxy SEA']['Jhocam'] = 152859296 # 76561198113125024
+PlayerIDs['Nigma Galaxy SEA']['poloson'] = 76904792 # 76561198037170520
 ValidityTime['Nigma Galaxy SEA'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
 _TeamIDs['Nigma Galaxy SEA'] = 8572181
 
@@ -196,7 +198,7 @@ ValidityTime['TSM FTX'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
 _TeamIDs['TSM FTX'] = 8260983
 
 PlayerIDs['BOOM Esports'] = collections.OrderedDict()
-PlayerIDs['BOOM Esports']['JACKBOYS'] = 392565237 # 76561198352830965
+PlayerIDs['BOOM Esports']['JaCkky'] = 392565237 # 76561198352830965
 PlayerIDs['BOOM Esports']['Yopaj'] = 324277900 # 76561198284543628
 PlayerIDs['BOOM Esports']['Fbz'] = 156328257 # 76561198116593985
 PlayerIDs['BOOM Esports']['TIMS'] = 155494381 # 76561198115760109
