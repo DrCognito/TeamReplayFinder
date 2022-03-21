@@ -9,8 +9,8 @@ $GALAXY_DUBAI2022_G2 = "1838315", "1883502", "8572181", "7732977"
 
 $testing = 2586976
 
-$teams = $og + $GALAXY_DUBAI2022_G2 | Get-Unique
-#$teams = $og + $GALAXY_DUBAI2022_G2 + $GALAXY_DUBAI2022_G1 | Get-Unique
+#$teams = $og + $GALAXY_DUBAI2022_G2 | Get-Unique
+$teams = $og + $DPC_WEU_T2_D1 | Get-Unique
 # $teams = "1838315", "2586976", "8291895", "7554697"
 Write-Output("Updating replay-list for: " + $teams -join " ")
 

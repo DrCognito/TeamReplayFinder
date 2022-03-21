@@ -61,8 +61,8 @@ PlayerIDs['OG']['Yuragi'] = 167976729 # 76561198128242457
 PlayerIDs['OG']['bzm'] = 93618577 # 76561198053884305
 PlayerIDs['OG']['ATF'] = 183719386 # 76561198143985114
 PlayerIDs['OG']['Taiga'] = 401792574 # 76561198362058302
-PlayerIDs['OG']['Chu'] = 117483894
-# PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
+# PlayerIDs['OG']['Chu'] = 117483894
+PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
 ValidityTime['OG'] = datetime.datetime(2021, 11, 21, 0, 0, 0, 0)
 _TeamIDs['OG'] = 2586976
 
@@ -95,8 +95,8 @@ ValidityTime['Team Liquid'] = datetime.datetime(2021, 11, 17, 0, 0, 0, 0)
 _TeamIDs['Team Liquid'] = 2163
 
 PlayerIDs['Team Secret'] = collections.OrderedDict()
-PlayerIDs['Team Secret']['Nisha'] = 121769650 # 76561198082035378
 PlayerIDs['Team Secret']['SumaiL'] = 111620041 # 76561198071885769
+PlayerIDs['Team Secret']['Nisha'] = 121769650 # 76561198082035378
 PlayerIDs['Team Secret']['iceiceice'] = 84772440 # 76561198045038168
 PlayerIDs['Team Secret']['YapzOr'] = 89117038 # 76561198049382766
 PlayerIDs['Team Secret']['Puppey'] = 87278757 # 76561198047544485
