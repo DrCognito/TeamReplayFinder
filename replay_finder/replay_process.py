@@ -11,9 +11,11 @@ from sqlalchemy.exc import SQLAlchemyError
 from tqdm import tqdm
 from pathlib import Path
 
-from .__init__ import GC_API_LIMIT, WEB_API_LIMIT
+from .__init__ import GC_API_LIMIT, WEB_API_LIMIT, REPLAY_DOWNLOAD_DELAY, REPLAY_DOWNLOAD_GIVEUP
 from .api_usage import APIOverLimit, DecoratorUsageCheck
-from .model import ReplayStatus, get_gc_usage, get_api_usage, make_replay
+from .model import ReplayStatus, Replay,get_gc_usage, get_api_usage, make_replay
+
+from datetime import datetime
 
 
 GC_REPLAY_ATTEMPTS = 5
@@ -75,7 +77,7 @@ def extract_replay(path_in, path_out, remove_archive=True):
     return path_out
 
 
-def replay_process_odota(replay, session, req_session):
+def replay_process_odota(replay: Replay, session, req_session):
     def _query_odota(replay_id):
         base_url = 'https://api.opendota.com/api/matches/{}'.format(replay_id)
         responce = req_session.get(base_url)
@@ -129,9 +131,22 @@ def replay_process_odota(replay, session, req_session):
         return replay_process_odota(replay, session, req_session)
 
     if replay.status == ReplayStatus.DOWNLOADING:
-        if replay.process_attempts > REPLAY_DOWNLOAD_ATTEMPTS:
-            print("Download attempts exceeded for {}. Skipping."
-                  .format(replay.replay_id))
+        # if replay.process_attempts > REPLAY_DOWNLOAD_ATTEMPTS:
+        #     print("Download attempts exceeded for {}. Skipping."
+        #           .format(replay.replay_id))
+        #     return False
+        if replay.last_download_time is None:
+            replay.last_download_time = datetime.now()
+            session.merge(replay)
+            session.commit()
+        elif datetime.now() - replay.last_download_time < REPLAY_DOWNLOAD_DELAY:
+            print(f"Skipping {replay.replay_id} was tried {datetime.now() - replay.last_download_time} ago.")
+            return False
+        elif replay.start_time > REPLAY_DOWNLOAD_GIVEUP and replay.process_attempts > 1:
+            print(f"Skipping {replay.replay_id}. Has not been found after {REPLAY_DOWNLOAD_GIVEUP} and {replay.process_attempts}")
+            replay.status = ReplayStatus.FAILED
+            session.merge(replay)
+            session.commit()
             return False
 
         download_path = Path(environ["DOWNLOAD_PATH"]) /\
@@ -143,6 +158,7 @@ def replay_process_odota(replay, session, req_session):
             sleep(5)
             return replay_process_odota(replay, session, req_session)
         finally:
+            replay.last_download_time = datetime.now()
             replay.process_attempts += 1
             session.merge(replay)
             session.commit()
