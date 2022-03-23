@@ -47,6 +47,7 @@ class Replay(Base):
     process_attempts = Column(Integer)
     replay_url = Column(String)
     status = Column(Enum(ReplayStatus))
+    last_download_time = Column(DateTime)
 
     dire_id = Column(Integer)
     dire_stack_id = Column(String)
