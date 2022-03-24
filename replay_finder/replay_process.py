@@ -142,7 +142,7 @@ def replay_process_odota(replay: Replay, session, req_session):
         elif datetime.now() - replay.last_download_time < REPLAY_DOWNLOAD_DELAY:
             print(f"Skipping {replay.replay_id} was tried {datetime.now() - replay.last_download_time} ago.")
             return False
-        elif replay.start_time > REPLAY_DOWNLOAD_GIVEUP and replay.process_attempts > 1:
+        elif (datetime.now() - replay.start_time) > REPLAY_DOWNLOAD_GIVEUP and replay.process_attempts > 1:
             print(f"Skipping {replay.replay_id}. Has not been found after {REPLAY_DOWNLOAD_GIVEUP} and {replay.process_attempts}")
             replay.status = ReplayStatus.FAILED
             session.merge(replay)
