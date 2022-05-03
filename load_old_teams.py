@@ -135,8 +135,8 @@ PlayerIDs['Team Spirit'] = collections.OrderedDict()
 PlayerIDs['Team Spirit']['Yatoro'] = 321580662 # 76561198281846390
 PlayerIDs['Team Spirit']['TORONTOTOKYO'] = 431770905 # 76561198392036633
 PlayerIDs['Team Spirit']['CoLLapse'] = 302214028 # 76561198262479756
-# PlayerIDs['Team Spirit']['Mira'] = 256156323 # 76561198216422051
-PlayerIDs['Team Spirit']['RodjER'] = 159020918
+PlayerIDs['Team Spirit']['Mira'] = 256156323 # 76561198216422051
+# PlayerIDs['Team Spirit']['RodjER'] = 159020918
 PlayerIDs['Team Spirit']['Miposhka'] = 113331514 # 76561198073597242
 ValidityTime['Team Spirit'] = datetime.datetime(2021, 3, 1, 0, 0, 0, 0)
 _TeamIDs['Team Spirit'] = 7119388
@@ -263,7 +263,26 @@ PlayerIDs['beastcoast']['Stinger'] = 119631156 # 76561198079896884
 ValidityTime['beastcoast'] = datetime.datetime(2019, 10, 4, 0, 0, 0, 0)
 _TeamIDs['beastcoast'] = 8254400
 
+#Queried at 2022-05-03T17:06:40.149381
+PlayerIDs['Mind Games'] = collections.OrderedDict()
+PlayerIDs['Mind Games']['Dinozavrik'] = 165390194 # 76561198125655922
+PlayerIDs['Mind Games']['Ainkrad'] = 196482746 # 76561198156748474
+PlayerIDs['Mind Games']['Petushara'] = 363871826 # 76561198324137554
+PlayerIDs['Mind Games']['Bignum'] = 90423751 # 76561198050689479
+PlayerIDs['Mind Games']['Slayer'] = 91460772 # 76561198051726500
+# PlayerIDs['Mind Games']['fn'] = 5150808 # 76561197965416536
+# PlayerIDs['Mind Games']['7jesu'] = 293731272 # 76561198253997000
+ValidityTime['Mind Games'] = datetime.datetime(2021, 4, 26, 0, 0, 0, 0)
+_TeamIDs['Mind Games'] = 8255888
 
+PlayerIDs['BetBoom Team'] = collections.OrderedDict()
+PlayerIDs['BetBoom Team']['Daxak'] = 177411785 # 76561198137677513
+PlayerIDs['BetBoom Team']['Larl'] = 106305042 # 76561198066570770
+PlayerIDs['BetBoom Team']['Noticed'] = 195108598 # 76561198155374326
+PlayerIDs['BetBoom Team']['Forcemajor'] = 235505993 # 76561198195771721
+PlayerIDs['BetBoom Team']['SoNNeikO'] = 117421467 # 76561198077687195
+ValidityTime['BetBoom Team'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['BetBoom Team'] = 8721219
 
 
 path = None
