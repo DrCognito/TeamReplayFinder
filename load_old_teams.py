@@ -226,7 +226,7 @@ ValidityTime['Team Aster'] = datetime.datetime(2021, 11, 21, 0, 0, 0, 0)
 _TeamIDs['Team Aster'] = 6209166
 
 PlayerIDs['Royal NGU'] = collections.OrderedDict()
-PlayerIDs['Royal NGU']['圣子华炼 (shèng zǐ huá liàn)'] = 136177710 # 76561198096443438
+PlayerIDs['Royal NGU']['HuaLian'] = 136177710 # 76561198096443438
 PlayerIDs['Royal NGU']['Somnus'] = 106863163 # 76561198067128891
 PlayerIDs['Royal NGU']['Chalice'] = 94738847 # 76561198055004575
 PlayerIDs['Royal NGU']['FelixCiaoba'] = 119535307 # 76561198079801035
