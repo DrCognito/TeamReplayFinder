@@ -193,7 +193,11 @@ def add_single_replay(session, match_id: int):
     def _get_replay_details(web_query):
         return dota2_webapi.get_match_details(**web_query)
 
-    match_query = _get_replay_details({'match_id': match_id})
+    try:
+        match_query = _get_replay_details({'match_id': match_id})
+    except d2api.errors.APITimeoutError:
+        print(f"Failed to add {match_id}, valve Dota2 API Time Out.")
+        return
     sleep(1)
 
     new_replay = make_replay(match_query)
