@@ -17,14 +17,14 @@ PlayerIDs = {}
 ValidityTime = {}
 _TeamIDs = {}
 
-PlayerIDs['OG'] = collections.OrderedDict()
-PlayerIDs['OG']['midone'] = 76561198076851106
-PlayerIDs['OG']['Topson'] = 76561198054320440
-PlayerIDs['OG']['Ceb'] = convert_to_64_bit(88271237)
-PlayerIDs['OG']['Saksa'] = 76561198064001473
-PlayerIDs['OG']['N0tail'] = 76561197979938082
-ValidityTime['OG'] = datetime.datetime(2020, 1, 29, 0, 0, 0, 0)
-_TeamIDs['OG'] = 2586976
+# PlayerIDs['OG'] = collections.OrderedDict()
+# PlayerIDs['OG']['midone'] = 76561198076851106
+# PlayerIDs['OG']['Topson'] = 76561198054320440
+# PlayerIDs['OG']['Ceb'] = convert_to_64_bit(88271237)
+# PlayerIDs['OG']['Saksa'] = 76561198064001473
+# PlayerIDs['OG']['N0tail'] = 76561197979938082
+# ValidityTime['OG'] = datetime.datetime(2020, 1, 29, 0, 0, 0, 0)
+# _TeamIDs['OG'] = 2586976
 
 #Queried at 2021-11-16T17:14:18.556747
 PlayerIDs['Evil Geniuses'] = collections.OrderedDict()
@@ -62,7 +62,8 @@ PlayerIDs['OG']['bzm'] = 93618577 # 76561198053884305
 PlayerIDs['OG']['ATF'] = 183719386 # 76561198143985114
 PlayerIDs['OG']['Taiga'] = 401792574 # 76561198362058302
 # PlayerIDs['OG']['Chu'] = 117483894
-PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
+# PlayerIDs['OG']['Misha'] = 90125566 # 76561198050391294
+PlayerIDs['OG']['Ceb'] = 88271237
 ValidityTime['OG'] = datetime.datetime(2021, 11, 21, 0, 0, 0, 0)
 _TeamIDs['OG'] = 2586976
 
@@ -190,8 +191,9 @@ _TeamIDs['Nigma Galaxy SEA'] = 8572181
 
 PlayerIDs['TSM'] = collections.OrderedDict()
 PlayerIDs['TSM']['Timado'] = 97658618 # 76561198057924346
+PlayerIDs['TSM']['Quinn'] = 221666230 
+# PlayerIDs['TSM']['SabeRLighT'] = 126212866 # 76561198086478594
 PlayerIDs['TSM']['Bryle'] = 238239590 # 76561198198505318
-PlayerIDs['TSM']['SabeRLighT'] = 126212866 # 76561198086478594
 PlayerIDs['TSM']['MoonMeander'] = 38628747 # 76561197998894475
 PlayerIDs['TSM']['DuBu'] = 145550466 # 76561198105816194
 ValidityTime['TSM'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
@@ -268,10 +270,10 @@ PlayerIDs['Mind Games'] = collections.OrderedDict()
 PlayerIDs['Mind Games']['Dinozavrik'] = 165390194 # 76561198125655922
 PlayerIDs['Mind Games']['Ainkrad'] = 196482746 # 76561198156748474
 PlayerIDs['Mind Games']['Petushara'] = 363871826 # 76561198324137554
-PlayerIDs['Mind Games']['Bignum'] = 90423751 # 76561198050689479
-PlayerIDs['Mind Games']['Slayer'] = 91460772 # 76561198051726500
-# PlayerIDs['Mind Games']['fn'] = 5150808 # 76561197965416536
-# PlayerIDs['Mind Games']['7jesu'] = 293731272 # 76561198253997000
+# PlayerIDs['Mind Games']['Bignum'] = 90423751 # 76561198050689479
+# PlayerIDs['Mind Games']['Slayer'] = 91460772 # 76561198051726500
+PlayerIDs['Mind Games']['Astral'] = 197547532
+PlayerIDs['Mind Games']['Dukalis'] = 73401082
 ValidityTime['Mind Games'] = datetime.datetime(2021, 4, 26, 0, 0, 0, 0)
 _TeamIDs['Mind Games'] = 8255888
 
