@@ -128,3 +128,4 @@ alembic.ini
 team_template.py
 *.png
 load_old_teams.py
+current_teams.ps1
