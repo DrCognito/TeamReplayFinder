@@ -48,13 +48,20 @@ replay_extensions = [
     '.dem.bz2',
 ]
 
+ImportantTimes = {
+    'Patch_7_31': datetime(2022, 2, 23, 0, 0, 0, 0),
+    'Stockholm2022': datetime(2022, 5, 12, 0, 0, 0, 0),
+}
+
 
 if __name__ == '__main__':
     args = arguments.parse_args()
-    updatecut = timedelta(days=REPLAY_TIME_PERIOD_DAYS)
+    # updatecut = timedelta(days=REPLAY_TIME_PERIOD_DAYS)
+    time_filter = Replay.start_time > ImportantTimes['Patch_7_31']
 
     if args.custom_time is not None:
         updatecut = timedelta(days=args.custom_time)
+        time_filter = Replay.start_time > datetime.now() - updatecut
 
     replay_engine = replay_InitDB(environment['REPLAY_LEAGUE_DB_PATH'])
     replay_Session = sessionmaker(bind=replay_engine)
@@ -81,7 +88,7 @@ if __name__ == '__main__':
         else:
             replays = get_replays_for_team(team, replay_session,
                                            require_both=False)
-        replays = replays.filter(Replay.start_time > datetime.now() - updatecut)\
+        replays = replays.filter(time_filter)\
                          .order_by(Replay.replay_id.desc())
 
         if args.list:
