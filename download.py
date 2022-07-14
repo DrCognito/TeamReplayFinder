@@ -51,6 +51,8 @@ replay_extensions = [
 ImportantTimes = {
     'Patch_7_31': datetime(2022, 2, 23, 0, 0, 0, 0),
     'Stockholm2022': datetime(2022, 5, 12, 0, 0, 0, 0),
+    'DPC2022_T3': datetime(2022, 6, 7, 0, 0, 0, 0),
+    'RIYADH_2022': datetime(2022, 7, 20, 0, 0, 0, 0),
 }
 
 
