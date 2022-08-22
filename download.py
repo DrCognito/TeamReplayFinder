@@ -53,6 +53,7 @@ ImportantTimes = {
     'Stockholm2022': datetime(2022, 5, 12, 0, 0, 0, 0),
     'DPC2022_T3': datetime(2022, 6, 7, 0, 0, 0, 0),
     'RIYADH_2022': datetime(2022, 7, 20, 0, 0, 0, 0),
+    'Malaysia_2022': datetime(2022, 8, 23, 0, 0, 0, 0),
 }
 
 
