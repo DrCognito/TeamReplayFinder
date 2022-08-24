@@ -54,6 +54,7 @@ ImportantTimes = {
     'DPC2022_T3': datetime(2022, 6, 7, 0, 0, 0, 0),
     'RIYADH_2022': datetime(2022, 7, 20, 0, 0, 0, 0),
     'Malaysia_2022': datetime(2022, 8, 23, 0, 0, 0, 0),
+    'Patch_7_32': datetime(2022, 8, 24, 0, 0, 0, 0),
 }
 
 
