@@ -129,3 +129,4 @@ team_template.py
 *.png
 load_old_teams.py
 current_teams.ps1
+current_test.ps1
