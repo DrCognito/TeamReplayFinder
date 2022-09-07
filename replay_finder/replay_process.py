@@ -14,6 +14,7 @@ from pathlib import Path
 from .__init__ import GC_API_LIMIT, WEB_API_LIMIT, REPLAY_DOWNLOAD_DELAY, REPLAY_DOWNLOAD_GIVEUP
 from .api_usage import APIOverLimit, DecoratorUsageCheck
 from .model import ReplayStatus, Replay,get_gc_usage, get_api_usage, make_replay
+from .match_draft import save_match_draft
 
 from datetime import datetime
 
@@ -201,6 +202,7 @@ def add_single_replay(session, match_id: int):
     sleep(1)
 
     new_replay = make_replay(match_query)
+    save_match_draft(match_query)
     try:
         session.add(new_replay)
         session.commit()
@@ -208,3 +210,5 @@ def add_single_replay(session, match_id: int):
         print("Failed to add new match {}".format(match_id))
         print(e)
         session.rollback()
+
+    return new_replay.start_time
