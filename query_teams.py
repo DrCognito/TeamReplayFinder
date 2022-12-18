@@ -97,8 +97,12 @@ if __name__ == '__main__':
     with requests_Session() as req_session:
         for t in args.team_ids:
             print("Querying {}".format(t))
-            output += get_team_info(t, req_session)
-            output += "\n"
+            team_info = get_team_info(t, req_session)
+            if team_info is not None:
+                output += get_team_info(t, req_session)
+                output += "\n"
+            else:
+                print(f"Unable to add info from {t}")
             #print(get_team_info(t, req_session))
 
     if len(args.team_ids) > 0:
