@@ -56,13 +56,14 @@ ImportantTimes = {
     'Malaysia_2022': datetime(2022, 8, 23, 0, 0, 0, 0),
     'Patch_7_32': datetime(2022, 8, 24, 0, 0, 0, 0),
     'Quals2023': datetime(2022, 11, 28, 0, 0, 0, 0),
+    'Season2023': datetime(2022, 12, 21, 0, 0, 0, 0),
 }
 
 
 if __name__ == '__main__':
     args = arguments.parse_args()
     # updatecut = timedelta(days=REPLAY_TIME_PERIOD_DAYS)
-    time_filter = Replay.start_time > ImportantTimes['Quals2023']
+    time_filter = Replay.start_time > ImportantTimes['Season2023']
 
     if args.custom_time is not None:
         updatecut = timedelta(days=args.custom_time)
