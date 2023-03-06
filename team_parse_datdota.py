@@ -34,7 +34,8 @@ def get_json(url: str) -> str:
         response = r.get(url)
         time.sleep(3)
     except r.HTTPError:
-        print("Failed to retrieve {} with {} code {}".format(url, r.status_code))
+        # print("Failed to retrieve {} with {} code {}".format(url, r.status_code))
+        print(f"Failed to retrieve {query} with {response.status_code}")
         print(f"Headers:\n{response.headers}")
         response.raise_for_status()
         raise
