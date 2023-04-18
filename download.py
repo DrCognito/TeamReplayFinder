@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 from os import environ as environment
 from pathlib import Path
 
+import requests
+from herotools.important_times import ImportantTimes
 from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
@@ -10,7 +12,6 @@ from replay_finder.model import InitDB as replay_InitDB
 from replay_finder.model import Replay, ReplayStatus, get_replays_for_team
 from replay_finder.replay_process import check_existance, replay_process_odota
 from replay_finder.team_info import InitTeamDB, TeamInfo
-import requests
 
 REPLAY_TIME_PERIOD_DAYS = 30
 
@@ -47,19 +48,6 @@ replay_extensions = [
     '.dem',
     '.dem.bz2',
 ]
-
-ImportantTimes = {
-    'Patch_7_31': datetime(2022, 2, 23, 0, 0, 0, 0),
-    'Stockholm2022': datetime(2022, 5, 12, 0, 0, 0, 0),
-    'DPC2022_T3': datetime(2022, 6, 7, 0, 0, 0, 0),
-    'RIYADH_2022': datetime(2022, 7, 20, 0, 0, 0, 0),
-    'Malaysia_2022': datetime(2022, 8, 23, 0, 0, 0, 0),
-    'Patch_7_32': datetime(2022, 8, 24, 0, 0, 0, 0),
-    'Quals2023': datetime(2022, 11, 28, 0, 0, 0, 0),
-    'Season2023': datetime(2022, 12, 21, 0, 0, 0, 0),
-    'DPC_T1': datetime(2023, 1, 9, 0, 0, 0, 0),
-    'S2023_Tour2': datetime(2023, 3, 8, 0, 0, 0, 0),
-}
 
 
 if __name__ == '__main__':
