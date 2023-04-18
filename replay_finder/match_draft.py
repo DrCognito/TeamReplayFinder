@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from json import dump
 from pathlib import Path
 from os import environ as environment
-from .HeroTools import heroByID
+from herotools.HeroTools import heroByID
 
 load_dotenv(dotenv_path="setup.env")
 # api = d2api.APIWrapper()
