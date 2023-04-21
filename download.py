@@ -53,7 +53,7 @@ replay_extensions = [
 if __name__ == '__main__':
     args = arguments.parse_args()
     # updatecut = timedelta(days=REPLAY_TIME_PERIOD_DAYS)
-    time_filter = Replay.start_time > ImportantTimes['S2023_Tour2']
+    time_filter = Replay.start_time > ImportantTimes['Patch_7_33']
 
     if args.custom_time is not None:
         updatecut = timedelta(days=args.custom_time)
