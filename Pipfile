@@ -13,6 +13,7 @@ tabulate = "*"
 pandas = "*"
 beautifulsoup4 = "*"
 d2api = "*"
+gql = {extras = ["all"], version = "*"}
 
 [dev-packages]
 flake8 = "*"
