@@ -43,12 +43,14 @@ def InitTeamDB(path=None):
 
 
 def build_team(team_id, name, date, players, session):
-    new_team = TeamInfo()
+    team = session.query(TeamInfo).filter(TeamInfo.team_id == team_id).one_or_none()
+    if team is None:
+        team = TeamInfo()
 
-    new_team.team_id = team_id
-    new_team.name = name
-    new_team.last_change = date
-    new_team.players = players
+    team.team_id = team_id
+    team.name = name
+    team.last_change = date
+    team.players = players
 
     def _stack_id(team):
         p_list = [p.player_id for p in team.players]
@@ -56,17 +58,17 @@ def build_team(team_id, name, date, players, session):
 
         return ''.join(str(p) for p in p_list)
 
-    new_team.stack_id = _stack_id(new_team)
+    team.stack_id = _stack_id(team)
 
     try:
-        session.add(new_team)
+        session.merge(team)
         session.commit()
     except SQLAlchemyError as e:
         print(e)
         session.rollback()
         raise
 
-    return new_team
+    return team
 
 
 def update_stack_ids(session):
@@ -85,13 +87,16 @@ def update_stack_ids(session):
 
 
 def process_player(name, player_id, team_id, session):
-    player = TeamPlayer()
+    player = session.query(TeamPlayer).filter(TeamPlayer.player_id == convert_to_64_bit(player_id)).one_or_none()
+    if player is None:
+        player = TeamPlayer()
     player.player_id = convert_to_64_bit(player_id)
     player.name = name
     player.team_id = team_id
 
     try:
-        session.add(player)
+        session.merge(player)
+        session.commit()
     except SQLAlchemyError:
         session.rollback()
         raise
@@ -107,16 +112,6 @@ def import_from_old(team_ids, all_players, validity_times, session):
 
         valid_from = validity_times.get(name, DEFAULT_TIME)
 
-        current_data = session.query(TeamInfo).filter(TeamInfo.team_id == team_ids[name]).one_or_none()
-        if current_data is not None:
-            try:
-                for p in current_data.players:
-                    session.delete(p)
-                session.delete(current_data)
-                session.commit()
-            except SQLAlchemyError as e:
-                print(e)
-                session.rollback()
         player_list = []
         team = all_players[name]
         for player in team:
