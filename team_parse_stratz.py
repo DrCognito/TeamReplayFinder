@@ -9,9 +9,9 @@ from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 from datetime import datetime
 from replay_finder.replay_process import add_single_replay
-from herotools.important_times import ImportantTimes
+from herotools.important_times import ImportantTimes, MAIN_TIME
 
-use_time = ImportantTimes['After_Berlin']
+use_time = MAIN_TIME
 STRATZ_KEY = environment['STRATZ_KEY']
 stratz_endpoint = AIOHTTPTransport(url=f"https://api.stratz.com/graphql?jwt={STRATZ_KEY}")
 

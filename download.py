@@ -4,7 +4,7 @@ from os import environ as environment
 from pathlib import Path
 
 import requests
-from herotools.important_times import ImportantTimes
+from herotools.important_times import ImportantTimes, MAIN_TIME
 from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
@@ -53,7 +53,7 @@ replay_extensions = [
 if __name__ == '__main__':
     args = arguments.parse_args()
     # updatecut = timedelta(days=REPLAY_TIME_PERIOD_DAYS)
-    time_filter = Replay.start_time > ImportantTimes['Patch_7_33']
+    time_filter = Replay.start_time > MAIN_TIME
 
     if args.custom_time is not None:
         updatecut = timedelta(days=args.custom_time)
