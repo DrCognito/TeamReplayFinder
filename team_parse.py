@@ -183,6 +183,6 @@ if __name__ == "__main__":
         new_ids += new_team
         session.commit()
 
-    print('All new ids:')
+    print(f'All new {len(new_ids)} ids:')
     new_ids = set(new_ids)
     print(' '.join(new_ids))

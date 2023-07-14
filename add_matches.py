@@ -31,5 +31,5 @@ if __name__ == "__main__":
             print(f"{m_id} already present in DB.")
     session.commit()
 
-    print('All new ids:')
+    print(f'All new {len(new_ids)} ids:')
     print(' '.join(new_ids))
