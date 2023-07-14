@@ -27,6 +27,15 @@ query MyQuery {{
   }}
 }}
 """
+query = f"""
+query MyQuery {{
+  team(teamId: TEAM_ID) {{
+    matches(request: {{skip: 0, take: MAX_REPLAYS}}) {{
+      id
+    }}
+  }}
+}}
+"""
 
 
 def get_team_str(team: int, from_time: datetime, max_replays:int, in_str = query) -> str:
