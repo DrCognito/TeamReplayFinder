@@ -4,8 +4,8 @@ from util import convert_to_64_bit
 from os import environ as environment
 
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
-                        String, create_engine)
-from sqlalchemy.exc import SQLAlchemyError
+                        String, create_engine, delete)
+from sqlalchemy.exc import SQLAlchemyError, MultipleResultsFound
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
@@ -87,9 +87,11 @@ def update_stack_ids(session):
 
 
 def process_player(name, player_id, team_id, session):
-    player = session.query(TeamPlayer).filter(TeamPlayer.player_id == convert_to_64_bit(player_id)).one_or_none()
-    if player is None:
-        player = TeamPlayer()
+    players = session.query(TeamPlayer).filter(TeamPlayer.player_id == convert_to_64_bit(player_id)).all()
+    for p in players:
+        session.delete(p)
+
+    player = TeamPlayer()
     player.player_id = convert_to_64_bit(player_id)
     player.name = name
     player.team_id = team_id
