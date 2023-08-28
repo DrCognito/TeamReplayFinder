@@ -45,7 +45,7 @@ def build_metadata(match_in) -> dict:
                             "unitName":None,"cName":None,"entType":"Team","endOfTime":None,
                             "createdTime":None,"steamid":None,"smokeStart":[],"preciseSmokeStartx":[],"preciseSmokeStarty":[],
                             "preciseSmokeEndx":[],"preciseSmokeEndy":[],"kills":None,"killList":{},"deaths":None,"deathList":{},"assists":None,
-                            "assistList":{},"denies":None,"denyList":{},"last_hits":None,"last_hitList":{}}
+                            "assistList":{},"denies":None,"denyList":{},"last_hits":None,"last_hitList":{}, "net_worth": {}}
     pickban_template = {"type":"PicksAndBans", "cName": [], "team":[], "ID":[], "isPick":[],
                         "steamID":[], "playerHero":[],
                         "winningTeam":None, "gameMode":None, "matchID":None, "leagueID": None, "endTimeUTC":None,
