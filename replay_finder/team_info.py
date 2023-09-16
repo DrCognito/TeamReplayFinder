@@ -43,9 +43,15 @@ def InitTeamDB(path=None):
 
 
 def build_team(team_id, name, date, players, session):
-    team = session.query(TeamInfo).filter(TeamInfo.team_id == team_id).one_or_none()
+    from sqlalchemy import or_
+    team: TeamInfo = session.query(TeamInfo).filter(or_(TeamInfo.team_id == team_id, TeamInfo.name == name)).one_or_none()
     if team is None:
         team = TeamInfo()
+    else:
+        if team.team_id != team_id:
+            print(f"Team {name} redefined to id {team_id}")
+        if team.name != name:
+            print(f"Team {team.team_id} redefined to name {name}")
 
     team.team_id = team_id
     team.name = name
