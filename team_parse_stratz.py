@@ -16,7 +16,7 @@ STRATZ_KEY = environment['STRATZ_KEY']
 stratz_endpoint = AIOHTTPTransport(url=f"https://api.stratz.com/graphql?jwt={STRATZ_KEY}")
 
 # Create a GraphQL client using the defined transport
-client = Client(transport=stratz_endpoint, fetch_schema_from_transport=True)
+client = Client(transport=stratz_endpoint, execute_timeout=30)
 
 query = f"""
 query MyQuery {{
