@@ -110,6 +110,10 @@ if __name__ == '__main__':
                 except TimeoutError:
                     print("TimeoutError for {}".format(rep.replay_id))
                     continue
+                except ValueError:
+                    print("ValueError for {}, probably missing replay_url".format(rep.replay_id))
+                    failure_list.append(f"{rep.replay_id}\n")
+                    continue
                 if path:
                     print("Replay downloaded to: {}".format(path))
                 else:
