@@ -81,7 +81,7 @@ def extract_replay(path_in, path_out, remove_archive=True):
 def replay_process_odota(replay: Replay, session, req_session):
     def _query_odota(replay_id):
         base_url = 'https://api.opendota.com/api/matches/{}'.format(replay_id)
-        responce = req_session.get(base_url)
+        responce = req_session.get(base_url, timeout=10)
 
         if responce.status_code != req_codes.ok:
             print("Failed to retrieve {} from odota with code {}"
@@ -120,8 +120,8 @@ def replay_process_odota(replay: Replay, session, req_session):
         sleep(3)
 
         if url is None:
-            raise TimeoutError
-            return replay_process_odota(replay, session, req_session)
+            raise ValueError
+            # return replay_process_odota(replay, session, req_session)
 
         replay.replay_url = url
         replay.status = ReplayStatus.DOWNLOADING
