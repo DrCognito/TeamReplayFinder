@@ -124,6 +124,6 @@ def save_match_draft(match_in, output_dir: Path = Path(environment['DRAFT_JSON_P
         print(f"Warning! f{output} already exists!")
     with open(output, "w") as f:
         dump(res, f)
-    print(f"Saved dotaAPI draft info to {output}")
+    # print(f"Saved dotaAPI draft info to {output}")
 
     return output
