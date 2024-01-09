@@ -53,8 +53,11 @@ def process_team(team_id: int, from_time: datetime, max_replays:int) -> List[int
     query = gql(query_str)
     result = client.execute(query)
     time.sleep(1)
-
-    matches = [x['id'] for x in result['team']['matches']]
+    try:
+        matches = [x['id'] for x in result['team']['matches']]
+    except TypeError:
+        print(f"Invalid results for {team_id}")
+        return []
 
     return matches
 
