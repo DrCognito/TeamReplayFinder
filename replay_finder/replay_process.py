@@ -6,7 +6,7 @@ import d2api
 from requests import get as req_get, Session as requests_Session
 from requests import codes as req_codes
 from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
-                                 RequestException)
+                                 RequestException, ReadTimeout)
 from sqlalchemy.exc import SQLAlchemyError
 from tqdm import tqdm
 from pathlib import Path
@@ -113,7 +113,12 @@ def replay_process_odota(replay: Replay, session, req_session):
                   .format(replay.replay_id))
             return False
 
-        url = _query_odota(replay.replay_id)
+        try:
+            url = _query_odota(replay.replay_id)
+        except ReadTimeout:
+            print(f"Failed to query opendota for {replay.replay_id}")
+            url = None
+            sleep(10)
         replay.process_attempts += 1
         session.merge(replay)
         session.commit()
