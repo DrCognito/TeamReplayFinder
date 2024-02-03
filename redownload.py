@@ -77,7 +77,7 @@ if __name__ == '__main__':
             print("Could not find team corresponding to {}"
                   .format(t_in))
             exit()
-        print(f"Processing {team.name}, {team.team_id}.")
+        print(f"Checking {team.name}, {team.team_id}.")
         failure_list.append(f"Team {team.name}, {team.team_id}.\n")
         if args.require_players:
             replays = get_replays_for_team(team, replay_session, require_both=True)
