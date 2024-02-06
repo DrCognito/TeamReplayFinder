@@ -97,6 +97,9 @@ def replay_process_odota(replay: Replay, session, req_session):
     if replay.status == ReplayStatus.DOWNLOADED:
         return False
 
+    if replay.status == ReplayStatus.FAILED:
+        return False
+
     extract_path = Path(environ["EXTRACT_PATH"]) /\
             (str(replay.replay_id) + '.dem')
 
@@ -148,12 +151,6 @@ def replay_process_odota(replay: Replay, session, req_session):
         elif datetime.now() - replay.last_download_time < REPLAY_DOWNLOAD_DELAY:
             print(f"Skipping {replay.replay_id} was tried {datetime.now() - replay.last_download_time} ago.")
             return False
-        elif (datetime.now() - replay.start_time) > REPLAY_DOWNLOAD_GIVEUP and replay.process_attempts > 1:
-            print(f"Skipping {replay.replay_id}. Has not been found after {REPLAY_DOWNLOAD_GIVEUP} and {replay.process_attempts}")
-            replay.status = ReplayStatus.FAILED
-            session.merge(replay)
-            session.commit()
-            return False
 
         download_path = Path(environ["DOWNLOAD_PATH"]) /\
             (str(replay.replay_id) + '.dem.bz2')
@@ -164,7 +161,11 @@ def replay_process_odota(replay: Replay, session, req_session):
             sleep(5)
             return replay_process_odota(replay, session, req_session)
         finally:
-            replay.last_download_time = datetime.now()
+            if (datetime.now() - replay.start_time) > REPLAY_DOWNLOAD_GIVEUP and replay.process_attempts > 1:
+                print(f"Skipping {replay.replay_id}. Has not been found after {REPLAY_DOWNLOAD_GIVEUP} and {replay.process_attempts}")
+                replay.status = ReplayStatus.FAILED
+            else:
+                replay.last_download_time = datetime.now()
             replay.process_attempts += 1
             session.merge(replay)
             session.commit()
