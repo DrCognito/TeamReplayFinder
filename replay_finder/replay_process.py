@@ -35,12 +35,12 @@ def download_replay(replay, path):
     try:
         dl_stream = req_get(replay.replay_url, stream=True)
     except ConnectionError:
-        print("Connection error!")
-        return
+        print(f"Connection error! {replay.replay_url}")
+        raise ConnectionError
     except HTTPError:
         print("Starting connection to {} failed with {}."
               .format(replay.replay_url, dl_stream.status_code))
-        return
+        raise HTTPError
 
     with open(path, 'wb') as file:
         for data in tqdm(dl_stream.iter_content(chunk_size=10000)):
@@ -156,7 +156,7 @@ def replay_process_odota(replay: Replay, session, req_session):
             (str(replay.replay_id) + '.dem.bz2')
         try:
             download_replay(replay, download_path)
-        except RequestException as e:
+        except (RequestException, HTTPError, ConnectionError) as e:
             print(e)
             sleep(5)
             return replay_process_odota(replay, session, req_session)
