@@ -13,7 +13,7 @@ from pathlib import Path
 
 from .__init__ import GC_API_LIMIT, WEB_API_LIMIT, REPLAY_DOWNLOAD_DELAY, REPLAY_DOWNLOAD_GIVEUP
 from .api_usage import APIOverLimit, DecoratorUsageCheck
-from .model import ReplayStatus, Replay,get_gc_usage, get_api_usage, make_replay
+from .model import ReplayStatus, Replay,get_gc_usage, get_api_usage, make_replay, make_replay_odota
 from .match_draft import save_match_draft
 
 from datetime import datetime
@@ -200,15 +200,17 @@ def add_single_replay(session, match_id: int):
     def _get_replay_details(web_query):
         return dota2_webapi.get_match_details(**web_query)
 
+    match_query = None
     try:
         match_query = _get_replay_details({'match_id': match_id})
+        new_replay = make_replay(match_query)
+        save_match_draft(match_query)
     except (d2api.errors.APITimeoutError, d2api.errors.BaseError) as e:
         print(f"Failed to add {match_id}, valve Dota2 API Time Out.")
-        return
-    sleep(1)
+        new_replay = make_replay_odota(match_id)
+        sleep(1)
 
-    new_replay = make_replay(match_query)
-    save_match_draft(match_query)
+
     try:
         session.add(new_replay)
         session.commit()

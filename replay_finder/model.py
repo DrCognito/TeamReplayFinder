@@ -10,6 +10,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_method, hybrid_property
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import Enum
+import requests as r
+from time import sleep
 
 from replay_finder.team_info import TeamInfo
 
@@ -70,6 +72,87 @@ class Player(Base):
     player_id = Column(BigInteger, primary_key=True)
     hero_id = Column(Integer)
     side = Column(Enum(Side))
+
+
+from requests import codes as req_codes
+def make_replay_odota(replay_id: int):
+    '''
+    Query a replay with no dota2api info from odota!
+    '''
+    new_replay = Replay()
+    new_replay.status = None
+    # Get the replay
+    try:
+        base_url = 'https://api.opendota.com/api/matches/{}'.format(replay_id)
+        responce = r.get(base_url, timeout=10)
+    except:
+        print("Failed to retrieve odota for ".format(replay_id))
+        sleep(5)
+        return new_replay
+    if responce.status_code != req_codes.ok:
+        print("Failed to retrieve {} from odota with code {}"
+                .format(base_url, responce.status_code))
+        return new_replay
+    try:
+        json = responce.json()
+    except (ValueError, KeyError):
+        print("Invalid json retrieved from {}"
+                .format(base_url))
+        return new_replay
+    sleep(1)
+
+    # Extract data from the json
+
+    new_replay.replay_id = replay_id
+    new_replay.start_time = datetime.fromtimestamp(json['start_time'])
+
+    new_replay.status = ReplayStatus.ACKNOWLEDGED
+    new_replay.process_attempts = 0
+
+    try:
+        new_replay.dire_id = json['dire_team_id']
+    except KeyError:
+        print("Missing dire team in {}".format(replay_id))
+        new_replay.dire_id = 0
+    try:
+        new_replay.radiant_id = json['radiant_team_id']
+    except KeyError:
+        print("Missing radiant team in {}".format(replay_id))
+        new_replay.radiant_id = 0
+
+    def _player(p):
+        new_player = Player()
+        try:
+            player_id = convert_to_64_bit(p['account_id'])
+        except KeyError as e:
+            print("Invalid player object in replay {}."
+                  .format(new_replay.replay_id))
+            raise
+
+        new_player.player_id = player_id
+        new_player.replay_id = new_replay.replay_id
+        # Works as a bit mask, 8th bit is true if the team is dire
+        if p['isRadiant']:
+            new_player.side = Side.RADIANT
+        else:
+            new_player.side = Side.DIRE
+
+        new_player.hero_id = p['hero_id']
+
+        return new_player
+
+    new_replay.players = [_player(p) for p in json['players']]
+
+    new_replay.dire_stack_id = new_replay.stack_id(Side.DIRE)
+    new_replay.radiant_stack_id = new_replay.stack_id(Side.RADIANT)
+
+    if 'replay_url' in json:
+        if url:= json['replay_url'] is not None:
+            new_replay.replay_url = json['replay_url']
+            new_replay.status = ReplayStatus.DOWNLOADING
+            new_replay.process_attempts = 0
+
+    return new_replay
 
 
 def make_replay(dict_obj):

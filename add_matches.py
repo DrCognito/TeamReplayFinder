@@ -1,5 +1,5 @@
 from os import environ as environment
-from replay_finder.model import InitDB, Replay
+from replay_finder.model import InitDB, Replay, ReplayStatus
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
 from replay_finder.replay_process import add_single_replay
@@ -21,10 +21,16 @@ if __name__ == "__main__":
     query = session.query(Replay.replay_id)
     print("Adding matches:\n{}.".format(args.match_id))
     for m_id in args.match_id:
+        test_q: Replay
         test_q = query.filter(Replay.replay_id == m_id).one_or_none()
 
         if test_q is None:
             print(f"Adding {m_id}.")
+            new_ids.append(str(m_id))
+            add_single_replay(session, m_id)
+        elif test_q.status is None:
+            # Replay was acknowledged but never processed properly
+            print(f"Re-Adding {m_id}.")
             new_ids.append(str(m_id))
             add_single_replay(session, m_id)
         else:
