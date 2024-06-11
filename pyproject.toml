@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 version_scheme = "no-guess-dev"
 
 [tool.poetry]
-name = "replay_finder"
+name = "TeamReplayFinder"
 version = "1.0.0"
 description = "Package for finding and downloading replays."
 authors = ["Matthew Chadwick"]
