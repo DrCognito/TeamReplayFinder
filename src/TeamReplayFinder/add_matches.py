@@ -1,8 +1,8 @@
 from os import environ as environment
-from replay_finder.model import InitDB, Replay, ReplayStatus
+from replay_finder.replay_finder.model import InitDB, Replay, ReplayStatus
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
-from replay_finder.replay_process import add_single_replay
+from replay_finder.replay_finder.replay_process import add_single_replay
 
 arguments = arg.ArgumentParser()
 arguments.add_argument('match_id',

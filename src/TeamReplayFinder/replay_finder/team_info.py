@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from types import NoneType
-from util import convert_to_64_bit
+from replay_finder.util import convert_to_64_bit
 from os import environ as environment
 
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,

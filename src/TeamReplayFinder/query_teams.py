@@ -4,14 +4,14 @@ from argparse import ArgumentParser
 from time import sleep
 from os import environ as environment
 
-from util import convert_to_64_bit, convert_to_32_bit
+from replay_finder.util import convert_to_64_bit, convert_to_32_bit
 from dotenv import load_dotenv
 from requests import Session as requests_Session
 from requests import codes as req_codes
 from requests import get as req_get
 from sqlalchemy.orm import sessionmaker
 
-from replay_finder.team_info import InitTeamDB, build_team
+from replay_finder.replay_finder.team_info import InitTeamDB, build_team
 
 load_dotenv(dotenv_path="setup.env")
 
