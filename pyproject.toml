@@ -7,3 +7,23 @@ build-backend = "setuptools.build_meta"
 # For smarter version schemes and other configuration options,
 # check out https://github.com/pypa/setuptools_scm
 version_scheme = "no-guess-dev"
+
+[tool.poetry]
+name = "replay_finder"
+version = "1.0.0"
+description = "Package for finding and downloading replays."
+authors = ["Matthew Chadwick"]
+
+[tool.poetry.dependencies]
+sqlalchemy = "2.*"
+python = ">=3.9, <4.0"
+python-dotenv = "1.*"
+requests = "2.*"
+tqdm="4.*"
+alembic="1.*"
+tabulate = "0.*"
+pandas = "2.*"
+beautifulsoup4 = "4.*"
+d2api = "1.*"
+gql = {extras = ["aiohttp"], version = "^3.5.0"}
+herotools = {path = "E:/Python/HeroTools", develop = true}
