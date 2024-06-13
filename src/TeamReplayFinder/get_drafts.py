@@ -1,7 +1,8 @@
 from TeamReplayFinder.replay_finder.match_draft import save_match_draft
 from TeamReplayFinder.replay_finder.api_usage import DecoratorUsageCheck
 from TeamReplayFinder.replay_finder.__init__ import WEB_API_LIMIT
-from TeamReplayFinder.replay_finder.model import get_api_usage, InitDB
+from TeamReplayFinder.replay_finder.model import get_api_usage, InitDB, make_replay_odota, get_replay_odota
+from TeamReplayFinder.replay_finder.match_draft_odota import save_match_draft_odota
 import argparse as arg
 from os import environ as environment
 from sqlalchemy.orm import sessionmaker
@@ -29,9 +30,17 @@ if __name__ == "__main__":
         print(f"Adding {m_id}")
         try:
             match_query = _get_replay_details({'match_id': m_id})
-        except d2api.errors.APITimeoutError:
+            save_match_draft(match_query)
+        except(d2api.errors.APITimeoutError, d2api.errors.BaseError) as e:
             print(f"Failed to add {m_id}, valve Dota2 API Time Out.")
-            break
+            match_query = None
         sleep(1)
 
-        save_match_draft(match_query)
+        if match_query is None:
+            match_query = get_replay_odota(m_id)
+            if match_query is None:
+                print(f"Failed to add {m_id} from Open Dota.")
+            else:
+                new_replay = make_replay_odota(match_query)
+                save_match_draft_odota(match_query)
+

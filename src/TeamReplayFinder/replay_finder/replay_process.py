@@ -13,8 +13,11 @@ from pathlib import Path
 
 from TeamReplayFinder.replay_finder import GC_API_LIMIT, WEB_API_LIMIT, REPLAY_DOWNLOAD_DELAY, REPLAY_DOWNLOAD_GIVEUP
 from TeamReplayFinder.replay_finder.api_usage import APIOverLimit, DecoratorUsageCheck
-from TeamReplayFinder.replay_finder.model import ReplayStatus, Replay,get_gc_usage, get_api_usage, make_replay, make_replay_odota
+from TeamReplayFinder.replay_finder.model import (
+    ReplayStatus, Replay, get_gc_usage, get_api_usage, make_replay, make_replay_odota, get_replay_odota
+)
 from TeamReplayFinder.replay_finder.match_draft import save_match_draft
+from TeamReplayFinder.replay_finder.match_draft_odota import save_match_draft_odota
 
 from datetime import datetime
 
@@ -207,9 +210,19 @@ def add_single_replay(session, match_id: int):
         save_match_draft(match_query)
     except (d2api.errors.APITimeoutError, d2api.errors.BaseError) as e:
         print(f"Failed to add {match_id}, valve Dota2 API Time Out.")
-        new_replay = make_replay_odota(match_id)
+        match_query = None
         sleep(1)
 
+    if match_query is None:
+        match_query = get_replay_odota(match_id)
+        if match_query is None:
+            print(f"Failed to add {match_id} from Open Dota.")
+        else:
+            new_replay = make_replay_odota(match_query)
+            save_match_draft_odota(match_query)
+
+    if match_query is None:
+        return None
 
     try:
         session.add(new_replay)
