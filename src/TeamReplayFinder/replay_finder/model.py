@@ -74,47 +74,53 @@ class Player(Base):
 
 
 from requests import codes as req_codes
-def make_replay_odota(replay_id: int):
+def get_replay_odota(replay_id: int) -> dict:
     '''
-    Query a replay with no dota2api info from odota!
+    Get a replay json from Open Dota and return as dictionary.
     '''
-    new_replay = Replay()
-    new_replay.status = None
-    # Get the replay
     try:
         base_url = 'https://api.opendota.com/api/matches/{}'.format(replay_id)
         responce = r.get(base_url, timeout=10)
     except:
         print("Failed to retrieve odota for ".format(replay_id))
         sleep(5)
-        return new_replay
+        return None
     if responce.status_code != req_codes.ok:
         print("Failed to retrieve {} from odota with code {}"
                 .format(base_url, responce.status_code))
-        return new_replay
+        return None
     try:
         json = responce.json()
     except (ValueError, KeyError):
         print("Invalid json retrieved from {}"
                 .format(base_url))
-        return new_replay
-    sleep(1)
+        return None
+    
+    return json
+
+
+def make_replay_odota(in_dict: dict) -> Replay:
+    '''
+    Query a replay with no dota2api info from odota!
+    '''
+    new_replay = Replay()
+    new_replay.status = None
 
     # Extract data from the json
-
+    replay_id = in_dict['match_id']
     new_replay.replay_id = replay_id
-    new_replay.start_time = datetime.fromtimestamp(json['start_time'])
+    new_replay.start_time = datetime.fromtimestamp(in_dict['start_time'])
 
     new_replay.status = ReplayStatus.ACKNOWLEDGED
     new_replay.process_attempts = 0
 
     try:
-        new_replay.dire_id = json['dire_team_id']
+        new_replay.dire_id = in_dict['dire_team_id']
     except KeyError:
         print("Missing dire team in {}".format(replay_id))
         new_replay.dire_id = 0
     try:
-        new_replay.radiant_id = json['radiant_team_id']
+        new_replay.radiant_id = in_dict['radiant_team_id']
     except KeyError:
         print("Missing radiant team in {}".format(replay_id))
         new_replay.radiant_id = 0
@@ -140,14 +146,14 @@ def make_replay_odota(replay_id: int):
 
         return new_player
 
-    new_replay.players = [_player(p) for p in json['players']]
+    new_replay.players = [_player(p) for p in in_dict['players']]
 
     new_replay.dire_stack_id = new_replay.stack_id(Side.DIRE)
     new_replay.radiant_stack_id = new_replay.stack_id(Side.RADIANT)
 
-    if 'replay_url' in json:
-        if url:= json['replay_url'] is not None:
-            new_replay.replay_url = json['replay_url']
+    if 'replay_url' in in_dict:
+        if url:= in_dict['replay_url'] is not None:
+            new_replay.replay_url = in_dict['replay_url']
             new_replay.status = ReplayStatus.DOWNLOADING
             new_replay.process_attempts = 0
 

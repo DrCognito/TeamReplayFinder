@@ -117,7 +117,7 @@ def build_metadata(match_in) -> dict:
     return output
 
 
-def save_match_draft(match_in, output_dir: Path = Path(environment['DRAFT_JSON_PATH'])) -> Path:
+def save_match_draft_odota(match_in, output_dir: Path = Path(environment['DRAFT_JSON_PATH'])) -> Path:
     try:
         res = build_metadata(match_in)
     except:
