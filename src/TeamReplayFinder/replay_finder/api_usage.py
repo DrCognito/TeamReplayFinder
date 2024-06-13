@@ -1,6 +1,6 @@
-from .model import WebAPIUsage, get_api_usage
-from .__init__ import WEB_API_LIMIT
-from .exceptions import APIOverLimit
+from TeamReplayFinder.replay_finder.model import WebAPIUsage, get_api_usage
+from TeamReplayFinder.replay_finder import WEB_API_LIMIT
+from TeamReplayFinder.replay_finder.exceptions import APIOverLimit
 
 
 class DecoratorUsageCheck():

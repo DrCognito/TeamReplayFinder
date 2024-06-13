@@ -8,8 +8,8 @@ from tabulate import tabulate
 from pathlib import Path
 
 from download import replay_paths, replay_extensions
-from replay_finder.model import InitDB, League, Replay
-from replay_finder.team_info import InitTeamDB, TeamInfo, TeamPlayer
+from TeamReplayFinder.replay_finder.model import InitDB, League, Replay
+from TeamReplayFinder.replay_finder.team_info import InitTeamDB, TeamInfo, TeamPlayer
 
 
 load_dotenv(dotenv_path="setup.env")

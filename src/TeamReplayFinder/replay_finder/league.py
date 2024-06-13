@@ -9,10 +9,10 @@ from requests import Session as requests_Session
 from sqlalchemy import exists
 from sqlalchemy.exc import SQLAlchemyError
 
-from .__init__ import WEB_API_LIMIT
-from .api_usage import DecoratorUsageCheck
-from .exceptions import APIOverLimit
-from .model import League, LeagueStatus, Replay, get_api_usage, make_replay
+from TeamReplayFinder.replay_finder import WEB_API_LIMIT
+from TeamReplayFinder.replay_finder.api_usage import DecoratorUsageCheck
+from TeamReplayFinder.replay_finder.exceptions import APIOverLimit
+from TeamReplayFinder.replay_finder.model import League, LeagueStatus, Replay, get_api_usage, make_replay
 
 LEAGUE_EXPIRED_AFTER_DAYS = 30
 

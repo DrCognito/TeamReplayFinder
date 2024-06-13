@@ -8,7 +8,7 @@ import argparse as arg
 from gql import gql, Client
 from gql.transport.aiohttp import AIOHTTPTransport
 from datetime import datetime
-from replay_finder.replay_process import add_single_replay
+from TeamReplayFinder.replay_finder.replay_process import add_single_replay
 from herotools.important_times import ImportantTimes, MAIN_TIME
 
 use_time = MAIN_TIME

@@ -1,14 +1,13 @@
 from datetime import datetime, timedelta
 from types import NoneType
-from replay_finder.util import convert_to_64_bit
+from TeamReplayFinder.util import convert_to_64_bit
 from os import environ as environment
 
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
                         String, create_engine, delete)
 from sqlalchemy.exc import SQLAlchemyError, MultipleResultsFound
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, declarative_base
 
 Base_TI = declarative_base()
 DEFAULT_TIME = datetime.today() - timedelta(days=30)

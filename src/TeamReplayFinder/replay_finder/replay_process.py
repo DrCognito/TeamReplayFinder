@@ -11,10 +11,10 @@ from sqlalchemy.exc import SQLAlchemyError
 from tqdm import tqdm
 from pathlib import Path
 
-from .__init__ import GC_API_LIMIT, WEB_API_LIMIT, REPLAY_DOWNLOAD_DELAY, REPLAY_DOWNLOAD_GIVEUP
-from .api_usage import APIOverLimit, DecoratorUsageCheck
-from .model import ReplayStatus, Replay,get_gc_usage, get_api_usage, make_replay, make_replay_odota
-from .match_draft import save_match_draft
+from TeamReplayFinder.replay_finder import GC_API_LIMIT, WEB_API_LIMIT, REPLAY_DOWNLOAD_DELAY, REPLAY_DOWNLOAD_GIVEUP
+from TeamReplayFinder.replay_finder.api_usage import APIOverLimit, DecoratorUsageCheck
+from TeamReplayFinder.replay_finder.model import ReplayStatus, Replay,get_gc_usage, get_api_usage, make_replay, make_replay_odota
+from TeamReplayFinder.replay_finder.match_draft import save_match_draft
 
 from datetime import datetime
 

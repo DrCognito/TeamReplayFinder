@@ -2,18 +2,17 @@ import enum
 from datetime import datetime
 
 #from dota2api import convert_to_64_bit
-from util import convert_to_64_bit
+from TeamReplayFinder.util import convert_to_64_bit
 from sqlalchemy import (BigInteger, Column, DateTime, ForeignKey, Integer,
                         String, create_engine, exists, or_, and_)
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_method, hybrid_property
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.types import Enum
 import requests as r
 from time import sleep
 
-from replay_finder.team_info import TeamInfo
+from TeamReplayFinder.replay_finder.team_info import TeamInfo
 
 
 class Side(enum.Enum):

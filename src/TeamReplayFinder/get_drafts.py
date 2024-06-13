@@ -1,10 +1,9 @@
-from replay_finder.match_draft import save_match_draft
-from replay_finder.api_usage import DecoratorUsageCheck
-from replay_finder.__init__ import WEB_API_LIMIT
-from replay_finder.model import get_api_usage
+from TeamReplayFinder.replay_finder.match_draft import save_match_draft
+from TeamReplayFinder.replay_finder.api_usage import DecoratorUsageCheck
+from TeamReplayFinder.replay_finder.__init__ import WEB_API_LIMIT
+from TeamReplayFinder.replay_finder.model import get_api_usage, InitDB
 import argparse as arg
 from os import environ as environment
-from replay_finder.model import InitDB, Replay
 from sqlalchemy.orm import sessionmaker
 import d2api
 from time import sleep

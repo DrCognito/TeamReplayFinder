@@ -8,10 +8,10 @@ from herotools.important_times import ImportantTimes, MAIN_TIME
 from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
-from replay_finder.model import InitDB as replay_InitDB
-from replay_finder.model import Replay, ReplayStatus, get_replays_for_team
-from replay_finder.replay_process import check_existance, replay_process_odota
-from replay_finder.team_info import InitTeamDB, TeamInfo
+from TeamReplayFinder.replay_finder.model import InitDB as replay_InitDB
+from TeamReplayFinder.replay_finder.model import Replay, ReplayStatus, get_replays_for_team
+from TeamReplayFinder.replay_finder.replay_process import check_existance, replay_process_odota
+from TeamReplayFinder.replay_finder.team_info import InitTeamDB, TeamInfo
 
 REPLAY_TIME_PERIOD_DAYS = 30
 

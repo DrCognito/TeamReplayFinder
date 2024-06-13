@@ -1,15 +1,15 @@
 import time
 from os import environ as environment
 from typing import List, Tuple
-from replay_finder.model import InitDB, Replay
+from TeamReplayFinder.replay_finder.model import InitDB, Replay
 import requests as r
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
 from random import randrange, sample
-from replay_finder.__init__ import DATDOTA_API_LIMIT
-from replay_finder.replay_process import add_single_replay
-from replay_finder.api_usage import APIOverLimit, DecoratorUsageCheck
-from replay_finder.model import get_datdota_usage
+from TeamReplayFinder.replay_finder import DATDOTA_API_LIMIT
+from TeamReplayFinder.replay_finder.replay_process import add_single_replay
+from TeamReplayFinder.replay_finder.api_usage import APIOverLimit, DecoratorUsageCheck
+from TeamReplayFinder.replay_finder.model import get_datdota_usage
 
 
 base_url = "https://www.dotabuff.com/esports/teams/"
