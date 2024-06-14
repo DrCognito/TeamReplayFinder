@@ -101,14 +101,14 @@ def build_metadata(match_in) -> dict:
         else:
             pickban_template['winningTeam'] = 3
 
-        pickban_template['game_mode'] = match_in['game_mode']
-        pickban_template['match_id'] = match_in['match_id']
-        pickban_template['leagueid'] = match_in['leagueid']
-        pickban_template['start_time'] = match_in['start_time']
-        pickban_template['radiant_team_id'] = match_in['radiant_team_id']
-        pickban_template['dire_team_id'] = match_in['dire_team_id']
-        pickban_template['radiant_name'] = match_in['radiant_name']
-        pickban_template['dire_name'] = match_in['dire_name']
+        pickban_template['gameMode'] = match_in['game_mode']
+        pickban_template['matchID'] = match_in['match_id']
+        pickban_template['leagueID'] = match_in['leagueid']
+        pickban_template['endTimeUTC'] = match_in['start_time']
+        pickban_template['radiantTeamID'] = match_in['radiant_team_id']
+        pickban_template['direTeamID'] = match_in['dire_team_id']
+        pickban_template['radiantTeamName'] = match_in['radiant_name']
+        pickban_template['direTeamName'] = match_in['dire_name']
 
     except:
         print("Invalid metadata!")
