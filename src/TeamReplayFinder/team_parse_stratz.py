@@ -1,7 +1,7 @@
 import time
 from os import environ as environment
 from typing import List, Tuple
-from replay_finder.model import InitDB, Replay
+from TeamReplayFinder.replay_finder.model import InitDB, Replay
 from sqlalchemy.orm import sessionmaker
 import argparse as arg
 
