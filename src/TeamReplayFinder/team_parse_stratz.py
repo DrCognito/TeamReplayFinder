@@ -18,7 +18,7 @@ stratz_endpoint = AIOHTTPTransport(url=f"https://api.stratz.com/graphql?jwt={STR
 # Create a GraphQL client using the defined transport
 client = Client(transport=stratz_endpoint, execute_timeout=30)
 
-query = f"""
+query_stamp = f"""
 query MyQuery {{
   team(teamId: TEAM_ID) {{
     matches(request: {{startDateTime: UNIX_START_TIME, skip: 0, take: MAX_REPLAYS}}) {{
@@ -38,7 +38,7 @@ query MyQuery {{
 """
 
 
-def get_team_str(team: int, from_time: datetime, max_replays:int, in_str = query) -> str:
+def get_team_str(team: int, from_time: datetime, max_replays:int, in_str = query_stamp) -> str:
     """Build a team query for stratz gql
     """
     in_str = in_str.replace("TEAM_ID", str(team))
