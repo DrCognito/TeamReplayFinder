@@ -13,7 +13,11 @@ from herotools.important_times import ImportantTimes, MAIN_TIME
 
 use_time = MAIN_TIME
 STRATZ_KEY = environment['STRATZ_KEY']
-stratz_endpoint = AIOHTTPTransport(url=f"https://api.stratz.com/graphql?jwt={STRATZ_KEY}")
+headers = {'User-Agent': 'STRATZ_API'}
+stratz_endpoint = AIOHTTPTransport(
+    url=f"https://api.stratz.com/graphql?jwt={STRATZ_KEY}",
+    headers=headers
+    )
 
 # Create a GraphQL client using the defined transport
 client = Client(transport=stratz_endpoint, execute_timeout=30)
