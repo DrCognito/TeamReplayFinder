@@ -58,7 +58,7 @@ def build_team(team_id, name, date, players, session):
     team.players = players
 
     def _stack_id(team):
-        p_list = [p.player_id for p in team.players]
+        p_list = [convert_to_64_bit(p.player_id) for p in team.players]
         p_list.sort()
 
         return ''.join(str(p) for p in p_list)
