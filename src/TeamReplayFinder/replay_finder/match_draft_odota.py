@@ -63,12 +63,12 @@ def build_metadata(match_in) -> dict:
         pickban_template['cName'].append(hero)
         pickban_template['ID'].append(pb['hero_id'])
         pickban_template['isPick'].append(pb['is_pick'])
-        # Dire is 2 and Radiant is 3 in replays
+        # Dire is 3 and Radiant is 2 in replays
         # Dire is 1 and Radiant is 0 in odota
         if pb['team'] == 1: # Dire odota
-            pickban_template['team'].append(2) # Dire replay
+            pickban_template['team'].append(3) # Dire replay
         elif pb['team'] == 0: # Radiant odota
-            pickban_template['team'].append(3) # Radiant replay
+            pickban_template['team'].append(2) # Radiant replay
         else:
             print(f"Invalid side: {pb['side']}")
 

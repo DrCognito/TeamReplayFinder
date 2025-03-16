@@ -64,10 +64,10 @@ def build_metadata(match_in) -> dict:
         pickban_template['cName'].append(hero_name)
         pickban_template['ID'].append(pb['hero']['hero_id'])
         pickban_template['isPick'].append(pb['is_pick'])
-        # Dire is 2 and Radiant is 3
-        if pb['side'] == 'dire':
+        # Dire is 3 and Radiant is 2
+        if pb['side'] == 'radiant':
             pickban_template['team'].append(2)
-        elif pb['side'] == 'radiant':
+        elif pb['side'] == 'dire':
             pickban_template['team'].append(3)
         else:
             print(f"Invalid side: {pb['side']}")
