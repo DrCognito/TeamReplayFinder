@@ -208,7 +208,7 @@ def add_single_replay(session, match_id: int):
         match_query = _get_replay_details({'match_id': match_id})
         new_replay = make_replay(match_query)
         save_match_draft(match_query)
-    except (d2api.errors.APITimeoutError, d2api.errors.BaseError) as e:
+    except (d2api.errors.APITimeoutError, d2api.errors.BaseError, ReadTimeout) as e:
         print(f"Failed to add {match_id}, valve Dota2 API Time Out.")
         match_query = None
         sleep(1)
