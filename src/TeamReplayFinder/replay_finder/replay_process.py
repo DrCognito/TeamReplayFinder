@@ -215,6 +215,7 @@ def add_single_replay(session, match_id: int):
 
     # if match_query is None:
     match_query = get_replay_odota(match_id)
+    sleep(1)
     if match_query is None:
         print(f"Failed to add {match_id} from Open Dota.")
     else:
