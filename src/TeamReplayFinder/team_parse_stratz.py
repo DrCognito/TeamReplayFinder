@@ -52,13 +52,13 @@ def get_team_str(team: int, from_time: datetime, max_replays:int, in_str = query
     return in_str
 
 
-from gql.transport.exceptions import TransportServerError
+from gql.transport.exceptions import TransportError
 def process_team(team_id: int, from_time: datetime, max_replays:int) -> List[int]:
     query_str = get_team_str(team_id, from_time, max_replays)
     query = gql(query_str)
     try:
         result = client.execute(query)
-    except TransportServerError as e:
+    except (TransportError, TimeoutError) as e:
         print(f"Raised error/n: {e}")
         print(f"Invalid results for {team_id}, sleeping a bit.")
         time.sleep(5)
