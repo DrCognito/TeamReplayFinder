@@ -59,6 +59,7 @@ def process_team(team_id: int, from_time: datetime, max_replays:int) -> List[int
     try:
         result = client.execute(query)
     except (TransportError, TimeoutError) as e:
+        print(query_str)
         print(f"Raised error/n: {e}")
         print(f"Invalid results for {team_id}, sleeping a bit.")
         time.sleep(5)
