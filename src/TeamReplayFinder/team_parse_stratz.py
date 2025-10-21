@@ -12,6 +12,7 @@ from TeamReplayFinder.replay_finder.replay_process import add_single_replay
 from herotools.important_times import ImportantTimes, MAIN_TIME
 
 use_time = MAIN_TIME
+# use_time = ImportantTimes['TI2025']
 STRATZ_KEY = environment['STRATZ_KEY']
 headers = {'User-Agent': 'STRATZ_API'}
 stratz_endpoint = AIOHTTPTransport(
@@ -86,7 +87,7 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    limit = 40
+    limit = 80
 
     new_ids = []
     query = session.query(Replay.replay_id)

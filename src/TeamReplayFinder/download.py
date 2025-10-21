@@ -54,6 +54,7 @@ if __name__ == '__main__':
     args = arguments.parse_args()
     # updatecut = timedelta(days=REPLAY_TIME_PERIOD_DAYS)
     time_filter = Replay.start_time > MAIN_TIME
+    # time_filter = Replay.start_time > ImportantTimes['TI2025']
 
     if args.custom_time is not None:
         updatecut = timedelta(days=args.custom_time)
