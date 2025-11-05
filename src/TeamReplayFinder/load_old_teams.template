@@ -1,0 +1,39 @@
+import collections
+import time
+import datetime
+from TeamReplayFinder.replay_finder.team_info import import_from_old, InitTeamDB
+from sqlalchemy.orm import sessionmaker
+from TeamReplayFinder.util import convert_to_32_bit, convert_to_64_bit
+
+def getSteam64From32(input32):
+    return 76561197960265728 + input32
+
+
+def getSteam32From64(input64):
+    return input64 - 76561197960265728
+
+
+PlayerIDs = {}
+ValidityTime = {}
+_TeamIDs = {}
+
+#Queried at 2023-08-18T16:11:34.599357
+PlayerIDs['Bleed'] = collections.OrderedDict()
+# PlayerIDs['Bleed']['Kordan'] = 262838756 # 76561198223104484
+PlayerIDs['Bleed']['DuBu'] = 145550466 # 76561198105816194
+PlayerIDs['Bleed']['DJ'] = 102099826 # 76561198062365554
+PlayerIDs['Bleed']['iceiceice'] = 84772440 # 76561198045038168
+ValidityTime['Bleed'] = datetime.datetime(2021, 9, 14, 0, 0, 0, 0)
+_TeamIDs['Bleed'] = 8214850
+
+path = None
+engine = InitTeamDB(path)
+Session = sessionmaker(bind=engine)
+session = Session()
+
+
+def make_db():
+    import_from_old(_TeamIDs, PlayerIDs, ValidityTime, session)
+
+
+make_db()
