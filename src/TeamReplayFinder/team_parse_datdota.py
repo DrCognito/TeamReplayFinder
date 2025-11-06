@@ -66,7 +66,7 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    limit = 40
+    limit = 80
 
     new_ids = []
     query = session.query(Replay.replay_id)
