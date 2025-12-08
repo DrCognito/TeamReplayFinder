@@ -10,6 +10,7 @@ from TeamReplayFinder.replay_finder import DATDOTA_API_LIMIT
 from TeamReplayFinder.replay_finder.replay_process import add_single_replay
 from TeamReplayFinder.replay_finder.api_usage import APIOverLimit, DecoratorUsageCheck
 from TeamReplayFinder.replay_finder.model import get_datdota_usage
+from json.decoder import JSONDecodeError
 
 
 base_url = "https://www.dotabuff.com/esports/teams/"
@@ -46,7 +47,15 @@ def get_json(url: str) -> str:
 def process_team(team_id: int) -> List[int]:
     print(f"Processing team {team_id}")
     url = f"https://datdota.com/api/teams/{team_id}"
-    team_json = get_json(url)
+    try:
+        team_json = get_json(url)
+    except JSONDecodeError as e:
+        print(
+            f"Failed to process json for team {team_id}!\n"
+            f"url: {url}")
+        print(e)
+        
+        return []
 
     # matches = [x['matchId'] for x in j for j in k['matches'] for k in team_json['data']]
     matches = [x['matchId'] for x in team_json['data']['matches']]
