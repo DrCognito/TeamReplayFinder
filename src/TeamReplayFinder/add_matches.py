@@ -18,7 +18,7 @@ if __name__ == "__main__":
     limit = 20
 
     new_ids = []
-    query = session.query(Replay.replay_id)
+    query = session.query(Replay)
     print("Adding matches:\n{}.".format(args.match_id))
     for m_id in args.match_id:
         test_q: Replay
