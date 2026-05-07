@@ -38,6 +38,7 @@ if __name__ == "__main__":
 
         if match_query is None:
             match_query = get_replay_odota(m_id)
+            sleep(2)
             if match_query is None:
                 print(f"Failed to add {m_id} from Open Dota. Sleeping more!")
                 sleep(3)
