@@ -16,7 +16,7 @@ authors = ["Matthew Chadwick"]
 
 [tool.poetry.dependencies]
 sqlalchemy = "2.*"
-python = ">=3.9, <4.0"
+python = ">=3.12, <4.0"
 python-dotenv = "1.*"
 requests = "2.*"
 tqdm="4.*"
