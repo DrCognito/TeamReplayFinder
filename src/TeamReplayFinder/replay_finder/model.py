@@ -82,7 +82,7 @@ def get_replay_odota(replay_id: int) -> dict:
         base_url = 'https://api.opendota.com/api/matches/{}'.format(replay_id)
         responce = r.get(base_url, timeout=10)
     except:
-        print("Failed to retrieve odota for ".format(replay_id))
+        print("Failed to retrieve odota for {}".format(replay_id))
         sleep(5)
         return None
     if responce.status_code != req_codes.ok:
