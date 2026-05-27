@@ -214,6 +214,17 @@ def add_single_replay(session, match_id: int):
     #     sleep(1)
 
     # if match_query is None:
+    extract_path = Path(environ["EXTRACT_PATH"]) /\
+            (str(match_id) + '.dem')
+    if extract_path.is_file():
+        replay = Replay()
+        replay.replay_id = match_id
+        print("Found {} in extract path before adding!".format(replay.replay_id))
+        replay.status = ReplayStatus.DOWNLOADED
+        session.merge(replay)
+        session.commit()
+        return None
+
     match_query = get_replay_odota(match_id)
     sleep(2)
     if match_query is None:
