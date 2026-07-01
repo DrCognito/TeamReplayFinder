@@ -43,7 +43,12 @@ def InitTeamDB(path=None):
 
 def build_team(team_id, name, date, players, session):
     from sqlalchemy import or_
-    team: TeamInfo = session.query(TeamInfo).filter(or_(TeamInfo.team_id == team_id, TeamInfo.name == name)).one_or_none()
+    from sqlalchemy.exc import MultipleResultsFound
+    try:
+        team: TeamInfo = session.query(TeamInfo).filter(or_(TeamInfo.team_id == team_id, TeamInfo.name == name)).one_or_none()
+    except MultipleResultsFound:
+        print(f"Could not build team for {team_id}/{name} as multiple teans with the id were found!")
+        raise
     if team is None:
         team = TeamInfo()
     else:
