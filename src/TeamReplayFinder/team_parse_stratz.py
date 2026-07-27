@@ -17,7 +17,7 @@ STRATZ_KEY = environment['STRATZ_KEY']
 headers = {'User-Agent': 'STRATZ_API'}
 stratz_endpoint = AIOHTTPTransport(
     url=f"https://api.stratz.com/graphql?jwt={STRATZ_KEY}",
-    headers=headers
+    headers=headers, ssl=True
     )
 
 # Create a GraphQL client using the defined transport
