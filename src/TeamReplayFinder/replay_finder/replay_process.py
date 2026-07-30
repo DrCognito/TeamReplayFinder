@@ -1,5 +1,6 @@
 from bz2 import BZ2File
 from compression import zstd
+from compression.zstd import ZstdError
 from os import remove as remove_file, environ
 from time import sleep
 
@@ -87,20 +88,24 @@ def extract_replay(path_in, path_out, remove_failure=True, remove_success=True):
 
 def extract_replay_zstd(path_in, path_out, remove_failure=True, remove_success=True):
     if path_out.is_file():
-            print("{} already exists.".format(path_out))
-            remove_file(path_out)
-            #raise FileExistsError
+        print("{} already exists.".format(path_out))
+        remove_file(path_out)
+        #raise FileExistsError
     if not path_in.is_file():
         print("{} replay zstd file does not exist".format(path_in))
         raise FileNotFoundError
     
     failed_file = False
     with open(path_out, 'wb') as out_file, zstd.open(path_in) as file:
-        file_content = file.read()
         try:
+            file_content = file.read()
             out_file.write(file_content)
+        except ZstdError as e:
+            print(f'File extract error (ZstdError): {e}')
+            print('Failed to extract {}.'.format(path_in))
+            failed_file = True
         except OSError as e:
-            print(f'Extract error: {e}')
+            print(f'File write error (OSError): {e}')
             print('Failed to extract {}.'.format(path_in))
             failed_file = True
 
