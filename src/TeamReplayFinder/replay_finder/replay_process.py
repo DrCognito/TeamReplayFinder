@@ -1,4 +1,5 @@
 from bz2 import BZ2File
+from compression import zstd
 from os import remove as remove_file, environ
 from time import sleep
 
@@ -52,7 +53,7 @@ def download_replay(replay, path):
     return path
 
 
-def extract_replay(path_in, path_out, remove_archive=True):
+def extract_replay(path_in, path_out, remove_failure=True, remove_success=True):
     if path_out.is_file():
         print("{} already exists.".format(path_out))
         remove_file(path_out)
@@ -66,17 +67,52 @@ def extract_replay(path_in, path_out, remove_archive=True):
         try:
             for data in iter(lambda: file.read(100 * 1024), b''):
                 out_file.write(data)
-        except OSError:
+        except OSError as e:
+            print(f'Extract error: {e}')
             print('Failed to extract {}.'.format(path_in))
             failed_file = True
-
-    if remove_archive:
-        remove_file(path_in)
 
     if failed_file:
         if path_out.is_file():
                 remove_file(path_out)
+        if remove_failure:
+            remove_file(path_in)
         return False
+    else:
+        if remove_success:
+            remove_file(path_in)
+
+    return path_out
+
+
+def extract_replay_zstd(path_in, path_out, remove_failure=True, remove_success=True):
+    if path_out.is_file():
+            print("{} already exists.".format(path_out))
+            remove_file(path_out)
+            #raise FileExistsError
+    if not path_in.is_file():
+        print("{} replay zstd file does not exist".format(path_in))
+        raise FileNotFoundError
+    
+    failed_file = False
+    with open(path_out, 'wb') as out_file, zstd.open(path_in) as file:
+        file_content = file.read()
+        try:
+            out_file.write(file_content)
+        except OSError as e:
+            print(f'Extract error: {e}')
+            print('Failed to extract {}.'.format(path_in))
+            failed_file = True
+
+    if failed_file:
+        if path_out.is_file():
+                remove_file(path_out)
+        if remove_failure:
+            remove_file(path_in)
+        return False
+    else:
+        if remove_success:
+            remove_file(path_in)
 
     return path_out
 
@@ -174,7 +210,11 @@ def replay_process_odota(replay: Replay, session, req_session):
             session.commit()
             sleep(1)
 
-        final_path = extract_replay(download_path, extract_path)
+        # Try zstd first
+        final_path = extract_replay_zstd(download_path, extract_path, remove_success=True, remove_failure=False)
+        if not final_path:
+            # Try bz2 for the old format
+            final_path = extract_replay(download_path, extract_path, remove_success=True, remove_failure=True)
         if final_path:
             replay.status = ReplayStatus.DOWNLOADED
         session.merge(replay)
