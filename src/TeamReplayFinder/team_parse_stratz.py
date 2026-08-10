@@ -98,6 +98,7 @@ if __name__ == "__main__":
         new = 0
         matched = 0
         new_team = []
+        print('Getting replays for team: {}'.format(t_id))
         for m_id in ids[:limit]:
             test_q = query.filter(Replay.replay_id == m_id).one_or_none()
 
@@ -108,7 +109,6 @@ if __name__ == "__main__":
                 add_single_replay(session, m_id)
             else:
                 matched += 1
-        print('Team: {}'.format(t_id))
         if new_team:
             print(' '.join(new_team))
         print('New: {} Matched: {}\n'.format(new, matched))

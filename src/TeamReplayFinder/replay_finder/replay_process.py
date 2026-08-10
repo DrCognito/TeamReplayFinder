@@ -101,8 +101,8 @@ def extract_replay_zstd(path_in, path_out, remove_failure=True, remove_success=T
             file_content = file.read()
             out_file.write(file_content)
         except ZstdError as e:
-            print(f'File extract error (ZstdError): {e}')
-            print('Failed to extract {}.'.format(path_in))
+            # print(f'File extract error (ZstdError): {e}')
+            print('Failed to extract {} with Zstd.'.format(path_in))
             failed_file = True
         except OSError as e:
             print(f'File write error (OSError): {e}')
