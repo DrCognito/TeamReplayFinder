@@ -8,7 +8,7 @@ import d2api
 from requests import get as req_get, Session as requests_Session
 from requests import codes as req_codes
 from requests.exceptions import (ConnectionError, HTTPError, InvalidURL,
-                                 RequestException, ReadTimeout)
+                                 RequestException, ReadTimeout, Timeout)
 from sqlalchemy.exc import SQLAlchemyError
 from tqdm import tqdm
 from pathlib import Path
@@ -36,9 +36,10 @@ def download_replay(replay, path):
         print("Url in replay is none.")
         raise InvalidURL
 
+    timeout = 10
     print("Downloading: {}".format(replay.replay_url))
     try:
-        dl_stream = req_get(replay.replay_url, stream=True)
+        dl_stream = req_get(replay.replay_url, stream=True, timeout=timeout)
     except ConnectionError:
         print(f"Connection error! {replay.replay_url}")
         raise ConnectionError
@@ -46,6 +47,9 @@ def download_replay(replay, path):
         print("Starting connection to {} failed with {}."
               .format(replay.replay_url, dl_stream.status_code))
         raise HTTPError
+    except Timeout:
+        print(f"Timed out waiting for {replay.replay_url} ({timeout}s)")
+        raise Timeout
 
     with open(path, 'wb') as file:
         for data in tqdm(dl_stream.iter_content(chunk_size=10000)):
@@ -200,6 +204,9 @@ def replay_process_odota(replay: Replay, session, req_session):
             (str(replay.replay_id) + '.dem.bz2')
         try:
             download_replay(replay, download_path)
+        except Timeout:
+            # print(f"Timed out attempting download.")
+            return replay_process_odota(replay, session, req_session)
         except (RequestException, HTTPError, ConnectionError) as e:
             print(e)
             sleep(5)
